@@ -157,6 +157,12 @@
             <p>{{ __('Salary Type') }}</p>
         </a>
       </li>
+      <li class="nav-item{{ $activePage == 'skill' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.skill.index') }}">
+          <i class="material-icons">SK</i>
+            <p>{{ __('Skills') }}</p>
+        </a>
+      </li>
 
 
 

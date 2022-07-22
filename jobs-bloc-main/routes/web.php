@@ -342,18 +342,26 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
                   });
 
                   Route::group(['prefix' => 'location','as'=>'location.', "namespace" => "App\Http\Controllers\Admin"],function(){
-                  
                       Route::get('/','LocationController@index')->name('index');
                       Route::Post('/store','LocationController@store')->name('store');
                       Route::get('/edit/{id}','LocationController@edit')->name('edit');
                       Route::post('/update/','LocationController@update')->name('update');
                       Route::delete('/delete/{id}','LocationController@destroy')->name('delete');
                       Route::get('/status/{id}','LocationController@changeStatus')->name('status');
+                  });
+
+                  Route::group(['prefix' => 'skill','as'=>'skill.', "namespace" => "App\Http\Controllers\Admin"],function(){
+                  
+                      Route::get('/','SkillController@index')->name('index');
+                      Route::Post('/store','SkillController@store')->name('store');
+                      Route::get('/edit/{id}','SkillController@edit')->name('edit');
+                      Route::post('/update/','SkillController@update')->name('update');
+                      Route::delete('/delete/{id}','SkillController@destroy')->name('delete');
+                      Route::get('/status/{id}','SkillController@changeStatus')->name('status');
           
                   });
 
  });
-
 
 Route::middleware([
     'auth:sanctum',

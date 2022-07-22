@@ -4,10 +4,11 @@ namespace App\Http\Controllers\website\candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\CandidateDetailsModel;
-
+use App\Models\candidateSkillModel;
 use App\Models\Job\JobCategoryModel;
 use App\Models\LocationModel;
 use App\Models\Job\SalaryTypeModel;
+use App\Models\SkillModel;
 use App\Models\socialNetworks;
 use App\Models\User;
 use App\Models\UserSocialNetwork;
@@ -26,10 +27,10 @@ class ProfileController extends Controller
         $salary_types =  SalaryTypeModel::where('is_active',1)->get();
         $social_networks = socialNetworks::where('is_active',1)->get();
         $job_categories = JobCategoryModel::where('is_active',1)->get();
-
+        $skills = SkillModel::where('is_active',1)->get();
         $user_social_networks = UserSocialNetwork::where('user_id',$user_details->id)->get();
 
-        return view('website.candidate.profile',compact('salary_types','user_details','candidate_details','locations','job_categories','social_networks','user_social_networks'));
+        return view('website.candidate.profile',compact('salary_types','skills','user_details','candidate_details','locations','job_categories','social_networks','user_social_networks'));
     }
 
     public function updateProfile(Request $request){
@@ -52,6 +53,7 @@ class ProfileController extends Controller
             'introduction_video_url' =>"nullable|url",
             'url.*' =>"nullable|url",
             'network.*' =>"nullable|numeric",
+            'candidate_skill_id.*' => "nullable|numeric",
             'candidate_job_categories' => "nullable|array",
             'description' => "nullable",
             'location_id' => "nullable|numeric",
@@ -99,6 +101,29 @@ class ProfileController extends Controller
                             $user_social_network_model->insert($data);
 
                             $data = [];
+
+                          }
+
+
+                          
+                         $user_skill_model = new candidateSkillModel();
+
+                         $user_skill_model->where('user_id',$user->id)->delete();
+
+                          $skills = $request->candidate_skill_id;
+                           $loop = ($skills == null)? 0 : count($skills);
+
+                          for($i =0 ;$i<$loop; $i++){
+
+                            $skill_data = [
+                             'user_id' => $user->id ,
+                             'skill_id' => $skills[$i],
+                            
+                            ];
+
+                            $user_skill_model->insert($skill_data);
+
+                            $skill_data = [];
 
                           }
 

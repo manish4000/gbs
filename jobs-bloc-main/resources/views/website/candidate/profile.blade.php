@@ -112,7 +112,17 @@
                                     
                                     </select>
                                 </div>
-                                    
+                                
+                                <div class="col-md-12">
+                                    <label for="inputPassword4" class="form-label">Select Skills </label>
+                                    <select class="form-select p-3" id="skill-select" aria-label="Default select example" name="candidate_skill_id[]" value="{{$candidate_details->salary_type_id ?? ''}}" multiple>
+                                        <option></option>
+                                     @foreach($skills as $skill)   
+                                     <option value="{{$skill->id}}">{{$skill->title}}</option>
+                                     @endforeach
+                                    </select>
+                                    <span class="text-danger error-text  salary_type_id_error "></span> 
+                                </div>
 
 
                                 <div class="col-md-12">
@@ -346,6 +356,7 @@ $(document).ready(function (e) {
 
   $(document).ready(function() {
     $('#category-select').select2();
+    $('#skill-select').select2();
 });
 
 
