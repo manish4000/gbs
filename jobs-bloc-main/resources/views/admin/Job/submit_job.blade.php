@@ -90,7 +90,9 @@
                                 <div class="row">
                                     <div class="col-4 text-warning fw-bold"> <h5> Job Title : {{$data->title}} </h5></div>
                                     <div class="col-4">Job Type : {{$data->job_type_id}}  </div>
-                                    <div class="col-4">Job Location : {{$data->location_id }}  </div>
+                                    <div class="col-4">Job Location : @foreach ($data->location  as $array)
+                                        {{$array}}
+                                    @endforeach  </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-4"> Deadline Date: {{$data->application_deadline_date}}</div>
@@ -245,7 +247,9 @@
                                     <i class="material-icons">attach_file</i>
                                 </button>
                             </span>
+                           
                         </div>
+                        <span class="text-danger error-text  feature_image_error "></span>
                     </div>  
 
                     
@@ -282,16 +286,16 @@
 
                     <div class="form-group">
                       <label class="mb-2" for="">Location  </label>
-                      <select name="location_id"  class="form-control "  required> 
+                      <select name="location_id[]" id="location-select"  class="form-control "  required multiple> 
   
                           @foreach ($location as $type)
-                          
+                  
                           <option value="{{$type->id}}">{{$type->title}}</option>
   
                           @endforeach
                        
                       </select>
-                      <span class="text-danger error-text  location_id _error "></span>
+                      <span class="text-danger error-text  location_id_error "></span>
                     </div>
 
                     <div class="form-group">
@@ -338,7 +342,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit Job </h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <a type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></a>
       </div>
       <div class="modal-body">
 
@@ -402,6 +406,7 @@
                               </button>
                           </span>
                       </div>
+                      <span class="text-danger error-text  feature_image_error "></span>
                   </div>  
 
                   <div><img src="" alt="" id="edit_feature_image" height="150"></div>
@@ -428,9 +433,7 @@
                     <select name="salary_type_id"  class="form-control" id="edit_salary_type_id"  required> 
 
                         @foreach ($salary_type as $type)
-                        
                         <option value="{{$type->id}}">{{$type->title}}</option>
-
                         @endforeach
                      
                     </select>
@@ -439,16 +442,12 @@
 
                   <div class="form-group">
                     <label class="mb-2" for="">Location  </label>
-                    <select name="location_id"  class="form-control "  id="edit_location_id" required> 
-
+                    <select name="location_id[]"  class="form-control "  id="edit_location_id" required> 
                         @foreach ($location as $type)
-                        
                         <option value="{{$type->id}}">{{$type->title}}</option>
-
                         @endforeach
-                     
                     </select>
-                    <span class="text-danger error-text  location_id _error "></span>
+                    <span class="text-danger error-text  location_id_error "></span>
                   </div>
 
                   <div class="form-group">    
@@ -742,6 +741,12 @@
 <script>
   $(document).ready(function() {
     $('#category-select').select2();
+});
+  $(document).ready(function() {
+    $('#location-select').select2();
+});
+  $(document).ready(function() {
+    $('#edit_location_id').select2();
 });
   $(document).ready(function() {
     $('#edit_job_category_id').select2();

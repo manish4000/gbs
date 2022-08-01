@@ -20,6 +20,9 @@ class JobModel extends Model
         return $this->belongsToMany(JobCategoryModel::class,'job_categories_relation','job_category_id','job_id');
     }
 
+    public function location(){
+        return $this->hasMany(JobLocationModel::class,'job_id');
+    }
 
 
 

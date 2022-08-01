@@ -385,6 +385,12 @@ Route::middleware([
 
 });
 
+Route::get('/logout', function(){
+
+    session()->flush();
+    Auth::logout();
+    return redirect('/');
+});
 
 //these route for candidates
 Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\website\candidate','as'=>'candidate.'],function(){

@@ -9,9 +9,18 @@ class LocationModel extends Model
 {
     use HasFactory;
     protected $fillable = [       
-        'title','is_active'
+        'title','is_active','slug'
     ];
     protected $table = "locations";
     protected $primaryKey ="id";
     public $timestamps =true;
+
+
+    public function Jobs(){
+        return $this->belongsToMany(JobModel::class,'job_locations','location_id','job_id');
+    }
+
+
+
+
 }

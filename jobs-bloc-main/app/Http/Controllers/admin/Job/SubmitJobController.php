@@ -7,6 +7,7 @@ use App\Models\Job\JobCategoryModel;
 use App\Models\Job\JobCategoryRelationModel;
 use App\Models\Job\JobTypeModel;
 use App\Models\Job\SalaryTypeModel;
+use App\Models\JobLocationModel;
 use App\Models\JobModel;
 use App\Models\LocationModel;
 use Illuminate\Http\Request;
@@ -21,15 +22,13 @@ class SubmitJobController extends Controller
 
         
 
-        $job_list  = JobModel::select('job.*','job_types.title as job_type_id','locations.title as location_id','salary_types.title as salary_type_id')
+        $job_list  = JobModel::with('location.location_data')->select('job.*','job_types.title as job_type_id','salary_types.title as salary_type_id')
                                 ->leftJoin('job_types','job.job_type_id','=','job_types.id')
-                                ->leftJoin('locations','job.location_id','=','locations.id')
+                                // ->leftJoin('job_locations','job_locations.job_id','=','job.id')
+                                // ->leftJoin('locations','job_locations.location_id','=','locations.id')
                                 ->leftJoin('salary_types','job.salary_type_id','=','salary_types.id')
                                 
                                 ->get();
-       
-
-
 
         $job_types =  JobTypeModel::get();
 
@@ -54,7 +53,7 @@ class SubmitJobController extends Controller
             'min_salary' => 'required|numeric',
             'max_salary' => 'required|numeric',
             'salary_type_id' => 'required|numeric',
-            'location_id' => 'required|numeric',
+            'location_id.*' => 'required|numeric',
             'address' => 'required',
             'is_active' => [
                 'required',
@@ -90,7 +89,7 @@ class SubmitJobController extends Controller
                             $job_model->min_salary =          $request->input('min_salary');
                             $job_model->max_salary =          $request->input('max_salary');
                             $job_model->salary_type_id =          $request->input('salary_type_id');
-                            $job_model->location_id =          $request->input('location_id');
+                            // $job_model->location_id =          $request->input('location_id');
                             $job_model->address =          $request->input('address');
                         
 
@@ -117,10 +116,7 @@ class SubmitJobController extends Controller
                                 
                                 $job_category_relation_model = new JobCategoryRelationModel; 
                                 
-
                                 $job_category_relation_model->where('job_id',$job_model->id)->delete();
-
-     
                                 $loop_time = ($request->job_category_id == null)? 0 : count($request->job_category_id);
      
                                for($i =0 ;$i<$loop_time; $i++){
@@ -135,6 +131,22 @@ class SubmitJobController extends Controller
                                  $data = [];
                                  $response = true;
                                }
+
+                                    $job_location_model=   new JobLocationModel;
+                                    $job_location_model->where('job_id',$job_model->id)->delete();
+
+                                    $location_loop = ($request->location_id == null)? 0 : count($request->location_id);
+     
+                                    for($i =0 ;$i<$location_loop; $i++){
+          
+                                      $location_ids = [
+                                       'job_id' =>$job_model->id ,
+                                       'location_id' => $request->location_id[$i],
+                                      ];
+                                      $job_location_model->insert($location_ids);
+                                      $location_ids = [];
+                                      $response = true;
+                                    }
 
                                
                             }

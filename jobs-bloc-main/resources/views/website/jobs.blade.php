@@ -161,14 +161,21 @@
                                 <div class="col-12 shadow">
                                     <div class="product">
 
-                                          <div class="row">
+                                          <div class="d-flex d-flex justify-content-lg-between justify-content-md-between">
 
-                                                <div class="col-3 ">
-                                                  <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" class="ps-2" height="110px"> 
+                                                <div class="">
+                                                  {{-- <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" class="ps-2" >  --}}
+                                                  <div class="p-2">
+                                                      @if ($jobs->feature_image)
+                                                      <img src="{{APP_PATH.JOB_FEATURE_IMAGE_URL}}{{$jobs->feature_image}}" alt="{{$jobs->title}}"  class="ps-2" height="110px" width="110px">
+                                                      @else   
+                                                      <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" alt="" class="">
+                                                      @endif
                                                 </div>
-                                                   <div class="col-9 my-auto">
+                                                </div>
+                                                <div class="my-auto">
 
-                                                   <a href="{{route('job_details',[ 'title' =>  $jobs->slug, 'id' => $jobs->id])}}" class="text-decoration-none text-reset ms-3"> {{$jobs->title}} </a>    <span> @if($jobs->is_feature == 1)  <i class="fa fa-star ms-2" style="color:#ffc107;"></i>  @endif  </span>       
+                                                   <a href="{{route('job_details',[ 'title' =>  $jobs->slug, 'id' => $jobs->id])}}" class="text-decoration-none text-reset pe-lg-3"> {{$jobs->title}} </a>    <span> @if($jobs->is_feature == 1)  <i class="fa fa-star ms-2" style="color:#ffc107;"></i>  @endif  </span>       
 
                                                 </div>
                                           </div>           

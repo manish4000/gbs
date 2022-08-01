@@ -35,7 +35,13 @@
 
                                         <div class="col-3">
                                             <div>
+                                                @if ($job_data->feature_image)
+                                                <img src="{{APP_PATH.JOB_FEATURE_IMAGE_URL}}{{$job_data->feature_image}}" alt="" class="img-thumbnail">
+                                               
+
+                                                @else   
                                                 <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" alt="" class="img-thumbnail">
+                                                @endif
                                             </div>
                                             <div class="text-center mt-2">
 

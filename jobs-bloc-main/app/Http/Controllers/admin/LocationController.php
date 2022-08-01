@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\LocationModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 class LocationController extends Controller
@@ -40,6 +41,7 @@ class LocationController extends Controller
                     }
 
                         $location_model->title =          $request->input('title');
+                        $location_model->slug =       Str::slug($request->title);  ; 
                         $location_model->is_active =          $request->input('is_active');
 
                         $location_model->save();
