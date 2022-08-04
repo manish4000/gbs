@@ -296,12 +296,14 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
 
                     Route::group(['prefix' => 'submit-job','as'=>'submit_job.'],function(){                          
                         Route::get('/','SubmitJobController@index')->name('index');
+                        Route::get('/add','SubmitJobController@addNewJob')->name('add');
                         Route::Post('/store','SubmitJobController@store')->name('store');
                         Route::get('/edit/{id}','SubmitJobController@edit')->name('edit');
                         Route::post('/update/','SubmitJobController@update')->name('update');
                         Route::delete('/delete/{id}','SubmitJobController@destroy')->name('delete');
                         Route::get('/status/{id}','SubmitJobController@changeStatus')->name('status');
                         Route::get('/featured/{id}','SubmitJobController@changefeatured')->name('featured');            
+                        Route::get('/view/{id}','SubmitJobController@viewJob')->name('view');            
                     });
 
 

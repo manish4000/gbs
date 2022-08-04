@@ -1,156 +1,181 @@
 @extends('website.layout')
 
 @section('content')
+ <!-- Shop Start -->
+ <div class="container">
+   
+</div>
+<!-- Shop End -->
+
+
+
+
 
 <div class="container mt-5 mb-5">
-   <div class="row g-2">
-      <div class="col-md-3">
-       
-         <div class="processor p-2">
-            <div class="heading d-flex justify-content-between align-items-center">
-               <h6 class="text-uppercase">Category</h6>
-               <span>--</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Intel Core i7 </label> </div>
-               <span>3</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Intel Core i6 </label> </div>
-               <span>4</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Intel Core i3 </label> </div>
-               <span>14</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Intel Centron </label> </div>
-               <span>8</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Intel Pentinum </label> </div>
-               <span>14</span> 
-            </div>
-         </div>
-         <div class="brand p-2">
-            <div class="heading d-flex justify-content-between align-items-center">
-               <h6 class="text-uppercase">Location</h6>
-               <span>--</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Apple </label> </div>
-               <span>13</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Asus </label> </div>
-               <span>4</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Dell </label> </div>
-               <span>24</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Lenovo </label> </div>
-               <span>18</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Acer </label> </div>
-               <span>44</span> 
-            </div>
-         </div>
-         <div class="type p-2 mb-2">
-            <div class="heading d-flex justify-content-between align-items-center">
-               <h6 class="text-uppercase">Type</h6>
-               <span>--</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Hybrid </label> </div>
-               <span>23</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Laptop </label> </div>
-               <span>24</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Desktop </label> </div>
-               <span>14</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Touch </label> </div>
-               <span>28</span> 
-            </div>
-            <div class="d-flex justify-content-between mt-2">
-               <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> Tablets </label> </div>
-               <span>44</span> 
-            </div>
-         </div>
-         <div class="type p-2 mb-2">
-         
-         <div class="price-range-block">
+   <div class="row px-xl-5">
+      <!-- Shop Sidebar Start -->
+      <div class="col-lg-3 col-md-4">
+          <!-- Price Start -->
+          <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-light pr-3">Filter by price</span></h5>
+          <div class="bg-light p-4 mb-30">
+              <form>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" checked id="price-all">
+                      <label class="custom-control-label" for="price-all">All Price</label>
+                      <span class="badge border font-weight-normal">1000</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="price-1">
+                      <label class="custom-control-label" for="price-1">$0 - $100</label>
+                      <span class="badge border font-weight-normal">150</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="price-2">
+                      <label class="custom-control-label" for="price-2">$100 - $200</label>
+                      <span class="badge border font-weight-normal">295</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="price-3">
+                      <label class="custom-control-label" for="price-3">$200 - $300</label>
+                      <span class="badge border font-weight-normal">246</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="price-4">
+                      <label class="custom-control-label" for="price-4">$300 - $400</label>
+                      <span class="badge border font-weight-normal">145</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                      <input type="checkbox" class="custom-control-input" id="price-5">
+                      <label class="custom-control-label" for="price-5">$400 - $500</label>
+                      <span class="badge border font-weight-normal">168</span>
+                  </div>
+              </form>
+          </div>
+          <!-- Price End -->
+          
+          <!-- Color Start -->
+          <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-light pr-3">Filter by color</span></h5>
+          <div class="bg-light p-4 mb-30">
+              <form>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" checked id="color-all">
+                      <label class="custom-control-label" for="price-all">All Color</label>
+                      <span class="badge border font-weight-normal">1000</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="color-1">
+                      <label class="custom-control-label" for="color-1">Black</label>
+                      <span class="badge border font-weight-normal">150</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="color-2">
+                      <label class="custom-control-label" for="color-2">White</label>
+                      <span class="badge border font-weight-normal">295</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="color-3">
+                      <label class="custom-control-label" for="color-3">Red</label>
+                      <span class="badge border font-weight-normal">246</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="color-4">
+                      <label class="custom-control-label" for="color-4">Blue</label>
+                      <span class="badge border font-weight-normal">145</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                      <input type="checkbox" class="custom-control-input" id="color-5">
+                      <label class="custom-control-label" for="color-5">Green</label>
+                      <span class="badge border font-weight-normal">168</span>
+                  </div>
+              </form>
+          </div>
+          <!-- Color End -->
 
-                <div class="sliderText">jQuery UI Price Range Slider</div>
-
-                <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
-
-                <div style="margin:30px auto">
-                <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
-                <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" />
-                </div>
-
-                <button class="price-range-search" id="price-range-submit">Search</button>
-
-                <div id="searchResults" class="search-results-block"></div>
-
-                </div>
-
-         
-         </div>
+          <!-- Size Start -->
+          <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-light pr-3">Filter by size</span></h5>
+          <div class="bg-light p-4 mb-30">
+              <form>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" checked id="size-all">
+                      <label class="custom-control-label" for="size-all">All Size</label>
+                      <span class="badge border font-weight-normal">1000</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="size-1">
+                      <label class="custom-control-label" for="size-1">XS</label>
+                      <span class="badge border font-weight-normal">150</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="size-2">
+                      <label class="custom-control-label" for="size-2">S</label>
+                      <span class="badge border font-weight-normal">295</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="size-3">
+                      <label class="custom-control-label" for="size-3">M</label>
+                      <span class="badge border font-weight-normal">246</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                      <input type="checkbox" class="custom-control-input" id="size-4">
+                      <label class="custom-control-label" for="size-4">L</label>
+                      <span class="badge border font-weight-normal">145</span>
+                  </div>
+                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                      <input type="checkbox" class="custom-control-input" id="size-5">
+                      <label class="custom-control-label" for="size-5">XL</label>
+                      <span class="badge border font-weight-normal">168</span>
+                  </div>
+              </form>
+          </div>
+          <!-- Size End -->
       </div>
-    
-      
-        <div class="col-md-9  ">
-         <!-- <div class="container  overflow-hidden">
+      <!-- Shop Sidebar End -->
 
-       
-            <div class="row  ">
 
-                    @for($i=1;$i<=10;$i++)
-
-                    <div class="col-md-6 border">
-                    <div class="product py-4">
+      <!-- Shop Product Start -->
+      <div class="col-lg-9 col-md-8">
         
-                        <div class="text-center"> <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" width="200"> </div>
-                        <div class="about text-center">
-                            <h5>Name</h5>
-                            <span>$1,999.99</span> 
-                        </div>
-                        <div class=" d-grid mx-4 my-3 ">
-                            <button type="submit" class="btn btn-warning rounded btn-large  text-white btn-block py-3 fw-bold px-5"> View Profile </button>
-                        </div>
-                    </div>
-                    </div>
-
-                    @endfor
-            
-             </div>
-            </div>  -->
-
-            <div class="container px-5">
-
-                <p class="fs-5">Showing 1 – 6 of 825 results</p>
-
-                <div class="mb-3">
+          <div class="row pb-3">
+              <div class="col-12 pb-1">
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                      <div>
                         <button type="submit" class="btn btn-warning   py-3  text-white  fw-bold px-5"> Get Candidate Alerts</button>
-               </div>
-
-            <div class="row g-4">
-
+                      </div>
+                      <div class="ml-2">
+                          <div class="btn-group">
+                              <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a class="dropdown-item" href="#">Latest</a>
+                                  <a class="dropdown-item" href="#">Popularity</a>
+                                  <a class="dropdown-item" href="#">Best Rating</a>
+                              </div>
+                          </div>
+                          <div class="btn-group ml-2">
+                              <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a class="dropdown-item" href="#">10</a>
+                                  <a class="dropdown-item" href="#">20</a>
+                                  <a class="dropdown-item" href="#">30</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
             @foreach ( $candidates as $candidate)
                
             <div class="col-12 col-lg-6 ">
                   <div class="product pt-5 shadow fade-in">
 
-                        <div class="text-center"> <img src="{{CANDIDATE_FEATURE_IMAGE_URL}}{{$candidate->featured_image}}" height="120px" > </div>
+                        <div class="text-center">
+                           
+                           @if(isset($candidate->featured_image))  
+                           <img src="{{CANDIDATE_FEATURE_IMAGE_URL}}{{$candidate->featured_image}}" height="120px" > 
+                           @else
+                           <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" height="120px" > 
+                           @endif
+                        
+                        </div>
                         <div class="about text-center">
                            <h6 class="text-uppercase fw-bold">{{$candidate->name}}</h6>
                            <span>4t5rtre</span> 
@@ -171,104 +196,61 @@
                            </div>   
                         @endisset
                         </div>
-                        <div class=" d-grid mx-4 my-2 ">
-                          <a href="{{route('candidates.details',['name' => $candidate->name,'id' => $candidate->id])}}"> <button type="submit" class="btn btn-outline-warning rounded btn-large  btn-block py-3 px-4 mb-3"> View Profile </button></a>
+                        
+                        <div class="text-center py-3">
+                          <a href="{{route('candidates.details',['name' => $candidate->name,'id' => $candidate->id])}}" class="btn btn-outline-warning rounded btn-block px-4 py-2" > View Profile </a>
                         </div>
                   </div>
               </div>
-            @endforeach()
+            @endforeach
+              {{-- <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                  <div class="product-item bg-light mb-4">
+                      <div class="product-img position-relative overflow-hidden">
+                          <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                          <div class="product-action">
+                              <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                              <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                              <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                              <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                          </div>
+                      </div>
+                      <div class="text-center py-4">
+                          <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
+                          <div class="d-flex align-items-center justify-content-center mt-2">
+                              <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-center mb-1">
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small>(99)</small>
+                          </div>
+                      </div>
+                  </div>
+              </div> --}}
+           
+              <div class="col-12 mt-4 py-4" >
+                  <nav>
+                    <ul class="pagination justify-content-start">
+                      <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
+                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+      <!-- Shop Product End -->
+  </div>
 
 
-            </div>
-          
-            </div>
-        </div>
-
-
-   </div>
 </div>
 
 
-<script>
-    $(document).ready(function(){
-	
-	$('#price-range-submit').hide();
 
-	$("#min_price,#max_price").on('change', function () {
-
-	  $('#price-range-submit').show();
-
-	  var min_price_range = parseInt($("#min_price").val());
-
-	  var max_price_range = parseInt($("#max_price").val());
-
-	  if (min_price_range > max_price_range) {
-		$('#max_price').val(min_price_range);
-	  }
-
-	  $("#slider-range").slider({
-		values: [min_price_range, max_price_range]
-	  });
-	  
-	});
-
-
-	$("#min_price,#max_price").on("paste keyup", function () {                                        
-
-	  $('#price-range-submit').show();
-
-	  var min_price_range = parseInt($("#min_price").val());
-
-	  var max_price_range = parseInt($("#max_price").val());
-	  
-	  if(min_price_range == max_price_range){
-
-			max_price_range = min_price_range + 100;
-			
-			$("#min_price").val(min_price_range);		
-			$("#max_price").val(max_price_range);
-	  }
-
-	  $("#slider-range").slider({
-		values: [min_price_range, max_price_range]
-	  });
-
-	});
-
-
-	$(function () {
-	  $("#slider-range").slider({
-		range: true,
-		orientation: "horizontal",
-		min: 0,
-		max: 10000,
-		values: [0, 10000],
-		step: 100,
-
-		slide: function (event, ui) {
-		  if (ui.values[0] == ui.values[1]) {
-			  return false;
-		  }
-		  
-		  $("#min_price").val(ui.values[0]);
-		  $("#max_price").val(ui.values[1]);
-		}
-	  });
-
-	  $("#min_price").val($("#slider-range").slider("values", 0));
-	  $("#max_price").val($("#slider-range").slider("values", 1));
-
-	});
-
-	$("#slider-range,#price-range-submit").click(function () {
-
-	  var min_price = $('#min_price').val();
-	  var max_price = $('#max_price').val();
-
-	  $("#searchResults").text("Here List of products will be shown which are cost between " + min_price  +" "+ "and" + " "+ max_price + ".");
-	});
-
-});
-</script>
 
 @endsection

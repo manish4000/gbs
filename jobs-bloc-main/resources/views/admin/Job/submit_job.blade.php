@@ -37,7 +37,7 @@
 
 
 
-    <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#add_testimonial">Add New Job </button>
+    <a href="{{route('admin.job.submit_job.add')}}" class="btn btn-success mb-2">Add New Job </a>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -90,9 +90,7 @@
                                 <div class="row">
                                     <div class="col-4 text-warning fw-bold"> <h5> Job Title : {{$data->title}} </h5></div>
                                     <div class="col-4">Job Type : {{$data->job_type_id}}  </div>
-                                    <div class="col-4">Job Location : @foreach ($data->location  as $array)
-                                        {{$array}}
-                                    @endforeach  </div>
+                                  
                                 </div>
                                 <div class="row">
                                     <div class="col-4"> Deadline Date: {{$data->application_deadline_date}}</div>
@@ -118,11 +116,7 @@
                                    
                                    
                                 </div>
-                                <div class="row">
-                                    
-                                  <div class="col-4">Address: {{ $data->address}}  </div>
-                                  <div class="col-4">Description: {{ strip_tags($data->description)}}  </div>
-                                </div>
+                               
       
                                       
                                       
@@ -132,10 +126,11 @@
                             <div class="col-4"> <img src="{{APP_PATH.JOB_FEATURE_IMAGE_URL.$data->feature_image}}" alt="..." class="avatar img-raised" height="100" ></div>
                           </div>
                           <div class="col-2">
-                            <a href="{{route('admin.job.submit_job.status',$data->id)}}" class="btn btn-warning btn-sm" >Status</a>
-                            <a href="{{route('admin.job.submit_job.featured',$data->id)}}" class="btn btn-info btn-sm" > <i class="material-icons">star</i> Feature</a>
-                            <button type="button" data-toggle="modal" data-target="#edit_testimonial" class="edit_testimonial   btn btn-primary btn-sm"  value="{{$data->id}}" > <i class="material-icons px-1">edit </i>Edit</button>
-                            <button type="button" data-toggle="modal" data-target="#delete_testimonial" class="delete_testimonial   btn btn-danger btn-sm" value="{{$data->id}}" ><i class="material-icons">delete</i> Delete</button>
+                            <a href="{{route('admin.job.submit_job.status',$data->id)}}" class="btn btn-success btn-sm" >Status</a>
+                            <a href="{{route('admin.job.submit_job.view',$data->id)}}" class="btn btn-warning btn-sm" >View</a>
+                            <a href="{{route('admin.job.submit_job.featured',$data->id)}}" title="Featured" class="btn btn-info btn-sm" > <i class="material-icons">star</i> </a>
+                            <a href="{{route('admin.job.submit_job.edit',$data->id)}}" type="button" title="edit" class=" btn btn-secondary btn-sm" > <i class="material-icons px-1">edit </i></a>
+                            <button type="button" data-toggle="modal" data-target="#delete_testimonial" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" class="delete_testimonial   btn btn-danger btn-sm" value="{{$data->id}}" ><i class="material-icons">delete</i> </button>
                           </div>
 
                       </div>
