@@ -30,43 +30,36 @@
             
                     </div>
 
-                    <div class="border">
+                    <div class="">
 
-                        <table class="table caption-top">
-                             
-                                <thead class="border bg-light">
-
+                        <div class="row text-center py-3 border bg-light" >
+                            <div class="col-3">  <h6> Job Title </h6></div>
+                            <div class="col-3"> <h6>  (5) Applicants </h6></div>
+                            <div class="col-3"> <h6> Preview </h6> </div>
+                            <div class="col-3">	<h6>Actions </h6>  </div>
+                        </div>  
                                     
-                                    <tr>                         
-                                        <th scope="col" class="p-4">Job Title</th>
-                                        <th scope="col" class="p-4">Applicants</th>
-                                        <th scope="col" class="p-4">Status</th>   
-                                        <th scope="col" class="p-4">Actions</th>
-                                    </tr>
-                                
 
-                                </thead>
-                                <tbody>
-                                    @for($i=1;$i<=6;$i++)
-                                        <tr>
-                                        <td class="p-4">
-                                            <h6>abcd</h6>
-                                            <p><small> <i class="fa fa-map-marker" aria-hidden="true"></i> Maharastra </small> </p>
-                                            <p> <small> <i class="fa fa-calendar" aria-hidden="true"></i> Created : <span> 9 May 2022</span>  </small></p>
-                                            <p> <small> </p> <i class="fa fa-calendar" aria-hidden="true"></i> Expiry : <span> 29 May 2022</span> </small>  
-                                        </td>
-                                        <td class="p-4 text-muted">(5) Applicants</td>
-                                        <td class="p-4">Preview</td>
-                                     
-                                        <td class="p-4">
-                                            <a href="#" class="bg-info p-1 rounded text-decoration-none text-dark">  <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span> </a>&ensp;
-                                            <a href="#" class="bg-light p-1 rounded text-decoration-none text-danger">  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span> </a>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                    @endfor      
-                                </tbody>
-                        </table>
+                                        <div class="row  mt-3" >
+                                            <div class="col-4"> 
+                                                 <h6 class="mt-2">abcd</h6> 
+                                                 <div class="text=start">
+                                                     <p><small> <i class="fa fa-map-marker" aria-hidden="true"></i> Maharastra </small> </p>
+                                                     <p> <small> <i class="fa fa-calendar" aria-hidden="true"></i> Created : <span> 9 May 2022</span>  </small>    <i class="fa fa-calendar" aria-hidden="true"></i> Expiry : <span> 29 May 2022</span> </small>  </p>
+                                                  
+
+                                                 </div>
+                                            </div>
+                                            <div class="col-2">(5) Applicants</div>
+                                            <div class="col-3">Preview</div>
+                                            <div class="col-3">                                    <a href="#" class="bg-info p-1 rounded text-decoration-none text-dark">  <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span> </a>&ensp;
+                                                <a href="#" class="bg-light p-1 rounded text-decoration-none text-danger">  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span> </a></div>
+                                        </div>
+
+     
+                                      
+                               
+                   
                         
                     </div>
 

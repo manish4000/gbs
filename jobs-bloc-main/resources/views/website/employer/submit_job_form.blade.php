@@ -2,6 +2,20 @@
 
 @section('content')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
 <div class="container-fluid bg-light">
     <div class="container bg-white">
     
@@ -139,7 +153,7 @@
     
     </div>
 
-</div>
+</div> --}}
 
 
 

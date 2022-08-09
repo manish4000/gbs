@@ -10,7 +10,7 @@ class candidateSkillModel extends Model
     use HasFactory;
 
     protected $fillable = [        
-        'user_id','sk_title','sk_percentage'
+        'user_id','skill_id'
     ];
 
     protected $table = "candidate_skills";

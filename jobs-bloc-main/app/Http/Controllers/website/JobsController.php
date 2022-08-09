@@ -3,27 +3,31 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ApplyJobEmail;
 use App\Models\CandidateShortlistJobModel;
 use App\Models\Job\JobCategoryModel;
 use App\Models\Job\JobCategoryRelationModel;
 use App\Models\Job\JobTypeModel;
 use App\Models\JobApplicationModel;
+use App\Models\JobLocationModel;
 use App\Models\JobModel;
 use App\Models\LocationModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class JobsController extends Controller
 {
     
     public function index(){
+
         $jobs_data = JobModel::where('is_active',1)->get();
 
         $Job_types = JobTypeModel:: where('is_active',1)->get();
         $job_categories = JobCategoryModel::where('is_active',1)->where('parent_id',null)->get();
         $locations = LocationModel::where('is_active',1)->get();
-
 
         return view('website.jobs',compact('jobs_data','Job_types','job_categories','locations'));
     }
@@ -31,10 +35,11 @@ class JobsController extends Controller
 
     public function jobDetails(Request $request){
 
-        $job_data = JobModel::select('job.*','locations.title as location','job_types.title as job_type')->leftjoin('job_types','job_types.id','=','job.job_type_id')
-                                ->leftjoin('locations','locations.id','=','job.location_id')    
+        $job_data = JobModel::select('job.*','job_types.title as job_type')->leftjoin('job_types','job_types.id','=','job.job_type_id')
+                                  
                                 ->where('job.id',$request->id)->first();
 
+        $job_data->location = JobLocationModel::select('locations.title')->leftJoin('locations','locations.id','=','job_locations.location_id')->where('job_id',$request->id)->get();                        
 
                           $job_categories =  JobCategoryRelationModel::select('job_category_id')->where('job_id', $request->id)->get()->toArray();
 
@@ -43,10 +48,7 @@ class JobsController extends Controller
 
                             $job_categories_ids =    array_column($job_categories, 'job_category_id');  
 
-                            
-
-                            $related_jobs = JobModel::select('job.*','locations.title as location','job_types.title as job_type')->leftjoin('job_types','job_types.id','=','job.job_type_id')
-                            ->leftjoin('locations','locations.id','=','job.location_id')
+                            $related_jobs = JobModel::select('job.*','job_types.title as job_type')->leftjoin('job_types','job_types.id','=','job.job_type_id')
                             ->join('job_categories_relation','job_categories_relation.job_id','=','job.id')    
                             ->whereIn('job_categories_relation.job_category_id',$job_categories_ids)->distinct()->get();
 
@@ -56,7 +58,7 @@ class JobsController extends Controller
                         }                          
                          
 
-
+        
 
 
         return view('website.job_details' ,compact('job_data','related_jobs' ));
@@ -66,6 +68,13 @@ class JobsController extends Controller
 
 
     public function applyJob(Request $request){
+
+        if(Auth::user()->role != 'candidate'){
+            return response()->json([
+                "status" => 500,
+                "message" => "Please Log in As an Candidate"
+            ]);
+        }
 
         $validator = Validator::make($request->all(), [  
             'name' => 'required|string',
@@ -103,11 +112,20 @@ class JobsController extends Controller
 
 
              if($job_application_model->save()){
-
+                
+                $job_data =  JobModel::where('id',$request->job_id)->first();
+                //an email send to employer 
+                $job_submited_by = User::select('email')->where('id',$job_data->submit_by)->first();
+                $send_to = $job_submited_by->email;
+                
+                Mail::to($send_to)->send(new ApplyJobEmail());
+                
                 return response()->json([
                     "status" => 200,
                     "message" => "You have successfully applied to the job"
                 ]);
+
+
              }
 
         }        

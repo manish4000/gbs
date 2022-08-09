@@ -174,8 +174,10 @@
                      {{Auth::user()->name}} </a>
                       <ul class="dropdown-menu">
   
-                      <li><a class="dropdown-item" href="{{route('candidate.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
                       <li><a class="dropdown-item" href="{{route('employer.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
+                      <li><a class="dropdown-item" href="{{route('employer.submit_job.add')}}"><i class="fas fa-file fa-fw"></i> Submit Job</a></li>
+                      <li><a class="dropdown-item" href="{{route('employer.my_jobs')}}"><i class="fas fa-file fa-fw"></i> My Jobs</a></li>
                       <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
   
                       </ul>

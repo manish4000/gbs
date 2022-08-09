@@ -110,7 +110,7 @@
                 <div class="mb-3"> 
                     {!! $job_data->description !!}
                 </div>
-                <p><i class="fa-solid fa-location-dot"></i>  {{ $job_data->location}}</p>
+                <p><i class="fa-solid fa-location-dot"></i>  @foreach($job_data->location as  $location)   {{$location->title}} ,   @endforeach  </p>
                 <p>Immediate joining will be preferred</p>
             </div>
 

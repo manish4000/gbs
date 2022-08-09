@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin\Job;
+namespace App\Http\Controllers\website\employer;
 
 use App\Http\Controllers\Controller;
+use App\Mail\JobSubmitEmail;
+use App\Models\candidateSkillModel;
 use App\Models\Job\JobCategoryModel;
 use App\Models\Job\JobCategoryRelationModel;
 use App\Models\Job\JobTypeModel;
@@ -11,40 +13,32 @@ use App\Models\JobLocationModel;
 use App\Models\JobModel;
 use App\Models\JobSkillModel;
 use App\Models\LocationModel;
-use App\Models\SkillModel;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use App\Models\SkillModel;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class SubmitJobController extends Controller
-{
-    public function index(Request $request){
+{   
+    
 
-        
-
-        $job_list  = JobModel::with('location.location_data')->select('job.*','job_types.title as job_type_id','salary_types.title as salary_type_id')
-                                ->leftJoin('job_types','job.job_type_id','=','job_types.id')
-                                // ->leftJoin('job_locations','job_locations.job_id','=','job.id')
-                                // ->leftJoin('locations','job_locations.location_id','=','locations.id')
-                                ->leftJoin('salary_types','job.salary_type_id','=','salary_types.id')->orderBy('job.created_at','DESC')
-                                
-                                ->get();
+    public function index(){
 
         $job_types =  JobTypeModel::get();
-
+        $skills = SkillModel::get();
         $location = LocationModel::get();
         $job_categories = JobCategoryModel::get();
         $salary_type = SalaryTypeModel::get();
 
-        return view('admin.job.submit_job',compact('job_types','location','salary_type','job_categories','job_list'));
+        return view('website.employer.submit_job',compact('skills','job_types','location','salary_type','job_categories'));
     }
 
+    public function submitJob(Request $request){
 
-
-    public function store(Request $request)
-    {
         $validator = Validator::make($request->all(), [   
             'title' => 'required|string|unique:job,title',
             'job_type_id' => 'required|numeric',
@@ -58,10 +52,6 @@ class SubmitJobController extends Controller
             'salary_type_id' => 'required|numeric',
             'location_id.*' => 'required|numeric',
             'address' => 'required',
-            'is_active' => [
-                'required',
-                Rule::in(['0', '1']),
-            ],
              [
                 'job_type_id.required' => 'please Select Job type',
                 'job_category_id.required' => 'please Select Job Category',
@@ -72,7 +62,6 @@ class SubmitJobController extends Controller
             ]
                        
         ]);
-
 
 
         if($validator->fails()){
@@ -100,9 +89,9 @@ class SubmitJobController extends Controller
                             $job_model->min_salary =          $request->input('min_salary');
                             $job_model->max_salary =          $request->input('max_salary');
                             $job_model->salary_type_id =          $request->input('salary_type_id');
-                            // $job_model->location_id =          $request->input('location_id');
                             $job_model->address =          $request->input('address');
-                        
+                            $job_model->is_active = 1;
+                            $job_model->submit_by = Auth::user()->id;
 
                             if($request->hasFile('feature_image')){
 
@@ -112,13 +101,9 @@ class SubmitJobController extends Controller
                                 $image->move(JOB_FEATURE_IMAGE_URL,$file_name);
                                 $job_model->feature_image = $file_name;
 
-
                                 if(file_exists(public_path(JOB_FEATURE_IMAGE_URL.$old_image_name))){
-
                                     unlink (public_path(JOB_FEATURE_IMAGE_URL.$old_image_name));
                                 }
-
-
                             } 
 
                              $job_model->save();
@@ -174,15 +159,14 @@ class SubmitJobController extends Controller
                                         $skill_ids = [];
                                         $response = true;
                                       }
-
-
-                               
                             }
 
 
                             if($response){
 
-                                return response()->json(['status' => 200, "msg" =>"your data is update"]); 
+                                $this->sendEmail($request->skill_id);
+
+                                 return response()->json(['status' => 200, "msg" =>"your data is saved"]); 
     
                             }else{
     
@@ -194,132 +178,36 @@ class SubmitJobController extends Controller
         });
 
         }
-    }
+
+    }   
 
 
+    public function sendEmail($skills)
+    {
+        $users = candidateSkillModel::select('user_id')->whereIn("skill_id",$skills)->distinct()->get()->toArray();
 
-    public function changefeatured($id){
-        
-        $data =  JobModel::select('is_feature')->where('id',$id)->first()->toArray();;
+        $users = array_column($users,'user_id');
 
-         $status =($data['is_feature'] == '1')?'0':'1';
-
-       if(JobModel::where('id',$id)->update(['is_feature'=> $status ])){
-
-         return   redirect()->back()->with('status_update','The status is updated');       
-
-        }else{
-            return   redirect()->back()->with('status_not_update', 'Oops.. somthing went wrong');    
-        }  
-        
-    }
-
-    public function changeStatus($id){
-        
-        $data =  JobModel::select('is_active')->where('id',$id)->first()->toArray();;
-
-         $status =($data['is_active'] == '1')?'0':'1';
-
-       if(JobModel::where('id',$id)->update(['is_active'=> $status ])){
-
-         return   redirect()->back()->with('status_update','The status is updated');       
-
-        }else{
-            return   redirect()->back()->with('status_not_update', 'Oops.. somthing went wrong');    
-        }  
-        
-    }
+        $users = User::select('email')->whereIn('id',$users)->get();
 
 
-    public function addNewJob(){
-
-        $job_types =  JobTypeModel::get();
-        $skills = SkillModel::get();
-        $location = LocationModel::get();
-        $job_categories = JobCategoryModel::get();
-        $salary_type = SalaryTypeModel::get();
-
-        return view('admin.Job.add_new_job',compact('skills','job_types','location','salary_type','job_categories'));
-    }
-
-
-    public function viewJob($id){
-
-        
-        $job_data  = JobModel::select('job.*','job_types.title as job_type_id','salary_types.title as salary_type_id')
-                                ->leftJoin('job_types','job.job_type_id','=','job_types.id')
-                                // ->leftJoin('job_locations','job_locations.job_id','=','job.id')
-                                // ->leftJoin('locations','job_locations.location_id','=','locations.id')
-                                ->leftJoin('salary_types','job.salary_type_id','=','salary_types.id')
-                                
-                                ->where('job.id',$id)->first();
-
-        $job_locations =  JobLocationModel::select('locations.title')->leftJoin('locations','locations.id','=','job_locations.location_id')->where('job_id',$id)->get();
-        $job_categories = JobCategoryRelationModel::select('job_categories.title')->leftJoin('job_categories','job_categories.id' ,'=','job_categories_relation.job_category_id')->where('job_id',$id)->get();
-       
-
-        return view('admin.job.view_job',compact('job_categories','job_data','job_locations'));
-
-
-    }
-
-
-    public function edit($id)
-    {           
-
-        // $job_data  = JobModel::select('job.*','job_types.title as job_type_id','salary_types.title as salary_type_id')
-        //                         ->leftJoin('job_types','job.job_type_id','=','job_types.id')
-        //                         // ->leftJoin('job_locations','job_locations.job_id','=','job.id')
-        //                         // ->leftJoin('locations','job_locations.location_id','=','locations.id')
-        //                         ->leftJoin('salary_types','job.salary_type_id','=','salary_types.id')->where('job.id',$id)->first();
-
-
-          $job_data = JobModel::find($id);
-          $job_data->job_category_id  =  array_column(JobCategoryRelationModel::select('job_category_id')->where('job_id',$id)->get()->toArray(), 'job_category_id'); 
-      
-
-        //    if($job_data){
-        //     return response()->json(['status' => 200,'job_data' => $job_data]);
-          
-        // }else{
-        //     return response()->json(['status' => 404,'message' => " no data found"]);
-        // }
-
-        $job_types =  JobTypeModel::get();
-
-        $location = LocationModel::get();
-        $job_categories = JobCategoryModel::get();
-        $salary_type = SalaryTypeModel::get();  
-
-
-         $selected_job_categories = JobCategoryRelationModel::where('job_id',$id)->get()->toArray();  
-
-         $selected_job_categories = array_column($selected_job_categories,'job_category_id');
-
-         $selected_job_locations = JobLocationModel::where('job_id',$id)->get()->toArray();  
-
-         $selected_job_locations = array_column($selected_job_locations,'location_id');
-
-
-        return view('admin.job.edit_job',compact('job_data','job_types','location','selected_job_locations','selected_job_categories','salary_type','job_categories'));
-    }
-
-
-    public function destroy($id)
-    {   
-           $job_category_model =  JobModel::find($id);
-        
-
-        if($job_category_model->delete()){
-
-            return response()->json(['status' => 200,'message' => " deleted "]);
-
-        }else{
-            return response()->json(['status' => 500,'message' => "Somthing Went Wrong"]);
+        foreach ($users as  $user) {
+            Mail::to($user->email)->send(new JobSubmitEmail);
         }
+        
+        return true;
+        // return response()->json(['success'=>'Send email successfully.']);
     }
 
 
 
+    public function myJobs(){
+
+
+    $my_jobs = JobModel::where('submit_by',Auth::user()->id)->get();   
+
+    return view('website.employer.my_jobs');
+
+     }
 
 }

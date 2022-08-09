@@ -34,9 +34,6 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request){
 
-
-
-
             // return response($request->all());
 
           $validator = Validator::make($request->all(), [  

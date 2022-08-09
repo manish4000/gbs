@@ -30,39 +30,34 @@
             ><span>Profile</span>
         </a>
         <a
-           href="{{route('candidate.resume.index')}}"
+           href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
-           ><i class="fas fa-file fa-fw me-3 my-3"></i><span>My Resume</span></a
+           ><i class="fas fa-file fa-fw me-3 my-3"></i><span>Submit Job</span></a
           >
         <a
-           href="{{route('candidate.applied_jobs')}}"
+           href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
            ><i class="fas fa-star-o fa-fw me-3 my-3"></i
-          ><span>Applied Jobs</span> </a
+          ><span>Applicants</span> </a
           >
         <a
            href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
            >
-          <i class="fas fa-tag fa-fw me-3 my-3"></i><span>Packages</span>
+          <i class="fas fa-tag fa-fw me-3 my-3"></i><span>Shortlist Candidates</span>
         </a>
         <a
-           href="{{route('candidate.shortlist_jobs')}}"
+           href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
-           ><i class="fas fa-chart-bar fa-fw me-3 my-3"></i><span>Shortlist Jobs</span></a
+           ><i class="fas fa-chart-bar fa-fw me-3 my-3"></i><span>My Jobs</span></a
           >
         <a
            href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
            ><i class="fas fa-user-secret fa-fw me-3 my-3"></i
-          ><span>Following Employers</span></a
+          ><span>Packages</span></a
           >
-        <a
-           href="{{route('candidate.alert_job')}}"
-           class="list-group-item list-group-item-action  py-2 ripple"
-           ><i class="fas fa-bell-o fa-fw me-3 my-3"></i
-          ><span>Alerts Jobs</span></a
-          >
+       
         <a
            href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
@@ -70,7 +65,7 @@
           ><span>Messages</span></a
           >
         <a
-           href="{{route('candidate.change_password')}}"
+           href="#"
            class="list-group-item list-group-item-action  py-2 ripple"
            ><i class="fas fa-unlock-alt fa-fw me-3 my-3"></i><span>Change Password</span></a
           >
@@ -78,7 +73,7 @@
           <i class="fas fa-sign-out fa-fw me-3 my-3"></i><span>Logout</span>
         </a>
     
-        <a href="{{route('candidate.delete_profile')}}"  class="list-group-item list-group-item-action py-2 ripp le">
+        <a href="#"  class="list-group-item list-group-item-action py-2 ripp le">
           <i class="fas fa-trash fa-fw me-3 my-3"></i><span>Delete Profile</span>
         </a>
       </div>
