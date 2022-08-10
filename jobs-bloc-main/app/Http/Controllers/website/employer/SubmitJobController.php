@@ -9,6 +9,7 @@ use App\Models\Job\JobCategoryModel;
 use App\Models\Job\JobCategoryRelationModel;
 use App\Models\Job\JobTypeModel;
 use App\Models\Job\SalaryTypeModel;
+use App\Models\JobApplicationModel;
 use App\Models\JobLocationModel;
 use App\Models\JobModel;
 use App\Models\JobSkillModel;
@@ -204,9 +205,16 @@ class SubmitJobController extends Controller
     public function myJobs(){
 
 
-    $my_jobs = JobModel::where('submit_by',Auth::user()->id)->get();   
+    $user_id = Auth::user()->id;
 
-    return view('website.employer.my_jobs');
+    $my_jobs = DB::table("job")
+          ->select("job.*",
+                    DB::raw("(SELECT COUNT(job_applications.job_id) FROM job_applications
+                                WHERE job_applications.job_id = job.id
+                                GROUP BY job_applications.job_id) as applicants"),
+          )->where('job.submit_by',$user_id)->get();
+
+        return view('website.employer.my_jobs',compact('my_jobs'));
 
      }
 

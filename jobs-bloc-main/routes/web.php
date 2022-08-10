@@ -411,8 +411,17 @@ Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\websit
     Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
     Route::get('submit-job','SubmitJobController@index')->name('submit_job.add'); 
     Route::post('submit-job','SubmitJobController@submitJob')->name('submit_job.store'); 
-
     Route::get('my-jobs','SubmitJobController@myJobs')->name('my_jobs');
+
+
+    Route::group(['prefix' => 'applicants','as'=>'applicants.'],function(){
+    
+        Route::get('/','ApplicantsController@index')->name('index'); 
+     
+    
+    });
+
+
 
 
 });
