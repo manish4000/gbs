@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'job', 'titlePage' => __('Job Details')])
+@extends('layouts.app', ['activePage' => 'submit-job', 'titlePage' => __('View Job Details')])
 
 @section('content')
 
@@ -13,7 +13,8 @@
     <ol class="breadcrumb bg-white d-flex justify-content-start  ">
       <li><a href="{{URL::to('admin/dashboard')}}" class="text-decoration-none text-reset" ><i class="fa fa-dashboard"></i> Dashboard</a> <i class="fa-solid fa-caret-right"></i></li>
        
-      <li><a href="#" class="text-decoration-none text-reset ms-1">Salary Type </a></li>
+      <li><a href="{{route('admin.job.submit_job.index')}}" class="text-decoration-none text-reset ms-1">Jobs </a> <i class="fa-solid fa-caret-right"></i> </li>
+      <li><a href="#" class="text-decoration-none text-reset ms-1">View </a></li>
     </ol>
 
     @if (\Session::has('status_update'))

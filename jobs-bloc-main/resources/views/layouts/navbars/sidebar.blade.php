@@ -13,8 +13,8 @@
     <ul class="nav">
       <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }} ">
         <a class="nav-link" href="{{ route('admin.dashboard') }}">
-          <i class="material-icons">dashboard</i>
-            <p>{{ __('Dashboard') }}</p>
+          <i class="material-icons">dashboard </i>
+            <p>{{ __('Dashboard') }}  </p>
         </a>
       </li>
        <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
@@ -70,7 +70,7 @@
         </div>
       </li>
 
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+      <li class="nav-item {{ ($activePage == 'testimonial' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
           <p>{{ __('Settings') }}
@@ -80,7 +80,7 @@
         <div class="collapse hide" id="setting">
           <ul class="nav">
 
-            <li class="nav-item">
+            <li class="nav-item {{ ($activePage == 'testimonial' || $activePage == 'user-management') ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('admin.settings.testimonial.index') }}">
                 <span class="sidebar-mini"> TM </span>
                 <span class="sidebar-normal">{{ __('Testimonial') }} </span>
@@ -99,7 +99,7 @@
         </a>
       </li> --}}
 
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+      <li class="nav-item {{ ($activePage == 'applications' || $activePage == 'job-category' || $activePage == 'job-type' || $activePage == 'submit-job' || $activePage == 'job-category' ? ' active' : ''); }}">
 
         <a class="nav-link" data-toggle="collapse" href="#job" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
@@ -110,31 +110,33 @@
         <div class="collapse hide" id="job">
           <ul class="nav">
 
-            <li class="nav-item">
+            <li class="nav-item{{ $activePage == 'submit-job' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.job.submit_job.index') }}">
+                <i class="material-icons">SJ</i>
+                  <p>{{ __('Submit Job') }}</p>
+              </a>
+            </li>
+
+            <li class="nav-item {{ $activePage == 'applications' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('admin.job.applications.index') }}">
                 <span class="sidebar-mini"> JA </span>
                 <span class="sidebar-normal">{{ __('Job Applications') }} </span>
               </a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin.job.job_category.index') }}">
+            <li class="nav-item {{ $activePage == 'job-category' ? ' active' : '' }}">
+              <a class="nav-link " href="{{ route('admin.job.job_category.index') }}">
                 <span class="sidebar-mini"> JC </span>
                 <span class="sidebar-normal">{{ __('Job Category') }} </span>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
+            <li class="nav-item{{ $activePage == 'job-type' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('admin.job.job_type.index') }}">
                 <i class="material-icons">JT</i>
                   <p>{{ __('Job Type') }}</p>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('admin.job.submit_job.index') }}">
-                <i class="material-icons">SJ</i>
-                  <p>{{ __('Submit Job') }}</p>
-              </a>
-            </li>
+           
            
           </ul>
         </div>
@@ -144,14 +146,14 @@
 
 
 
-      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'location' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin.location.index') }}">
           <i class="material-icons">L</i>
             <p>{{ __('Location') }}</p>
         </a>
       </li>
      
-      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
+      <li class="nav-item{{ $activePage == 'salary-type' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin.job.salary_type.index') }}">
           <i class="material-icons">ST</i>
             <p>{{ __('Salary Type') }}</p>

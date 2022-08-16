@@ -15,7 +15,7 @@ class JobTypeController extends Controller
 
         $job_type_data  = JobTypeModel::orderBy('created_at')->get();
 
-        return view('admin.Job.job_type',compact('job_type_data'));
+        return view('admin.job.job_type',compact('job_type_data'));
 
     }
 

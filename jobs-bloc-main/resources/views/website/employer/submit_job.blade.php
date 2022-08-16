@@ -8,13 +8,16 @@
 <div class="content">
     <div class="container-fluid bg-light p-4" >
   
-  
-      {{-- <ol class="breadcrumb bg-white d-flex justify-content-start  ">
-        <li><a href="{{URL::to('admin/dashboard')}}" class="text-decoration-none text-reset" ><i class="fa fa-dashboard"></i> Dashboard</a> <i class="fa-solid fa-caret-right"></i></li>
-         
-        <li><a href="{{route('admin.job.submit_job.index')}}" class="text-decoration-none text-reset ms-1">Jobs </a> <i class="fa-solid fa-caret-right"></i></li>
-        <li><a href="#" class="text-decoration-none text-reset ms-1">Add New  </a></li>
-      </ol> --}}
+     <div class="container">
+
+         <ol class="breadcrumb bg-white d-flex justify-content-start  ">
+           <li><a href="{{URL::to('employer/dashboard')}}" class="text-decoration-none text-reset" ><i class="fa fa-dashboard"></i> Dashboard</a> <i class="fa-solid fa-caret-right"></i></li>
+            
+          
+           <li><a href="#" class="text-decoration-none text-reset ms-1">Submit Job   </a></li>
+         </ol>
+    </div>   
+
   
       @if (\Session::has('status_update'))
      

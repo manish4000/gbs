@@ -57,13 +57,23 @@
                                 </div>
                                 <div class="col-md-12">
 
-                                  <?php  $selected =  explode(',',$employer_details->employer_job_categories) ?>
+                                  <?php  $selected =  isset($employer_details->employer_job_categories)? explode(',',$employer_details->employer_job_categories) :null ?>
                                     <label class="form-label">Categories</label>
-                                    <select id="" class="abc" multiple name="employer_job_categories[]" >
-                                    
-                                      @foreach($job_categories as $category)   
-                                       <option value="{{$category->id}}" {{(in_array($category->id ,$selected) ? 'selected' : '' )}}>{{$category->title}}</option>
-                                       @endforeach
+                                    <select id="" class="form-control p-3 abc" multiple name="employer_job_categories[]" >
+
+                                      @if($selected != null)
+
+                                        @foreach($job_categories as $category)   
+                                        <option value="{{$category->id}}" {{( in_array($category->id ,$selected) ? 'selected' : '' )}}>{{$category->title}}</option>
+                                        @endforeach
+                                      @else
+
+                                        @foreach($job_categories as $category)   
+                                          <option value="{{$category->id}}">{{$category->title}}</option>
+                                        @endforeach
+
+                                      @endif
+
                                       
                                       </select>
                                 </div>

@@ -20,6 +20,7 @@ Route::group(['namespace' => 'App\Http\Controllers\website'],function(){
 
     Route::get('/job-by-category','JobByCategoryController@index' )->name('job_by_category');
     Route::get('/jobs', 'JobsController@index')->name('jobs');
+
     Route::get('/jobs/{id}','JobsController@jobDetails')->name('job_details');
     Route::get('/jobs/shortlist/{job_id}','JobsController@shortlistJob')->name('shortlist_job');
 
@@ -172,7 +173,7 @@ Route::get('/employer/submit-job-form/', function () {
 
 //====================================guset admin ==============================================
 
-Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','autoTrim'] ,'namespace' => 'App\Http\Controllers\Admin'],function(){
+Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','autoTrim'] ,'namespace' => 'App\Http\Controllers\admin'],function(){
     Route::get('/',function (){  return view('admin.auth.login');})->name('login_view');
     Route::post('/login','Auth\LoginController@login')->name('admin.login');
  });
@@ -219,7 +220,7 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
 
 
 
-              Route::get('/dashboard', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('dashboard');
+              Route::get('/dashboard', [App\Http\Controllers\admin\HomeController::class, 'index'])->name('dashboard');
 
               Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
           
@@ -407,6 +408,7 @@ Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\websi
 
 Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\website\employer','as'=>'employer.'],function(){
 
+    Route::get('dashboard','DashboardController@index')->name('dashboard');
     Route::get('profile','ProfileController@index')->name('profile.index'); 
     Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
     Route::get('submit-job','SubmitJobController@index')->name('submit_job.add'); 
@@ -415,14 +417,12 @@ Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\websit
 
 
     Route::group(['prefix' => 'applicants','as'=>'applicants.'],function(){
-    
+
         Route::get('/','ApplicantsController@index')->name('index'); 
-     
-    
+        Route::get('/application-status','ApplicantsController@changeApplicationStatus')->name('application_status');
+        Route::get('/shortlist/{id}','ApplicantsController@changeShortListStatus')->name('application_shortlist');
+        Route::get('remove/{id}','ApplicantsController@removeApplication')->name('remove');
     });
-
-
-
 
 });
 

@@ -15,19 +15,49 @@ use App\Models\LocationModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class JobsController extends Controller
 {
     
-    public function index(){
+    public function index(Request $request){
 
-        $jobs_data = JobModel::where('is_active',1)->get();
+   
+       $job_location =   ($request->job_location != '')? explode(',',$request->job_location) : null;
 
+       $job_category =   ($request->job_category != '') ? explode(',',$request->job_category) : null;
+
+       $job_type  =   ($request->job_type != '') ? $request->job_type  : "asas";
+
+
+        $job_data =  new JobModel();
+
+
+
+        if($job_location != null){
+            $job_data->leftJoin('job_locations','job_locations.job_id','job.id')->whereIn('job_locations.location_id',$job_location);
+        }
+        if($job_category != null){
+           
+            $job_data->leftJoin('job_categories_relation','job_categories_relation.job_id','job.id')->whereIn('job_categories_relation.job_category_id',$job_category);
+           
+        }
+        // if($job_type != null){
+        //     echo "come form job_type";
+        //      $job_data->where('job_type_id',$job_type);
+        // }
+
+        $jobs_data = $job_data->get();
+
+        // echo "<pre>";
+        //    print_r($jobs_data); 
+        //     die;
         $Job_types = JobTypeModel:: where('is_active',1)->get();
         $job_categories = JobCategoryModel::where('is_active',1)->where('parent_id',null)->get();
         $locations = LocationModel::where('is_active',1)->get();
+
 
         return view('website.jobs',compact('jobs_data','Job_types','job_categories','locations'));
     }

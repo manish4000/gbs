@@ -30,7 +30,7 @@
                     </select>                        
                     </div>
                     <div class=" d-grid  col-lg-2 text-start mb-3">
-                        <button type="submit" class="btn btn-warning rounded-pill  btn-block  fw-bold "> Find Job </button>
+                        <button type="submit" class="btn theme-color rounded-pill  btn-block  fw-bold "> Find Job </button>
                     </div>
            
               </form>  
@@ -60,17 +60,6 @@
 
     </div> -->
 </div>
-{{-- Featured Jobs --}}
-
-
-
-
-{{-- Featured Jobs --}}
-
-
-
-
-
 
 <!-- find online job -->
 

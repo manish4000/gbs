@@ -10,12 +10,12 @@
            class="list-group-item list-group-item-action shadow mb-2 py-3 fw-bold text-center"
            aria-current="true"
            >
-          <span> {{Auth::user()->name}} </span>
+          <span> {{Auth::user()->name}}</span>
         </a>
 
         <a
-           href="#"
-           class="list-group-item list-group-item-action  py-2 ripple"
+           href="{{route('employer.dashboard')}}"
+           class="list-group-item list-group-item-action  py-2 ripple <?php echo  (Request::segment(2) == "dashboard") ? "active" : '' ;?>"
            aria-current="true"
            >
           <i class="fas fa-tachometer-alt fa-fw me-3 my-3"></i
@@ -24,19 +24,19 @@
         
         <a
            href="{{route('employer.profile.index')}}"
-           class="list-group-item list-group-item-action  py-2  active"
+           class="list-group-item list-group-item-action  py-2 <?php echo  (Request::segment(2) == "profile") ? "active" : '' ;?>"
            >
           <i class="fas fa-user fa-fw me-3 my-3"></i
             ><span>Profile</span>
         </a>
         <a
-           href="#"
-           class="list-group-item list-group-item-action  py-2 ripple"
+           href="{{route('employer.submit_job.add')}}"
+           class="list-group-item list-group-item-action  py-2 ripple <?php echo  (Request::segment(2) == "submit-job") ? "active" : '' ;?>"
            ><i class="fas fa-file fa-fw me-3 my-3"></i><span>Submit Job</span></a
           >
         <a
-           href="#"
-           class="list-group-item list-group-item-action  py-2 ripple"
+           href="{{route('employer.applicants.index')}}"
+           class="list-group-item list-group-item-action  py-2 ripple <?php echo  (Request::segment(2) == "applicants") ? "active" : '' ;?>" 
            ><i class="fas fa-star-o fa-fw me-3 my-3"></i
           ><span>Applicants</span> </a
           >
@@ -47,8 +47,8 @@
           <i class="fas fa-tag fa-fw me-3 my-3"></i><span>Shortlist Candidates</span>
         </a>
         <a
-           href="#"
-           class="list-group-item list-group-item-action  py-2 ripple"
+           href="{{route('employer.my_jobs')}}"
+           class="list-group-item list-group-item-action  py-2 ripple <?php echo  (Request::segment(2) == "my-jobs") ? "active" : '' ;?>"
            ><i class="fas fa-chart-bar fa-fw me-3 my-3"></i><span>My Jobs</span></a
           >
         <a

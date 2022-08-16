@@ -239,7 +239,7 @@ class SubmitJobController extends Controller
         $job_categories = JobCategoryModel::get();
         $salary_type = SalaryTypeModel::get();
 
-        return view('admin.Job.add_new_job',compact('skills','job_types','location','salary_type','job_categories'));
+        return view('admin.job.add_new_job',compact('skills','job_types','location','salary_type','job_categories'));
     }
 
 

@@ -165,7 +165,7 @@ class SubmitJobController extends Controller
 
                             if($response){
 
-                                $this->sendEmail($request->skill_id);
+                                // $this->sendEmail($request->skill_id);
 
                                  return response()->json(['status' => 200, "msg" =>"your data is saved"]); 
     

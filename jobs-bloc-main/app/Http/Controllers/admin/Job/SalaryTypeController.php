@@ -13,7 +13,7 @@ class SalaryTypeController extends Controller
 
         $salary_type_data  = SalaryTypeModel::orderBy('created_at')->get();
 
-        return view('admin.Job.salary_type',compact('salary_type_data'));
+        return view('admin.job.salary_type',compact('salary_type_data'));
 
     }
 

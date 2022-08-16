@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'map', 'titlePage' => __('Salary Type')])
+@extends('layouts.app', ['activePage' => 'salary-type', 'titlePage' => __('Salary Type')])
 
 @section('content')
 

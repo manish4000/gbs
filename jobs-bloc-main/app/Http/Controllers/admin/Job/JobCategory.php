@@ -20,7 +20,7 @@ class JobCategory extends Controller
 
         $job_categories = JobCategoryModel::get();        
 
-        return view('admin.Job.Job_category',compact('job_category_data','job_categories'));
+        return view('admin.job.Job_category',compact('job_category_data','job_categories'));
 
     }
 

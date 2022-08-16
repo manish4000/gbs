@@ -20,15 +20,17 @@
                         <div class="accordion-item border-0" >  
                         <div id="job_type-collapseOne" class="accordion-collapse collapse show" aria-labelledby="job_type-headingOne" >
                             <div class="accordion-body" style="overflow:auto;height:150px">
-                                
-                                @foreach($Job_types as $job_type)
-                                
-                                        <div class="d-flex justify-content-between mt-2">
-                                            <div class="form-check"> <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_type_id" name="job_type_id" type="radio" value="{{$job_type->id}}" id="job_type_id" checked> <label class="form-check-label" for="flexCheckChecked"> {{$job_type->title}} </label> </div>
-                                            <span>44</span> 
-                                        </div>
+                                <div  id="mainForm">
+
+                                    @foreach($Job_types as $job_type)
                                     
-                                @endforeach
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <div class="form-check"> <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_type_id" name="job_type_id" type="radio" value="{{$job_type->id}}" id="job_type_id" > <label class="form-check-label" for="flexCheckChecked"> {{$job_type->title}} </label> </div>
+                                                <span>44</span> 
+                                            </div>
+                                        
+                                    @endforeach
+                                </div>
 
                             </div>
                         </div>
@@ -48,7 +50,9 @@
                                 @foreach($job_categories as $category)
                                 
                                         <div class="d-flex justify-content-between mt-2">
-                                            <div class="form-check"> <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_category_id" name="job_category_id[]" type="checkbox" value="{{$category->id}}" id="job_category_id" checked> <label class="form-check-label" for="flexCheckChecked"> {{$category->title}} </label> </div>
+                                            <div class="form-check"> 
+                                                <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_category_id form_submit" name="job_category_id[]" type="checkbox" value="{{$category->id}}" id="job_category_id" > <label class="form-check-label" for="flexCheckChecked"> {{$category->title}} </label> 
+                                            </div>
                                             <span>44</span> 
                                         </div>
                                     
@@ -72,7 +76,8 @@
                                 @foreach($locations as $location)
                                 
                                         <div class="d-flex justify-content-between mt-2">
-                                            <div class="form-check"> <input class="form-check-input p-2 bg-warning border-1 border-light text-warning" name="location_id[]" type="checkbox" value="{{$location->id}}" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> {{$location->title}} </label> </div>
+                                            <div class="form-check">
+                                                 <input class="location_id form-check-input p-2 bg-warning border-1 border-light text-warning" name="location_id[]" type="checkbox" value="{{$location->id}}" > <label class="form-check-label" for="flexCheckChecked"> {{$location->title}} </label> </div>
                                             <span>44</span> 
                                         </div>
                                     
@@ -125,12 +130,17 @@
             <div>
                 <h3 class=" fw-bold text-center my-4">Online Free Job Search Websites in India</h3>
     
-                <form class="row  text-center px-4">
+                <form class="row  text-center px-4" method="GET" action="{{route('jobs')}}" id="create_job">
+
                     <div class="col-12 col-lg-5 mb-3 ">                       
-                        <input type="text"  class="form-control border-warning py-4 px-5" id="staticEmail2" value="Job Title or Keyword">
+                      <input type="text" name="title"  class="form-control border-warning py-4 px-5" id="staticEmail2" value="Job Title or Keyword">
+                      <input type="hidden" name="job_category" id="job_category" >
+                      <input type="hidden" name="job_location" id="job_location" >
+                      <input type="hidden" name="job_type" id="job_type" >
                     </div>
+
                     <div class="col-12 col-lg-5 mb-3">
-                    <select class="form-select border-warning py-4 px-5" aria-label="Default select example">
+                    <select class="form-select border-warning py-4 px-5" name="location" aria-label="Default select example">
                     <option selected>Location</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -141,7 +151,7 @@
                         <button type="submit" class="btn btn-warning rounded-pill py-4 btn-large  btn-block  fw-bold px-3"> Search</button>
                     </div>
            
-              </form>  
+                </form>  
     
             </div>
 
@@ -196,55 +206,58 @@
 
 <script>
 
-
-
-
+    var job_category = [];
+    var job_locations = [];
 
     
-    $("#filter-data").on('click',function(e){
+    $(".job_category_id").click(function(){
 
-        e.preventDefault();
+        var checkedBoxes = $('.job_category_id').val(); 
 
-        $('.job_type_id').click(function(){
+        $('.job_category_id').each(function (key, data) {
 
-            var Job_types = [];
-
-            $('.job_type_id').each(function(){
-
-                if($(this).is(":checked")){
-                    Job_types.push($(this).val());
-                }
-            });
-
-            job_type_data = Job_types.toString();
+            if($(this).is(":checked")){
+                job_category.push(data.value);
+            }            
         });
 
-        $('.job_category_id').click(function(){
-
-            var Job_category = [];
-
-            $('.job_category_id').each(function(){
-
-                if($(this).is(":checked")){
-                    Job_category.push($(this).val());
-                }
-
-            });
-
-            job_category_data = Job_category.toString();
-        });
-
-        $.ajax({
-                    type:'get',
-                    datatype:'html',
-                    url:'http://127.0.0.1:8000/jobs',
-                    data:"job_type_data="+job_type_data+end+"job_category_data="+job_category_data,
-                    
-                });
-
-
+        document.getElementById("job_category").value = job_category ;
+        job_category = [];
 
     });
+
+    
+    $(".location_id").click(function(){
+
+        var locations = $('.location_id').val(); 
+
+        $('.location_id').each(function (key, data) {
+
+            if($(this).is(":checked")){
+                job_locations.push(data.value);
+            }            
+        });
+        document.getElementById("job_location").value = job_locations ;
+
+        job_locations = [];
+
+    });
+
+    $(".job_type_id").click(function(){
+
+        var job_type = $('input[name="job_type_id"]:checked').val();
+
+        console.log(job_type);
+
+    });
+    
+
+
+    // function submitForm(){
+    //     $("#create_job").submit();
+    // }
+
+    
 
     
 
