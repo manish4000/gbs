@@ -106,7 +106,7 @@
        </a>
 
       <button class="navbar-toggler text-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon bg-dark"></span>
+        <i class="fa-solid fa-bars"></i>
       </button>
       <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     Button with data-bs-target
@@ -213,34 +213,32 @@
 <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body text-white">
         <ul class="navbar-nav">
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">Home</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#"> Find Resume</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('candidates')}}"> Find Resume</a>
                 </li>
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">Job Search</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('jobs')}}">Job Search</a>
                 </li>
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">Jobs By Category</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('job_by_category')}}">Jobs By Category</a>
                 </li>
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">Jobs By Location</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('job_by_location')}}">Jobs By Location</a>
                 </li>
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">Contact</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('contact')}}">Contact</a>
                 </li>
                 <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">Career with jobsbloc</a>
+                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('career_with_jabsbloc')}}">Career with jobsbloc</a>
                 </li>
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="#">wallet</a>
-                </li>
+               
               </ul>
    
   </div>
@@ -260,7 +258,8 @@
 <footer class="container">
 
   <div class="row">
-        <div class="col-12 col-lg-3">
+
+        <div class="col-12 col-lg-3 mb-3">
 
             <img src="images/logo.png" alt=""  width="100%">
 
@@ -283,7 +282,8 @@
 
 
         </div>
-        <div class="col-12 col-lg-3 text-start">
+
+        <div class="col-12 col-lg-3 text-start mb-3">
 
             <h5 class="text-uppercase">Important Links</h5>
                 
@@ -297,7 +297,7 @@
 
           
         </div>
-        <div class="col-12 col-lg-3 text-start">
+        <div class="col-12 col-lg-3 text-start mb-3">
 
             <h5 class="text-uppercase">JOBSBLOC</h5>
 
@@ -306,20 +306,20 @@
                    <p><a href="{{route('coaches')}}" class="text-muted  text-decoration-none"> coaches  </a></p>
                    <p><a href="{{route('privacy_policy')}}" class="text-muted  text-decoration-none"> Privacy Policy </a></p>
                    <p><a href="#" class="text-muted  text-decoration-none"> Stuck in Personal or Professional life? </a></p>
-                   <p><a href="#" class="text-muted  text-decoration-none"> Stuck in Personal or Professional life? </a></p>
+                  
                 
           
         </div>
        
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-3 mb-3">
            <h5>SEARCH JOB </h5>   
 
            <form class="row   my-4">
                     <div class="col-12 mb-3 ">                       
-                        <input type="text"  class="form-control border-warning py-4 px-5" id="staticEmail2" value="Job Title or Keyword">
+                        <input type="text"  class="form-control border-warning py-2 px-3" id="staticEmail2" placeholder="Job Title or Keyword">
                     </div>
                              <div class=" d-grid  col-lg-2 text-center mb-3">
-                        <button type="submit" class="btn btn-warning rounded-pill py-4 btn-large  btn-block  text-white fw-bold px-5"> Search</button>
+                        <button type="submit" class="btn btn-warning rounded-pill py-lg-2  btn-large  btn-block  text-white fw-bold px-lg-4"> Search</button>
                     </div>
            
               </form>  

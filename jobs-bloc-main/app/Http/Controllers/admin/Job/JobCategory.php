@@ -30,7 +30,6 @@ class JobCategory extends Controller
             'title' => 'required',
             'is_active' => "required",
             "parent_id" => "nullable|integer",
-
             "order" => "required|integer",
             "is_featured" => "required",
       

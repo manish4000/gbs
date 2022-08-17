@@ -24,7 +24,6 @@ class CandidatesController extends Controller
 
 
 
-                        
 
         return view('website.candidates',compact('candidates'));
     }

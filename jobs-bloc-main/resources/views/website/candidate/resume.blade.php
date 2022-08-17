@@ -212,55 +212,6 @@
                                  
                                 </div>
 
-                                <label for="inputPassword4" id="" class="form-label fw-bold">Skill</label> 
-
-                                  <div class="accordion" id="accordionExample">
-                                      <div class="accordion-item">
-                                      <h2 class="accordion-header" id="headingOne">
-                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skill" aria-expanded="false" aria-controls="skill">
-                                        Skill
-                                      </button>
-                                      </h2>
-                                      <div id="skill" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                              <div class="accordion-body">                                        
-                                      <div class="row">
-                                              <table class="table table-borderedless">
-                                                   
-                                                      <tbody id="skill_body">
-
-                                                        @foreach($candidate_skill as $skill)
-                                                                  <tr>
-                                                                      <td>
-                                                                          <div class="col-12 mb-2">
-                                                                            <input type="text" class="form-control p-2" id="" name="sk_title[]" placeholder="title" value="{{$skill->sk_title}}">
-                                                                          </div>
-                                                                          <div class="col-12 mb-2">
-                                                                            <input type="text" class="form-control p-2" id="" minlength="1" maxlength="3" name="sk_percentage[]" placeholder="Percentage" value="{{$skill->sk_percentage}}">
-                                                                          </div>
-                                                                      </td>
-
-                                                                      <td class="my-auto">
-
-                                                                          <a href="#" class="btn btn-danger btn-sm removeSkill">Delete </a>
-                                                                      </td>
-                                                                  </tr>
-                                                      @endforeach
-                                                      </tbody>
-
-                                              </table>
-
-                                              <div>
-                                                    <a href="#" class="btn btn-info addSkill">add antoher Award</a>
-                                              </div>
-
-                                      </div>
-                                
-                                </div>
-                                     </div>
-                                  </div>
-                                 
-                                 
-                                </div>
 
                                 
                                 
@@ -413,29 +364,29 @@
         });
 
 
-        function addSkill(){
+        // function addSkill(){
 
-            var tr = '<tr>'+
-                                                                      '<td>'+
-                                                                          '<div class="col-12 mb-2">'+
-                                                                            '<input type="text" class="form-control p-2" id="" name="sk_title[]" placeholder="title">'+
-                                                                          '</div>'+
-                                                                          '<div class="col-12 mb-2">'+
-                                                                            '<input type="text" class="form-control p-2" id="" minlength="1" maxlength="3" name="sk_percentage[]" placeholder="Percentage">'+
-                                                                          '</div>'+
+        //     var tr = '<tr>'+
+        //                                                               '<td>'+
+        //                                                                   '<div class="col-12 mb-2">'+
+        //                                                                     '<input type="text" class="form-control p-2" id="" name="sk_title[]" placeholder="title">'+
+        //                                                                   '</div>'+
+        //                                                                   '<div class="col-12 mb-2">'+
+        //                                                                     '<input type="text" class="form-control p-2" id="" minlength="1" maxlength="3" name="sk_percentage[]" placeholder="Percentage">'+
+        //                                                                   '</div>'+
                                                                         
-                                                                      '</td>'+
+        //                                                               '</td>'+
 
-                                                                      '<td class="my-auto">'+
+        //                                                               '<td class="my-auto">'+
 
-                                                                          '<a href="#" class="btn btn-danger btn-sm removeSkill">Delete </a>'+
-                                                                      '</td>'+
-                                                                  '</tr>' ;
+        //                                                                   '<a href="#" class="btn btn-danger btn-sm removeSkill">Delete </a>'+
+        //                                                               '</td>'+
+        //                                                           '</tr>' ;
 
-                       $('#skill_body').append(tr);                                    
+        //                $('#skill_body').append(tr);                                    
 
 
-        }
+        // }
 
       
        

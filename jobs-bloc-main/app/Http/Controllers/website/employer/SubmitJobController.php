@@ -165,7 +165,7 @@ class SubmitJobController extends Controller
 
                             if($response){
 
-                                // $this->sendEmail($request->skill_id);
+                                //  $this->sendEmail($request->skill_id);
 
                                  return response()->json(['status' => 200, "msg" =>"your data is saved"]); 
     
@@ -189,12 +189,34 @@ class SubmitJobController extends Controller
 
         $users = array_column($users,'user_id');
 
-        $users = User::select('email')->whereIn('id',$users)->get();
+       
 
 
-        foreach ($users as  $user) {
-            Mail::to($user->email)->send(new JobSubmitEmail);
+        if($users != null){
+
+            $users = User::select('email')->whereIn('id',$users)->get()->toArray();
+
+            $user_emails =   array_column($users,'email');
+            
+
+       
+    
+              // Mail::to($user_emails)->send(new JobSubmitEmail);
+    
+          
+              Mail::send('emails.submitJob', [], function($message) use ($user_emails)
+              {    
+                  $message->to($user_emails)->subject('This is test e-mail');    
+              });
+
+
+
         }
+
+
+            // var_dump( Mail:: failures());
+            // exit;
+
         
         return true;
         // return response()->json(['success'=>'Send email successfully.']);
@@ -211,7 +233,7 @@ class SubmitJobController extends Controller
           ->select("job.*",
                     DB::raw("(SELECT COUNT(job_applications.job_id) FROM job_applications
                                 WHERE job_applications.job_id = job.id
-                                GROUP BY job_applications.job_id) as applicants"),
+                                GROUP BY job_applications.job_id) as applicants")
           )->where('job.submit_by',$user_id)->get();
 
         return view('website.employer.my_jobs',compact('my_jobs'));

@@ -39,7 +39,7 @@
 
 
                     <!--Grid column-->
-                          <div class="col-md-5 mb-md-0 mb-5 p-4 ">
+                          <div class="col-12 col-lg-5 mb-md-0 mb-5 p-4 ">
 
                                         <h4 class="text-center">Quick Login</h4>
                                         <p class="text-center">Login Your Account</p>
@@ -113,7 +113,7 @@
 
 
                           <!--Grid column 2 -->
-                          <div class="col-md-5  mb-md-0 mb-5 p-4 border">
+                          <div class="col-12 col-lg-5  mb-md-0 mb-5 p-4 border">
 
                                         <h4 class="text-center">Create New Account</h4>
                                         <p class="text-center">Choose your Account Type</p>
@@ -135,7 +135,7 @@
 
                                                         <div class="col-6">
                                                                 <div class="md-form d-grid text-center">
-                                                                <input type="radio"  name="role"  autocomplete="off" value="candidate">
+                                                                <input type="radio"  name="role"  autocomplete="off" value="candidate" >
                                                                     <label class="btn btn-warning" for="role">Candidate</label>
                                                                 </div>
                                                         </div>

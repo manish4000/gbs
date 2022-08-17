@@ -25,41 +25,55 @@ class JobsController extends Controller
     public function index(Request $request){
 
    
-       $job_location =   ($request->job_location != '')? explode(',',$request->job_location) : null;
+       $job_location_checked =   (($request->job_location != '') || ($request->job_location != null) )? explode(',',$request->job_location) : null;
 
-       $job_category =   ($request->job_category != '') ? explode(',',$request->job_category) : null;
+       $job_category_checked =   ($request->job_category != '') ? explode(',',$request->job_category) : null;
 
-       $job_type  =   ($request->job_type != '') ? $request->job_type  : "asas";
+                         
 
-
-        $job_data =  new JobModel();
-
+       $job_type_checked  =   ($request->job_type != '') ? $request->job_type  : null;
 
 
-        if($job_location != null){
-            $job_data->leftJoin('job_locations','job_locations.job_id','job.id')->whereIn('job_locations.location_id',$job_location);
+        $job_data = JobModel::select('job.id','job.title','job.slug','job.feature_image')->where('job.is_active',1);
+
+        if($request->has('title')){
+
+            $job_data->where('job.title','like','%'.$request->title.'%');
         }
-        if($job_category != null){
-           
-            $job_data->leftJoin('job_categories_relation','job_categories_relation.job_id','job.id')->whereIn('job_categories_relation.job_category_id',$job_category);
+        if($request->has('sub_category')){
+
+            $job_data->leftJoin('job_categories_relation','job_categories_relation.job_id','job.id')->where('job_categories_relation.job_category_id',$request->sub_category);
+        }
+
+        if($job_location_checked != null){
+            $job_data->leftJoin('job_locations','job_locations.job_id','job.id')->whereIn('job_locations.location_id',$job_location_checked);
+        }
+        if($job_category_checked != null){
+
+            $sub_categories = JobCategoryModel::select('id')->whereIn('parent_id',$job_category_checked)->get()->toArray();
+
+            $all_subcategory_id = array_column($sub_categories, 'id');
+
+    
+
+            $job_data->leftJoin('job_categories_relation','job_categories_relation.job_id','job.id')->whereIn('job_categories_relation.job_category_id',$job_category_checked);
            
         }
-        // if($job_type != null){
-        //     echo "come form job_type";
-        //      $job_data->where('job_type_id',$job_type);
-        // }
+         if($job_type_checked != null){
+              $job_data->where('job.job_type_id',$job_type_checked);
+         }
 
         $jobs_data = $job_data->get();
 
-        // echo "<pre>";
-        //    print_r($jobs_data); 
-        //     die;
+
+
         $Job_types = JobTypeModel:: where('is_active',1)->get();
+
         $job_categories = JobCategoryModel::where('is_active',1)->where('parent_id',null)->get();
         $locations = LocationModel::where('is_active',1)->get();
 
 
-        return view('website.jobs',compact('jobs_data','Job_types','job_categories','locations'));
+        return view('website.jobs',compact('jobs_data','Job_types','job_categories','locations','job_location_checked','job_category_checked','job_type_checked'));
     }
 
 

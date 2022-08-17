@@ -160,49 +160,56 @@
                           </div>
                       </div>
                   </div>
-              </div>
-              
-            @foreach ( $candidates as $candidate)
-               
-            <div class="col-12 col-lg-6 ">
-                  <div class="product pt-5 shadow fade-in">
+            </div>
 
-                        <div class="text-center">
-                           
-                           @if(isset($candidate->featured_image))  
-                           <img src="{{CANDIDATE_FEATURE_IMAGE_URL}}{{$candidate->featured_image}}" height="120px" > 
-                           @else
-                           <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" height="120px" > 
-                           @endif
-                        
-                        </div>
-                        <div class="about text-center">
-                           <h6 class="text-uppercase fw-bold">{{$candidate->name}}</h6>
-                           <span>4t5rtre</span> 
-                           @isset($candidate->location)
-                           <div class="d-flex justify-content-between px-5 bg-light py-3">
-                           <span class="text-danger ">Location</span>
-                           
-                           <span class="text-muted"> <i class="fa-solid text-danger fa-location-dot"></i> {{$candidate->location}}</span>
-                           </div>  
-                           @endisset
-                              
-                           @isset($candidate->job_category)
-                           <div class="d-flex justify-content-between px-5  py-3">
-                              <span class="text-danger ">Sector</span>
-                              <span >
-                                 <a href="#" class="text-decoration-none text-muted"" > {{$candidate->job_category}}</a>
-                              </span>
-                           </div>   
-                        @endisset
-                        </div>
-                        
-                        <div class="text-center py-3">
-                          <a href="{{route('candidates.details',['name' => $candidate->name,'id' => $candidate->id])}}" class="btn btn-outline-warning rounded btn-block px-4 py-2" > View Profile </a>
-                        </div>
-                  </div>
-              </div>
-            @endforeach
+            @if(count($candidates) > 0)
+                    
+                @foreach ( $candidates as $candidate)
+                
+                <div class="col-12 col-lg-6 ">
+                    <div class="product pt-5 shadow fade-in">
+
+                            <div class="text-center">
+                            
+                            @if(isset($candidate->featured_image))  
+                            <img src="{{CANDIDATE_FEATURE_IMAGE_URL}}{{$candidate->featured_image}}" height="120px" > 
+                            @else
+                            <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" height="120px" > 
+                            @endif
+                            
+                            </div>
+                            <div class="about text-center">
+                            <h6 class="text-uppercase fw-bold">{{$candidate->name}}</h6>
+                            <span>4t5rtre</span> 
+                            @isset($candidate->location)
+                            <div class="d-flex justify-content-between px-5 bg-light py-3">
+                            <span class="text-danger ">Location</span>
+                            
+                            <span class="text-muted"> <i class="fa-solid text-danger fa-location-dot"></i> {{$candidate->location}}</span>
+                            </div>  
+                            @endisset
+                                
+                            @isset($candidate->job_category)
+                            <div class="d-flex justify-content-between px-5  py-3">
+                                <span class="text-danger ">Sector</span>
+                                <span >
+                                    <a href="#" class="text-decoration-none text-muted"" > {{$candidate->job_category}}</a>
+                                </span>
+                            </div>   
+                            @endisset
+                            </div>
+                            
+                            <div class="text-center py-3">
+                            <a href="{{route('candidates.details',['name' => $candidate->name,'id' => $candidate->id])}}" class="btn btn-outline-warning rounded btn-block px-4 py-2" > View Profile </a>
+                            </div>
+                    </div>
+                </div>
+                @endforeach
+            @else
+            <p class="text-center mt-3">No candidates found </p> 
+            @endif
+
+
               {{-- <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                   <div class="product-item bg-light mb-4">
                       <div class="product-img position-relative overflow-hidden">
@@ -232,7 +239,7 @@
               </div> --}}
            
               <div class="col-12 mt-4 py-4" >
-                  <nav>
+                  {{-- <nav>
                     <ul class="pagination justify-content-start">
                       <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
                       <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -240,7 +247,7 @@
                       <li class="page-item"><a class="page-link" href="#">3</a></li>
                       <li class="page-item"><a class="page-link" href="#">Next</a></li>
                     </ul>
-                  </nav>
+                  </nav> --}}
               </div>
           </div>
       </div>

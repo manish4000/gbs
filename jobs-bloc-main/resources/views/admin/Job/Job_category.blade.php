@@ -163,8 +163,8 @@
                     <div class="form-group">
                       <label class="mb-2" for="Parent Category">Parent Category </label>
 
-                      <select name="parent_id" id="" class="form-control" required> 
-                        <option> Select </option>
+                      <select name="parent_id" id="" class="form-control" > 
+                        <option value=""> Select </option>
                         @isset($job_categories)
 
                             @foreach($job_categories as $category)
@@ -247,7 +247,7 @@
                 <label for="Parent Category">Parent Category </label>
 
                 <select name="parent_id" id="edit_parent_id" class="form-control" > 
-                  <option>  </option>
+                  <option value="">Select Category </option>
                   @isset($job_categories)
 
                       @foreach($job_categories as $category)

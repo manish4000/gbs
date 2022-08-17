@@ -13,14 +13,14 @@
             <div>
                
     
-                <form class="row  text-center px-4">
-                    <h2 class="fw-bold text-start mb-2">Search Jobs In Your Preferred Locations</h2>
+                <form class="row  text-center px-4" action="{{route('jobs')}}" method="GET">
+                    <h2 class="fw-bold text-start mb-3">Search Jobs In Your Preferred Locations</h2>
                     <div class="col-12 col-lg-4 mb-3 ">                       
-                        <input type="text"  class="form-control border-warning py-4 px-4" id="staticEmail2" placeholder="Job Title or Keyword">
+                        <input type="text"  name="title" class="form-control border-warning py-4 px-4" id="staticEmail2" placeholder="Job Title or Keyword">
                     </div>
                     <div class="col-12 col-lg-4 mb-3">
-                    <select class="form-select border-warning py-4 px-5" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                    <select class="form-select border-warning py-4 px-5" name="job_location" aria-label="Default select example">
+                    <option value="" >Open this select menu</option>
 
                         @foreach ($locations as $location)
                         <option value="{{$location->id}}">{{$location->title}}</option>
@@ -30,7 +30,7 @@
                     </select>                        
                     </div>
                     <div class=" d-grid  col-lg-2 text-start mb-3">
-                        <button type="submit" class="btn theme-color rounded-pill  btn-block  fw-bold "> Find Job </button>
+                        <button type="submit" class="btn bg-warning rounded-pill  btn-block  fw-bold "> Find Job </button>
                     </div>
            
               </form>  
@@ -70,6 +70,9 @@
         <h3 class="fw-bold text-info">Find Free Online Jobs in India</h3>
         <h3 class="fw-bold text-info">How We Can Help You to find new job!</h3>
         <h5 class="fw-bold text-info">We make it as simple as a click.​</h5>
+
+        
+    
 
     </div>
 
@@ -130,10 +133,10 @@
                 <div class="col-12 col-md-6  mb-3">
                     <div class="row">
                         <div class=" col-12 col-md-6 mb-3">
-                        <button type="submit" class="btn btn-warning  fw-bold px-4 py-3"> Create Job Alerts </button>
+                        <button type="submit" class="btn btn-warning p-2  fw-bold  "> Create Job Alerts </button>
                         </div>
                         <div class="col-12 col-md-6 ">
-                        <button type="submit" class="btn btn-warning  fw-bold px-4 py-3"> Create Candidate Alerts </button>
+                        <button type="submit" class="btn btn-warning  p-2  fw-bold ">Candidate Alerts </button>
                         </div>
                     </div>
                 </div>
@@ -147,8 +150,229 @@
 <div class="container py-5 my-4 testmonial" >
 
 
+    <div class="container why-choose-us-tab mb-5">
+        <!-- Nav tabs -->
+
+
+	    <div class="text-center">
+
+                    <ul class="nav nav-pills d-flex justify-content-center"" id="myTab">
+                        <li class="nav-item ">
+                        <a class="nav-link active px-3 py-2 fs-5  mb-3 mb-lg-0 my-auto " data-bs-toggle="tab" href="#home"> 	<i class="fa  fa-tv "  > </i>  Development</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link px-3 py-2 fs-5 my-auto mb-3 mb-lg-0 " data-bs-toggle="tab" href="#menu1"> <i class="fa  fa-tv "  > </i> Web Marketing </a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link px-3 py-2 fs-5 my-auto mb-3 mb-lg-0 " data-bs-toggle="tab" href="#menu2"> <i class="fa  fa-tv "  > </i>  Data Analytic</a>
+                        </li>
+                    </ul>
+         </div>
+                        
+                        <!-- Tab panes -->
+                        <div class="tab-content mt-5" id="myTabContent">
+
+                            
+
+                            <div class="tab-pane container active" id="home">
+                                <div class="owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                   
+                                </div>
+                        
+                            </div>
+
+                            <div class="tab-pane container fade" id="menu1">
+                                <div class="owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                   
+                                </div>
+                            </div>
+                            <div class="tab-pane container fade" id="menu2">
+                                <div class="owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">hr </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">hr </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">hr </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+
+    </div>
+
+
 <!-- Carousel wrapper -->
-        <div
+        {{-- <div
         id="carouselExampleControls"
         class="carousel slide text-center carousel-dark"
         data-mdb-ride="carousel">
@@ -165,7 +389,7 @@
                                                   <div class="row ">
 
                                                         <div class="col-4 d-none d-md-inline my-auto">
-                                                        <img class="shadow-1-strong img-thumbnail" src="http://dairy.novaexpress.in/uploads/website/testmonial/1649741461.jpg"
+                                                        <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
                                                         alt="avatar"
                                                         style="width: 170px;" />
                                                         </div>
@@ -340,7 +564,7 @@
             <span class="carousel-control-next-icon bg-warning" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-        </div>
+        </div> --}}
 
 
 
@@ -429,15 +653,22 @@
 
 <script>
         $(document).ready(function() {
-     
-     $(".owl-carousel").owlCarousel({
-   items:4,
-   loop:true,
-   margin:10,
-   autoplay:true,
-   autoplayTimeout:3000,
-   autoplayHoverPause:true
-});
+            $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:3
+        }
+    }
+})
      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
        e.target // newly activated tab
        e.relatedTarget // previous active tab
