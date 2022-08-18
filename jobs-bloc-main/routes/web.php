@@ -25,7 +25,7 @@ Route::group(['namespace' => 'App\Http\Controllers\website'],function(){
     Route::get('/jobs/shortlist/{job_id}','JobsController@shortlistJob')->name('shortlist_job');
 
     Route::get('/job/locations','JobsLocationController@index')->name('job_by_location');
-    Route::post('apply-job','JobsController@applyJob')->name('job.apply');
+    Route::get('apply-job','JobsController@applyJob')->name('job.apply');
     Route::get('/candidates', 'CandidatesController@index')->name('candidates');
     Route::get('/candidate/details/', 'CandidatesController@candidateDetails')->name('candidates.details');
 
@@ -331,8 +331,10 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
                       });
                      
                       Route::group(['prefix' => 'job-category','as'=>'job_category.'],function(){
-          
+                        
                           Route::get('/','JobCategory@index')->name('index');
+                          
+
                           Route::Post('/store','JobCategory@store')->name('store');
                           Route::get('/edit/{id}','JobCategory@edit')->name('edit');
                           Route::post('/update/','JobCategory@update')->name('update');
@@ -345,7 +347,9 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
                   });
 
                   Route::group(['prefix' => 'location','as'=>'location.', "namespace" => "App\Http\Controllers\Admin"],function(){
+
                       Route::get('/','LocationController@index')->name('index');
+                      Route::get('/st','LocationController@st')->name('st');
                       Route::Post('/store','LocationController@store')->name('store');
                       Route::get('/edit/{id}','LocationController@edit')->name('edit');
                       Route::post('/update/','LocationController@update')->name('update');
@@ -379,6 +383,7 @@ Route::middleware([
         return view('website.employer.dashboard');
     })->name('dashboard');
 
+    
     Route::get('/profile', function () {
         if(Auth::user()->role == "candidate"){
             return view('website.candidate.dashboard');

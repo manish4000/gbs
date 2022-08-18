@@ -110,7 +110,9 @@ class SubmitJobController extends Controller
                              $job_model->save();
 
                             if($job_model->id){
-                                
+
+                                $job_details_for_email = JobModel::select('title','slug')->where('id',$job_model->id)->first()->toArray();
+
                                 $job_category_relation_model = new JobCategoryRelationModel; 
                                 
                                 $job_category_relation_model->where('job_id',$job_model->id)->delete();
@@ -165,7 +167,7 @@ class SubmitJobController extends Controller
 
                             if($response){
 
-                                //  $this->sendEmail($request->skill_id);
+                                  $this->sendEmail($job_details_for_email,$request->skill_id);
 
                                  return response()->json(['status' => 200, "msg" =>"your data is saved"]); 
     
@@ -183,30 +185,25 @@ class SubmitJobController extends Controller
     }   
 
 
-    public function sendEmail($skills)
+    public function sendEmail($job_details_for_email,$skills)
     {
         $users = candidateSkillModel::select('user_id')->whereIn("skill_id",$skills)->distinct()->get()->toArray();
 
         $users = array_column($users,'user_id');
 
-       
-
+    
 
         if($users != null){
 
             $users = User::select('email')->whereIn('id',$users)->get()->toArray();
 
             $user_emails =   array_column($users,'email');
-            
 
-       
-    
-              // Mail::to($user_emails)->send(new JobSubmitEmail);
-    
-          
-              Mail::send('emails.submitJob', [], function($message) use ($user_emails)
+            $job_details_for_email['link'] = APP_PATH."jobs/".$job_details_for_email['slug'];
+            
+              Mail::send('emails.submitJob', $job_details_for_email, function($message) use ($user_emails)
               {    
-                  $message->to($user_emails)->subject('This is test e-mail');    
+                  $message->to($user_emails)->subject('New Job Alert For You');    
               });
 
 
@@ -214,9 +211,7 @@ class SubmitJobController extends Controller
         }
 
 
-            // var_dump( Mail:: failures());
-            // exit;
-
+          
         
         return true;
         // return response()->json(['success'=>'Send email successfully.']);

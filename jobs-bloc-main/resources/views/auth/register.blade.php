@@ -4,6 +4,74 @@
 
 @section('content')
 
+<style>
+  .wrapper{
+
+  background: #fff;
+  
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 10px 20px;
+  
+}
+.wrapper .option{
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10 20px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.wrapper .option .dot{
+  height: 0px;
+  width: 0px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  display: none;
+}
+.wrapper .option .dot::before{
+  position: absolute;
+  content: "";
+  
+  width: 0px;
+  height: 0px;
+  background: rgba(225, 173, 1, 1);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2{
+  border-color: rgba(225, 173, 1, 1);
+  background: rgba(225, 173, 1, 1);
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span{
+  color: #fff;
+}
+</style>
+
 <div class="container-fluid  py-4 bg-light">
 
     <div class="container d-flex justify-content-between align-items-center">
@@ -131,20 +199,24 @@
 
                                             <div class="row mb-3">
 
-                                            <div class="row mb-3">
+                                            <div class="row mb-3 wrapper">
 
-                                                        <div class="col-6">
-                                                                <div class="md-form d-grid text-center">
-                                                                <input type="radio"  name="role"  autocomplete="off" value="candidate" >
-                                                                    <label class="btn btn-warning" for="role">Candidate</label>
-                                                                </div>
+                                                        <div class="col-6 ">
+                                                          <input type="radio" name="role" value="candidate" id="option-1" checked>
+                                                          <label for="option-1" class="option option-1 p-2">
+                                                            <div class="dot"></div>
+                                                             <span>Candidate</span>
+                                                             </label>
+                                                                
                                                         </div>
                                                         <div class="col-6">
-                                                                <div class="md-form d-grid text-center">
-                                                                <input type="radio"  name="role"  autocomplete="off" value="employer">
-                                                                    <label class="btn btn-warning" for="role">Employer</label>
-                                                                </div>
-                                                        </div>
+                                                          <input type="radio" name="role" value="employer" id="option-2">
+                                                          <label for="option-2" class="option option-2 p-2">
+                                                            <div class="dot"></div>
+                                                             <span>Employer</span>
+                                                          </label>
+                                                               
+                                                        </div> 
 
                                             </div>
 
@@ -207,7 +279,7 @@
                                                 </div>
                                             </div>
                                              <?php
-                                                     $categories = DB::table('job_categories')->where('parent_id',null)->get();
+                                                     $categories = DB::table('job_categories')->where('is_active',1)->get();
                                                  ?>   
 
                                             <div class="row mb-3">

@@ -127,9 +127,9 @@
           <li class="nav-item">
             <a class="nav-link text-dark  fw-bold" aria-current="page" href="{{route('jobs')}}"> <small>  Job Search </small></a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('job_by_category')}}"> <small>Jobs By Category </small> </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('job_by_location')}}">  <small> Jobs By Location</small> </a>
           </li>
@@ -226,9 +226,9 @@
                 <li class="nav-item py-1">
                   <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('jobs')}}">Job Search</a>
                 </li>
-                <li class="nav-item py-1">
+                {{-- <li class="nav-item py-1">
                   <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('job_by_category')}}">Jobs By Category</a>
-                </li>
+                </li> --}}
                 <li class="nav-item py-1">
                   <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('job_by_location')}}">Jobs By Location</a>
                 </li>

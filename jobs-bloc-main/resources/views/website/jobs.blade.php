@@ -192,7 +192,7 @@
 
                                                    
                                                     <div class="p-2">
-                                                        <a href="{{route('job_details',[ 'title' =>  $jobs->slug, 'id' => $jobs->id])}}">
+                                                        <a href="{{route('job_details',$jobs->slug)}}">
                                                         @if ($jobs->feature_image)
                                                         <img src="{{APP_PATH.JOB_FEATURE_IMAGE_URL}}{{$jobs->feature_image}}" alt="{{$jobs->title}}"  class="ps-2" height="80px" width="80px">
                                                         @else   
@@ -203,7 +203,7 @@
                                                    
                                                     <div class="my-auto">
                                                         <div class="me-3">
-                                                            <a href="{{route('job_details',[ 'title' =>  $jobs->slug, 'id' => $jobs->id])}}" class="text-decoration-none text-reset fw-bold "> {{$jobs->title}} </a>    <span> @if($jobs->is_feature == 1)  <i class="fa fa-star ms-2" style="color:#ffc107;"></i>  @endif  </span>       
+                                                            <a href="{{route('job_details',$jobs->slug)}}" class="text-decoration-none text-reset fw-bold "> {{$jobs->title}} </a>    <span> @if($jobs->is_feature == 1)  <i class="fa fa-star ms-2" style="color:#ffc107;"></i>  @endif  </span>       
                                                         </div>
                                                     </div>
                                             </div>           

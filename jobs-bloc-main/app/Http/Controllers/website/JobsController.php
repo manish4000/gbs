@@ -50,9 +50,9 @@ class JobsController extends Controller
         }
         if($job_category_checked != null){
 
-            $sub_categories = JobCategoryModel::select('id')->whereIn('parent_id',$job_category_checked)->get()->toArray();
+            // $sub_categories = JobCategoryModel::select('id')->whereIn('parent_id',$job_category_checked)->get()->toArray();
 
-            $all_subcategory_id = array_column($sub_categories, 'id');
+            // $all_subcategory_id = array_column($sub_categories, 'id');
 
     
 
@@ -69,7 +69,7 @@ class JobsController extends Controller
 
         $Job_types = JobTypeModel:: where('is_active',1)->get();
 
-        $job_categories = JobCategoryModel::where('is_active',1)->where('parent_id',null)->get();
+        $job_categories = JobCategoryModel::where('is_active',1)->get();
         $locations = LocationModel::where('is_active',1)->get();
 
 
@@ -77,15 +77,17 @@ class JobsController extends Controller
     }
 
 
-    public function jobDetails(Request $request){
+    public function jobDetails( $slug){
 
         $job_data = JobModel::select('job.*','job_types.title as job_type')->leftjoin('job_types','job_types.id','=','job.job_type_id')
                                   
-                                ->where('job.id',$request->id)->first();
+                                ->where('job.slug',$slug)->first();
 
-        $job_data->location = JobLocationModel::select('locations.title')->leftJoin('locations','locations.id','=','job_locations.location_id')->where('job_id',$request->id)->get();                        
 
-                          $job_categories =  JobCategoryRelationModel::select('job_category_id')->where('job_id', $request->id)->get()->toArray();
+
+        $job_data->location = JobLocationModel::select('locations.title')->leftJoin('locations','locations.id','=','job_locations.location_id')->where('job_id',$job_data->id)->get();                        
+
+                          $job_categories =  JobCategoryRelationModel::select('job_category_id')->where('job_id', $job_data->id)->get()->toArray();
 
                           
                         if($job_categories != null){
@@ -113,6 +115,9 @@ class JobsController extends Controller
 
     public function applyJob(Request $request){
 
+  $id = $request->id;
+
+
         if(Auth::user()->role != 'candidate'){
             return response()->json([
                 "status" => 500,
@@ -120,59 +125,103 @@ class JobsController extends Controller
             ]);
         }
 
-        $validator = Validator::make($request->all(), [  
-            'name' => 'required|string',
-            'phone' => 'required|numeric|digits_between:10,10',
-            'email' => "required|email",
-            'message' => "required",
-            'resume' => 'required|file|max:3000|mimes:pdf,docx,doc',         
-            'job_id' => "required|numeric",
-        ]);
+        // $validator = Validator::make($request->all(), [  
+        //     'name' => 'required|string',
+        //     'phone' => 'required|numeric|digits_between:10,10',
+        //     'email' => "required|email",
+        //     'message' => "required",
+        //     'resume' => 'required|file|max:3000|mimes:pdf,docx,doc',         
+        //     'job_id' => "required|numeric",
+        // ]);
 
-        if($validator->fails()){
-            return response()->json(['status' => 401 ,'error' => $validator->errors()->toArray() ]);
-        }else{
+        // if($validator->fails()){
+        //     return response()->json(['status' => 401 ,'error' => $validator->errors()->toArray() ]);
+        // }else{
 
+
+            $job_data =   JobModel::where('slug',$id)->first();
+
+
+             $check_already_apply =    JobApplicationModel::where('user_id',Auth::user()->id)->where('job_id',$job_data->id)->first();
+
+
+            if($check_already_apply == null){
+
+                
                 $job_application_model  = new  JobApplicationModel;
                 $job_application_model->user_id = Auth::user()->id;
-                $job_application_model->job_id =  $request->job_id;
-                $job_application_model->name = $request->name;
-                $job_application_model->phone = $request->email;
-                $job_application_model->email = $request->email;
-                $job_application_model->message =  $request->message;
+                $job_application_model->job_id =  $job_data->id;
 
-
-                if($request->hasFile('resume')){
-                                 
-                    $image =  $request->file('resume');
-                    $extension = $image->getClientOriginalExtension();
-                    $file_name = time().'.'.$extension;
-
-                    $image->move(JOB_APPLICATIONS_RESUME_URL,$file_name);
-
-                    $job_application_model->resume = $file_name;
-
-             } 
-
-
-             if($job_application_model->save()){
-                
-                $job_data =  JobModel::where('id',$request->job_id)->first();
-                //an email send to employer 
+                    if($job_application_model->save()){
+                    
+                        
                 $job_submited_by = User::select('email')->where('id',$job_data->submit_by)->first();
+
+     
+
                 $send_to = $job_submited_by->email;
                 
                 Mail::to($send_to)->send(new ApplyJobEmail());
+
+
+                        return redirect()->back()->with('job_apply_status','You have successfully apply for this job');
+
+                    }else{
+
+                        return redirect()->back()->with('job_apply_status','Somthing Went Wrong Try After some time');
+                        
+                    }
+
+
+            }else{
+
+                return redirect()->back()->with('You have already applied to the job');
+
+               
+
+            }
+
+
+            //     $job_application_model  = new  JobApplicationModel;
+            //     $job_application_model->user_id = Auth::user()->id;
+            //     $job_application_model->job_id =  $request->job_id;
+            //     $job_application_model->name = $request->name;
+            //     $job_application_model->phone = $request->email;
+            //     $job_application_model->email = $request->email;
+            //     $job_application_model->message =  $request->message;
+
+
+            //     if($request->hasFile('resume')){
+                                 
+            //         $image =  $request->file('resume');
+            //         $extension = $image->getClientOriginalExtension();
+            //         $file_name = time().'.'.$extension;
+
+            //         $image->move(JOB_APPLICATIONS_RESUME_URL,$file_name);
+
+            //         $job_application_model->resume = $file_name;
+
+            //  } 
+
+
+            //  if($job_application_model->save()){
                 
-                return response()->json([
-                    "status" => 200,
-                    "message" => "You have successfully applied to the job"
-                ]);
+            //     $job_data =  JobModel::where('id',$request->job_id)->first();
+            //     //an email send to employer 
+            //     $job_submited_by = User::select('email')->where('id',$job_data->submit_by)->first();
+            //     $send_to = $job_submited_by->email;
+                
+            //     Mail::to($send_to)->send(new ApplyJobEmail());
+                
+            //     return response()->json([
+            //         "status" => 200,
+            //         "message" => "You have successfully applied to the job"
+            //     ]);
 
 
-             }
+            //  }
 
-        }        
+        //}        
 
     }
 

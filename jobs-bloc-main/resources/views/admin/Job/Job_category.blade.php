@@ -51,7 +51,7 @@
                 <thead class=" text-primary">
                   <th>ID </th>
                   <th>Title </th>
-                  <th>Parent Category </th>
+                  {{-- <th>Parent Category </th> --}}
                   <th>Order</th>
                   <th>Status</th>
                   <th>IS Featured</th>    
@@ -70,12 +70,12 @@
                         <td>{{ $data->id }}</td>
                        
                         <td>{{$data->title}}</td>
-                        
+{{--                         
                             @if($data->parent_category == null)
                             <td> No Parent Category </td>
                             @else
                               <td>{{$data->parent_category}}   </td>                        
-                             @endif 
+                             @endif  --}}
                         <td>{{$data->order}}</td>
                        
                   
@@ -160,7 +160,7 @@
                       <span class="text-danger error-text  title_error "></span>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label class="mb-2" for="Parent Category">Parent Category </label>
 
                       <select name="parent_id" id="" class="form-control" > 
@@ -174,7 +174,7 @@
                       </select>
 
                       <span class="text-danger error-text  parent_id_error "></span>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                       <label class="mb-2" for="Order">Order</label>
@@ -243,7 +243,7 @@
                 <span class="text-danger error-text  title_error "></span>
               </div>
 
-              <div class="form-group">
+              {{-- <div class="form-group">
                 <label for="Parent Category">Parent Category </label>
 
                 <select name="parent_id" id="edit_parent_id" class="form-control" > 
@@ -257,7 +257,7 @@
                 </select>
 
                 <span class="text-danger error-text  parent_id_error "></span>
-              </div>
+              </div> --}}
 
               <div class="form-group">
                 <label class="mb-2" for="Order">Order</label>
@@ -373,10 +373,10 @@
                   console.log(response);
 
                  
-                  $('#edit_id').val(testimonial_id);    
-                  $('#edit_title').val(response.job_category_data.title);
-                 $('#edit_order').val(response.job_category_data.order);
-                 $('#edit_parent_id').val(response.job_category_data.parent_id);
+                $('#edit_id').val(testimonial_id);    
+                $('#edit_title').val(response.job_category_data.title);
+                $('#edit_order').val(response.job_category_data.order);
+                //  $('#edit_parent_id').val(response.job_category_data.parent_id);
                  $('#edit_is_featured').val(response.job_category_data.is_featured);
                  $('#edit_is_active').val(response.job_category_data.is_active);
                  

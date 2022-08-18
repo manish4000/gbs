@@ -91,8 +91,9 @@
                                 <div class="col-md-12">
                                     <label class="form-label">Locations</label>                       
                                     <select name="location_id"  value="{{($employer_details->location_id)?? '' }}" class="form-control p-3">
+                                      <option value="">Select  Location </option>
                                       @foreach($locations as $location)
-                                        <option value="{{$location->id}}"> {{ $location->title}}</option>
+                                        <option value="{{$location->id}}" <?php echo  (($employer_details->location_id != null) && ($location->id == $employer_details->location_id ))?'selected' : '' ?> > {{ $location->title}}</option>
                                       @endforeach
                                     </select>
                                 </div>
@@ -329,8 +330,7 @@
                                                                               '</div>'+
                                                                               '<div class="col-12 mb-2">'+
                                                                                 ' <label for="" class="text-samll ps-1"> <small>Description </small> </label>'+
-                                                                                '<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="mamber_description[]">'+'Description'+                                                            
-                                                                                '</textarea>'+
+                                                                                '<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="mamber_description[]"></textarea>'+
                                                                               '</div>'+
                                                                               
                                                                           '</td>'+

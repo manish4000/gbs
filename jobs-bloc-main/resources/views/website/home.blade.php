@@ -149,11 +149,53 @@
 
 <div class="container py-5 my-4 testmonial" >
 
+    
 
-    <div class="container why-choose-us-tab mb-5">
+    <div class="container why-choose-us-tab mb-5 shadow py-5 px-3">
         <!-- Nav tabs -->
 
+        <h2 class="text-center my-5">Featured Jobs</h2>
+     
 
+            @if( count($featured_jobs) > 0 )
+                    <div class="owl-carousel owl-theme">
+                        @foreach($featured_jobs as $job)
+
+                        <div class="item border" >
+                            
+                                <div class="p-3 ">
+
+                                    <div class="row ">
+
+                                        <div class="col-4 d-none d-md-inline my-auto">
+                                            @if($job->feature_image == null)
+                                            <img class="shadow-1-strong img-thumbnail" src="{{APP_PATH.NO_IMAGE}}" alt="avatar" style="width:100px; height:100px" />
+                                            @else
+                                            <img class="shadow-1-strong img-thumbnail" src="{{APP_PATH.JOB_FEATURE_IMAGE_URL}}{{$job->feature_image}}" alt="avatar" style="width:100px; height:100px" />
+                                            @endif
+                                        
+                                        </div>
+                                        <div class="col-8 text-start p-3">
+                                            <p class="text-warning  p-0 m-0"><small>{{$job->job_type}}</small> </p>
+                                            <p class="fw-bold p-0 m-0 "> <a class="text-decoration-none text-reset" href="{{route('job_details',$job->slug)}}" > {{$job->title}} </a> </p> 
+                                            <p class="text-muted p-0 m-0"><small >{{$job->created_at->diffForHumans()}}</small></p>
+
+                                        </div>
+                                </div>
+                                </div>
+                            
+                        </div>
+
+                        @endforeach
+                    </div>
+           @else
+
+                <h4 class="text-center">No Featured Jobs Available Right Now</h4>
+
+           @endif
+      
+
+{{-- 
 	    <div class="text-center">
 
                     <ul class="nav nav-pills d-flex justify-content-center"" id="myTab">
@@ -176,6 +218,25 @@
 
                             <div class="tab-pane container active" id="home">
                                 <div class="owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="p-3 border">
+
+                                            <div class="row ">
+
+                                                <div class="col-4 d-none d-md-inline my-auto">
+                                                <img class="shadow-1-strong img-thumbnail" src="https://jobsbloc.com/images/logo.png"
+                                                alt="avatar"
+                                                style="width: 100px;" />
+                                                </div>
+                                                <div class="col-8 text-start p-3">
+                                                    <p class="text-warning  p-0 m-0"><small>Full Time</small> </p>
+                                                    <p class="fw-bold p-0 m-0"> <a href="#">office staff </a> </p> 
+                                                    <p class="text-muted p-0 m-0"><small >posted 2 days Ago</small></p>
+
+                                                </div>
+                                        </div>
+                                        </div>
+                                    </div>
                                     <div class="item">
                                         <div class="p-3 border">
 
@@ -366,7 +427,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> --}}
 
     </div>
 
@@ -652,29 +713,24 @@
  
 
 <script>
-        $(document).ready(function() {
-            $('.owl-carousel').owlCarousel({
+  $('.owl-carousel').owlCarousel({
     loop:true,
-    margin:10,
+    margin:20,
     nav:true,
+    dots:true,
     responsive:{
         0:{
-            items:1
+            items:2
         },
         600:{
-            items:3
+            items:2
         },
         1000:{
             items:3
         }
     }
-})
-     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-       e.target // newly activated tab
-       e.relatedTarget // previous active tab
-       $(".owl-carousel").trigger('refresh.owl.carousel');
-     });
-   });
+});
+    
 </script>
 
 @endsection

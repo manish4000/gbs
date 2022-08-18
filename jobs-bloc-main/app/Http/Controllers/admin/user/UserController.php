@@ -25,7 +25,7 @@ class UserController extends Controller
 
 
          $locations = LocationModel::select('id','title')->get();
-        $categories = JobCategoryModel::select('id','title')->where('parent_id',null)->get();
+        $categories = JobCategoryModel::select('id','title')->get();
 
         $user_role = $request->role;
 

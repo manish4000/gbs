@@ -41,7 +41,7 @@ class ProfileController extends Controller
             'phone' => 'nullable|numeric|digits_between:10,10',
             'address' => 'nullable', 
             'email' => "required|email",
-            'founded_date' => "required|date",
+            'founded_date' => "nullable|date",
             'logo_image' => 'nullable|image|mimes:png,jpg,jpeg|max:524' ,
             'cover_image' => 'nullable|image|mimes:png,jpg,jpeg|max:524' ,
             'introduction_video_url' =>"nullable|url",
@@ -62,7 +62,7 @@ class ProfileController extends Controller
             return DB::transaction( function() use ($request){
                         //this is for user update
                         $user =   User::find(Auth::user()->id);
-
+                        $user->company = $request->company;
                         $user->phone = $request->phone;
                         $user->email = $request->email;
             
@@ -117,7 +117,6 @@ class ProfileController extends Controller
                            
 
                             $data = [
-
                              'user_id' => $user->id,
                              'name' => $mamber_name[$i],
                              'designation' => $mamber_designation[$i],
@@ -157,7 +156,7 @@ class ProfileController extends Controller
 
                             $employer_details  = EmployerDetailsModel::where('id',$user->id)->first();
                         }
-                    
+                            $employer_details->id = $user->id;
                 
                         if($request->hasFile('logo_image')){
                 
@@ -188,7 +187,7 @@ class ProfileController extends Controller
 
                          $cat=  $request->employer_job_categories;
 
-                          $job_categories = implode(',', $cat);
+                          $job_categories = ($cat != null )? implode(',', $cat) : null;
 
 
                         $employer_details->introduction_video_url = $request->introduction_video_url;

@@ -85,13 +85,19 @@
                                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>   
                                     @endif
+                                    @if (session()->has('job_apply_status'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                      {{ session('job_apply_status') }}
+                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>   
+                                    @endif
 
 
 
                                     {{-- <button type="submit" class="btn btn-warning   py-3  text-white px-5 mb-3">  Apply Now  <i class="fa-solid fa-arrow-right ms-3"></i></button>
                                     <button type="submit" class="btn btn-secondary   py-3  text-white px-5">   <i class="fa-regular fa-star"></i> ShortList  </button> --}}
                                     <div class="d-grid gap-3 col-12  mx-auto">
-                                        <button class="btn btn-warning   py-3  text-white px-5 " data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button">Apply Now  <i class="fa-solid fa-arrow-right ms-2"></i> </button>
+                                        <a  href="{{route('job.apply',['id' => $job_data->slug])}}"  class="btn btn-warning   py-3  text-white px-5 "  type="button">Apply Now  <i class="fa-solid fa-arrow-right ms-2"></i> </a>
                                         {{-- <a href="" class="btn btn-warning   py-3  text-white px-5 " type="button"> <i class="fa-regular fa-star me-2 "></i>  ShortList </a> --}}
 
                                         <button type="button" class="shortlist_job btn btn-warning   py-3  text-white px-5 "  value="{{$job_data->id}}" >Shortlist</button>
@@ -127,30 +133,30 @@
                                    <div class=" ">
                                     <?php 
                                         
-                                        if(file_exists(APP_PATH.JOB_FEATURE_IMAGE_URL.$job->feature_image)){
+                                        if($job->feature_image != null){
 
                                             $image_url = APP_PATH.JOB_FEATURE_IMAGE_URL.$job->feature_image;
 
                                             }else{
-                                                $image_url = "https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png";
+                                                $image_url = APP_PATH.NO_IMAGE;
                                             }
                                         
                                     ?>
-                                      <a href="{{route('job_details',$job->id)}}" class=" d-none d-md-inline"><img src="{{$image_url}}" alt="" height="120px" width="110" class="border d-none d-md-inline"></a>
+                                      <a href="{{route('job_details',$job->slug)}}" class=" d-none d-md-inline"><img src="{{$image_url}}" alt="" height="120px" width="110" class="border d-none d-md-inline"></a>
                                </div>
                                   
                                </div>
                                <div class="col-6 my-auto text-start">
                                    <div>
                                        <p class="text-warning">{{$job->job_type}} </p>
-                                        <a href="{{route('job_details',$job->id)}}" class="text-decoration-none text-reset"> <span class="fw-bold ">{{$job->title}}</span> <span>  </a> @if($job->is_feature == 1)  <i title="Feature" class="fa fa-star ms-2" style="color:#ffc107;"></i>  @endif  
+                                        <a href="{{route('job_details',$job->slug)}}" class="text-decoration-none text-reset"> <span class="fw-bold ">{{$job->title}}</span> <span>  </a> @if($job->is_feature == 1)  <i title="Feature" class="fa fa-star ms-2" style="color:#ffc107;"></i>  @endif  
                                        <p> <small> Posted {{$job->created_at->diffForHumans()}} </small> </p>
    
                                    </div>
                                </div>
                                <div class="col-3 my-auto">
                                
-                                    <i class="fas fa-star fa-2x  text-warning" ></i>
+                                    {{-- <i class="fas fa-star fa-2x  text-warning" ></i> --}}
                                  
                                
                                   
