@@ -1,5 +1,8 @@
 @extends('website.layout')
 
+@section('title') {{'Jobs search site | Find free job posting website online in India'}} @endsection
+
+
 @section('content')
 
 

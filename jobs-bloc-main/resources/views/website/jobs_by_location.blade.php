@@ -43,10 +43,9 @@
     
          <div class="row my-3">
 
-             <h2 class="fw-bold">1 Tier</h2>
             @foreach($job_locations as $location)
-             <div class="col-12 col-md-3 mb-2">
-                 <li><a href="#" class="text-decoration-none text-reset" title="{{$location->title}}"> <small>{{$location->title}}</small>  </a></li>
+             <div class="col-6 col-md-3 col-lg-2 mb-2">
+                 <li><a href="{{route('jobs',['job_location' => $location->id])}}" class="text-decoration-none text-reset" title="{{$location->title}}"> <small>{{$location->title}}</small>  </a></li>
              </div>
             @endforeach
          </div>  

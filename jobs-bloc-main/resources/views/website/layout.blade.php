@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title> @yield('title') </title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -146,8 +146,9 @@
                   @if(Auth::user()->role == "candidate")
                   <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
-                       <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
-                    class="img-fluid rounded-circle me-3" width="50">
+                       {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                    class="img-fluid rounded-circle me-3" width="50"> --}}
+                    <i class="fa-solid fa-user-large"></i>
                      {{Auth::user()->name}} </a>
                       <ul class="dropdown-menu">
                      <li><a class="dropdown-item" href="{{route('candidate.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
@@ -169,8 +170,9 @@
                   @elseif(Auth::user()->role == "employer")    
                   <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
-                       <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
-                    class="img-fluid rounded-circle me-3" width="50">
+                       {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                    class="img-fluid rounded-circle me-3" width="50"> --}}
+                    <i class="fa-solid fa-user-large"></i>
                      {{Auth::user()->name}} </a>
 
                       <ul class="dropdown-menu">
@@ -266,17 +268,17 @@
               <h5><a href="mailto:info@jobsbloc.com" class="text-decoration-none">info@jobsbloc.com</a></h5>
 
               <!-- Facebook -->
-                <a class="btn btn-primary text-decoration-none text-reset" style="background-color: #3b5998;" href="#!" role="button"  ><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/jobsbloc.9/" class="btn btn-primary text-decoration-none text-reset border-0" style="background-color: #3b5998;" href="#!" role="button"  ><i class="fab fa-facebook-f text-white"></i></a>
 
                 <!-- Twitter -->
-                <a class="btn btn-primary text-decoration-none text-reset" style="background-color: #55acee;" href="#!" role="button" ><i class="fab fa-twitter"></i></a>
+                <a href="https://twitter.com/jobsbloc" class="btn btn-primary text-decoration-none text-reset border-0" style="background-color: #55acee;" href="#!" role="button" ><i class="fab fa-twitter text-white"></i></a>
 
 
                 <!-- Instagram -->
-                <a class="btn btn-primary text-decoration-none text-reset" style="background-color: #ac2bac;" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/yourjobsbloc/" class="btn btn-primary text-decoration-none text-reset border-0" style="background-color: #ac2bac;" href="#!" role="button"><i class="fab fa-instagram text-white"></i></a>
 
                 <!-- Linkedin -->
-                <a class="btn btn-primary text-decoration-none text-reset" style="background-color: #0082ca;" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/jobsbloc/" class="btn btn-primary text-decoration-none text-reset border-0" style="background-color: #0082ca;" href="#!" role="button"><i class="fab fa-linkedin-in text-white"></i></a>
 
 
 
@@ -314,9 +316,9 @@
         <div class="col-12 col-lg-3 mb-3">
            <h5>SEARCH JOB </h5>   
 
-           <form class="row   my-4">
+           <form class="row my-4" action="{{route('jobs')}}" method="GET">
                     <div class="col-12 mb-3 ">                       
-                        <input type="text"  class="form-control border-warning py-2 px-3" id="staticEmail2" placeholder="Job Title or Keyword">
+                        <input type="text"  name="title" class="form-control border-warning py-2 px-3" id="staticEmail2" placeholder="Job Title or Keyword">
                     </div>
                              <div class=" d-grid  col-lg-2 text-center mb-3">
                         <button type="submit" class="btn btn-warning rounded-pill py-lg-2  btn-large  btn-block  text-white fw-bold px-lg-4"> Search</button>

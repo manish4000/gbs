@@ -24,7 +24,7 @@
                                             
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="form-check"> <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_type_id form_submit" name="job_type_id" type="radio" value="{{$job_type->id}}" id="job_type_id" <?php   if(($job_type_checked != null) && ( $job_type->id == $job_type_checked) ){ echo 'checked';} ?> > <label class="form-check-label" for="flexCheckChecked"> {{$job_type->title}} </label> </div>
-                                                <span>44</span> 
+                                                <span></span> 
                                             </div>
                                         
                                             @endforeach
@@ -57,7 +57,7 @@
                                                 <div class="form-check"> 
                                                     <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_category_id form_submit" name="job_category_id[]" type="checkbox" value="{{$category->id}}" id="job_category_id"  <?php   if(($job_category_checked != null) && in_array( $category->id,$job_category_checked)){ echo 'checked';} ?>> <label class="form-check-label" for="flexCheckChecked"> {{$category->title}} </label> 
                                                 </div>
-                                                <span>44</span> 
+                                                <span>({{DB::table('job_categories_relation')->where('job_category_id',$category->id)->count('job_id'); }})</span> 
                                             </div>
                                         
                                     @endforeach
@@ -92,7 +92,7 @@
                                         <div class="d-flex justify-content-between mt-2">
                                             <div class="form-check">
                                                  <input class="location_id form-check-input p-2 bg-warning border-1 border-light text-warning form_submit" name="location_id[]" type="checkbox" value="{{$location->id}}" <?php   if(($job_location_checked != null) && in_array( $location->id,$job_location_checked)){ echo 'checked';} ?>> <label class="form-check-label" for="flexCheckChecked"   > {{$location->title}} </label> </div>
-                                            <span>44</span> 
+                                            <span>({{DB::table('job_locations')->where('location_id',$location->id)->count('job_id'); }})</span> 
                                         </div>
                                     
                                 @endforeach
@@ -220,6 +220,10 @@
              @endif
 
             </div>
+                <div class="mt-5">
+                    {{$jobs_data->links("pagination.custom")}}
+
+                </div>
             </div>
         </div>
 

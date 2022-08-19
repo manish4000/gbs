@@ -16,5 +16,6 @@ define("JOB_FEATURE_IMAGE_URL","uploads/job/feature-images/");
 define("JOB_APPLICATIONS_RESUME_URL","uploads/job/job-applications/");
 define("CAREER_WITH_JOBSBLOC_RESUME","uploads/career-with-jobsbloc/");
 define("NO_IMAGE","images/no_image.png");
+define('IMAGE_FOLER','images/');
 
 ?>

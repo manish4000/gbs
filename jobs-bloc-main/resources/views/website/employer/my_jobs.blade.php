@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col-2 ">({{($job->applicants)??0}}) Applicants</div>
                                         <div class="col-2 ">Preview</div>
-                                        <div class="col-2 ">                                    <a href="#" class="bg-info p-1 rounded text-decoration-none text-dark">  <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span> </a>&ensp;
+                                        <div class="col-2 ">  <a href="{{route('employer.submit_job.edit',$job->slug)}}" class="bg-info p-1 rounded text-decoration-none text-dark">  <span><i class="fa fa-edit" aria-hidden="true"></i></span> </a>&ensp;
                                             <a href="#" class="bg-light p-1 rounded text-decoration-none text-danger">  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span> </a></div>
                                     </div>
                                     

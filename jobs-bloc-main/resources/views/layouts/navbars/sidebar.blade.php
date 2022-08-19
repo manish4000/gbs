@@ -99,7 +99,7 @@
         </a>
       </li> --}}
 
-      <li class="nav-item {{ ($activePage == 'applications' || $activePage == 'job-category' || $activePage == 'job-type' || $activePage == 'submit-job' || $activePage == 'job-category' ? ' active' : ''); }}">
+      <li class="nav-item {{ ($activePage == 'applications' ||$activePage == 'career-applications' || $activePage == 'job-category' || $activePage == 'job-type' || $activePage == 'submit-job' || $activePage == 'job-category' ? ' active' : ''); }}">
 
         <a class="nav-link" data-toggle="collapse" href="#job" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
@@ -121,6 +121,12 @@
               <a class="nav-link" href="{{ route('admin.job.applications.index') }}">
                 <span class="sidebar-mini"> JA </span>
                 <span class="sidebar-normal">{{ __('Job Applications') }} </span>
+              </a>
+            </li>
+            <li class="nav-item {{ $activePage == 'career-applications' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.job.career_applications.index') }}">
+                <span class="sidebar-mini"> CWJB </span>
+                <span class="sidebar-normal">{{ __('Career Applications') }} </span>
               </a>
             </li>
 

@@ -184,6 +184,20 @@ class SubmitJobController extends Controller
 
     }   
 
+        public function editJob($id){
+
+            
+        $job_types =  JobTypeModel::get();
+        $skills = SkillModel::get();
+        $location = LocationModel::get();
+        $job_categories = JobCategoryModel::get();
+        $salary_type = SalaryTypeModel::get();
+         $job_data = JobModel::where('slug',$id)->first();
+   
+        return view('website.employer.edit_submit_job',compact('job_data','skills','job_types','location','salary_type','job_categories'));
+
+        }
+
 
     public function sendEmail($job_details_for_email,$skills)
     {

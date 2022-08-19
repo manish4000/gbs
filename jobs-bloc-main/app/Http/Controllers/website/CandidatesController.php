@@ -8,24 +8,43 @@ use App\Models\candidateEducationModel;
 use App\Models\candidateExperienceModel;
 use App\Models\candidateSkillModel;
 use App\Models\EmployerShortlistCandidateModel;
+use App\Models\Job\JobCategoryModel;
+use App\Models\LocationModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CandidatesController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $candidates =   User::select('users.*','candidate_details.location_id','candidate_details.featured_image','locations.title as location','job_categories.title as job_category')
+        $candidate_location_checked =   (($request->job_location != '') || ($request->job_location != null) )? explode(',',$request->job_location) : null;
+
+        $candidate_category_checked =   ($request->job_category != '') ? explode(',',$request->job_category) : null;
+
+
+        $candidates_data =   User::select('users.*','candidate_details.location_id','candidate_details.featured_image','locations.title as location','job_categories.title as job_category')
                                                 ->leftJoin('candidate_details','candidate_details.user_id','=','users.id')
                                                 ->leftJoin('locations','locations.id','=','candidate_details.location_id')
                                                 ->leftJoin('job_categories','job_categories.id' ,'=' ,'users.job_category_id')
-                                                ->where('role','candidate')->get(); 
+                                                ->where('role','candidate'); 
+
+        if($candidate_category_checked  != null){
+
+            $candidates_data->whereIn('users.job_category_id',$candidate_category_checked);
+        }
+        if($candidate_location_checked  != null){
+
+            $candidates_data->whereIn('candidate_details.location_id',$candidate_location_checked);
+        }
 
 
+        $candidates = $candidates_data->paginate(6);
 
-
-        return view('website.candidates',compact('candidates'));
+        $job_categories = JobCategoryModel::where('is_active',1)->orderBy('title')->get();
+        $locations = LocationModel::where('is_active',1)->orderBy('title')->get();
+        
+        return view('website.candidates',compact('candidates','job_categories','locations','candidate_location_checked','candidate_category_checked'));
     }
 
 

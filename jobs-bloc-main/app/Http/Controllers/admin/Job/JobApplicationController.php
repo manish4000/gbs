@@ -13,7 +13,6 @@ class JobApplicationController extends Controller
         $job_applications = JobApplicationModel::select('job_applications.*','users.name as user_name','job.title as application_for')
                             ->leftJoin('job','job.id','=','job_applications.job_id')
                             ->leftjoin('users','users.id','=','job_applications.user_id')->orderBy('created_at')->paginate(10);
-
         return view('admin.job.job_application',compact('job_applications'));
 
     }

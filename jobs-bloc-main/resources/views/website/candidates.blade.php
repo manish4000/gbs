@@ -15,6 +15,76 @@
    <div class="row px-xl-5">
       <!-- Shop Sidebar Start -->
       <div class="col-lg-3 col-md-4">
+
+        <div class="accordion mt-4" id="accordionPanelsStayOpenExample ">
+     
+            <h2 class="accordion-header" id="job_category-headingOne">
+                <a class="accordion-button text-decoration-none fs-5"  data-bs-toggle="collapse" data-bs-target="#job_category-collapseOne" aria-expanded="true" aria-controls="job_category-collapseOne">
+                    Job Category
+                </a>
+            </h2>
+            <div class="accordion-item border-0 mb-3" >  
+            <div id="job_category-collapseOne" class="accordion-collapse collapse show" aria-labelledby="job_category-headingOne" >
+                <div class="accordion-body" style="overflow:auto;height:180px">
+                    
+                    @if(count($job_categories) > 0)
+                        @foreach($job_categories as $category)
+                        
+                                <div class="d-flex justify-content-between mt-2">
+                                    <div class="form-check"> 
+                                        <input class="form-check-input p-2 bg-warning border-1 border-light text-warning job_category_id form_submit" name="job_category_id[]" type="checkbox" value="{{$category->id}}" id="job_category_id"  <?php   if(($candidate_category_checked != null) && in_array( $category->id,$candidate_category_checked)){ echo 'checked';} ?>> <label class="form-check-label" for="flexCheckChecked"> {{$category->title}} </label> 
+                                    </div>
+                                    <span>({{DB::table('users')->where('role','candidate')->where('job_category_id',$category->id)->count('id'); }})</span> 
+                                </div>
+                            
+                        @endforeach
+                    @else
+                      <p class="text-center">   Job Categories Not Found</p>  
+
+                    @endif
+
+
+                    
+
+                </div>
+            </div>
+            </div>
+            {{--  --}}
+          
+
+            <h2 class="accordion-header" id="job_location-headingOne">
+                <a class="accordion-button text-decoration-none fs-5"  data-bs-toggle="collapse" data-bs-target="#job_location-collapseOne" aria-expanded="true" aria-controls="job_location-collapseOne">
+                    Job Locations
+                </a>
+            </h2>
+            <div class="accordion-item border-0" >  
+            <div id="job_location-collapseOne" class="accordion-collapse collapse show" aria-labelledby="job_location-headingOne" >
+                <div class="accordion-body" style="overflow:auto;height:180px">
+                    
+                
+
+                @if(count($locations) > 0)   
+                    @foreach($locations as $location)
+                    
+                            <div class="d-flex justify-content-between mt-2">
+                                <div class="form-check">
+                                     <input class="location_id form-check-input p-2 bg-warning border-1 border-light text-warning form_submit" name="location_id[]" type="checkbox" value="{{$location->id}}" <?php   if(($candidate_location_checked != null) && in_array( $location->id,$candidate_location_checked)){ echo 'checked';} ?>> <label class="form-check-label" for="flexCheckChecked"   > {{$location->title}} </label> </div>
+                                <span>({{DB::table('candidate_details')->where('location_id',$location->id)->count('id'); }})</span> 
+                            </div>
+                        
+                    @endforeach
+                @else
+                    <p class="text-center">  Job Locations Not Found</p>  
+
+                @endif                
+                </div>
+            </div>
+            </div>
+            {{--  --}}
+        
+    </div>
+   
+
           <!-- Price Start -->
           {{-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-light pr-3">Filter by price</span></h5>
           <div class="bg-light p-4 mb-30">
@@ -172,15 +242,23 @@
                             <div class="text-center">
                             
                             @if(isset($candidate->featured_image))  
+       
                             <img src="{{CANDIDATE_FEATURE_IMAGE_URL}}{{$candidate->featured_image}}" height="120px" > 
                             @else
-                            <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" height="120px" > 
+                            
+                            <img src="{{APP_PATH.NO_IMAGE}}" height="120px" > 
                             @endif
                             
                             </div>
                             <div class="about text-center">
-                            <h6 class="text-uppercase fw-bold">{{$candidate->name}}</h6>
-                            <span>4t5rtre</span> 
+                             
+                              @if($candidate->name == null) 
+                              <h6 class="text-uppercase my-3">{{$candidate->email}}</h6>
+                              @else
+
+                              <h6 class="text-uppercase fw-bold">{{$candidate->name}}</h6>
+                              @endif
+
                             @isset($candidate->location)
                             <div class="d-flex justify-content-between px-5 bg-light py-3">
                             <span class="text-danger ">Location</span>
@@ -205,6 +283,10 @@
                     </div>
                 </div>
                 @endforeach
+
+                <div class="mt-5">
+                    {{$candidates->links('pagination.custom')}}
+                </div>
             @else
             <p class="text-center mt-3">No candidates found </p> 
             @endif
@@ -257,6 +339,94 @@
 
 </div>
 
+<form class="row  text-center px-4" method="GET" action="{{route('candidates')}}" id="find_candidate">
+
+    <div class="col-12 col-lg-5 mb-3 ">                       
+
+    <input type="hidden" name="job_category" id="job_category" >
+    <input type="hidden" name="job_location" id="job_location" >
+
+    </div>
+</form>  
+
+
+
+<script>
+
+    var job_category = [];
+    var job_locations = [];
+
+    
+    $(".form_submit").click(function(){
+
+        var checkedBoxes = $('.job_category_id').val(); 
+
+        $('.job_category_id').each(function (key, data) {
+
+            if($(this).is(":checked")){
+                job_category.push(data.value);
+            }            
+        });
+
+        document.getElementById("job_category").value = job_category ;
+
+        
+        var locations = $('.location_id').val(); 
+
+        $('.location_id').each(function (key, data) {
+
+            if($(this).is(":checked")){
+                job_locations.push(data.value);
+            }            
+        });
+        document.getElementById("job_location").value = job_locations ;
+
+        var job_type = $('input[name="job_type_id"]:checked').val();
+
+        
+        submitForm();
+
+    });
+
+    
+    // $(".location_id").click(function(){
+
+    //     var locations = $('.location_id').val(); 
+
+    //     $('.location_id').each(function (key, data) {
+
+    //         if($(this).is(":checked")){
+    //             job_locations.push(data.value);
+    //         }            
+    //     });
+    //     document.getElementById("job_location").value = job_locations ;
+
+        
+    //     submitForm();
+
+    // });
+
+    // $(".job_type_id").click(function(){
+
+    //     var job_type = $('input[name="job_type_id"]:checked').val();
+
+    //     document.getElementById("job_type").value = job_type ;
+
+    //     submitForm();
+    // });
+    
+
+
+    function submitForm(){
+        $("#find_candidate").submit();
+    }
+
+    
+
+    
+
+
+</script>
 
 
 

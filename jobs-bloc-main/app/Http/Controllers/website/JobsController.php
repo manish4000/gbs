@@ -63,7 +63,7 @@ class JobsController extends Controller
               $job_data->where('job.job_type_id',$job_type_checked);
          }
 
-        $jobs_data = $job_data->get();
+        $jobs_data = $job_data->paginate(14);
 
 
 
@@ -175,7 +175,7 @@ class JobsController extends Controller
 
             }else{
 
-                return redirect()->back()->with('You have already applied to the job');
+                return redirect()->back()->with('job_apply_status','You have already applied to the job');
 
                
 
@@ -272,8 +272,6 @@ class JobsController extends Controller
 
                   } 
           }
-
-             
           return redirect()->route('jobs',['id' => $request->job_id]);
 
     }

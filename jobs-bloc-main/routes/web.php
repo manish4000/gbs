@@ -173,7 +173,7 @@ Route::get('/employer/submit-job-form/', function () {
 
 //====================================guset admin ==============================================
 
-Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','autoTrim'] ,'namespace' => 'App\Http\Controllers\admin'],function(){
+Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','autoTrim'] ,'namespace' => 'App\Http\Controllers\Admin'],function(){
     Route::get('/',function (){  return view('admin.auth.login');})->name('login_view');
     Route::post('/login','Auth\LoginController@login')->name('admin.login');
  });
@@ -220,7 +220,7 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
 
 
 
-              Route::get('/dashboard', [App\Http\Controllers\admin\HomeController::class, 'index'])->name('dashboard');
+              Route::get('/dashboard', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('dashboard');
 
               Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
           
@@ -288,8 +288,14 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
 
                         Route::group(['prefix' => 'applications','as'=>'applications.'],function(){                        
                         Route::get('/','JobApplicationController@index')->name('index');
-                        Route::delete('/delete/{id}','JobApplicationController@destroy')->name('delete');                   
-            
+                        Route::delete('/delete/{id}','JobApplicationController@destroy')->name('delete');  
+                        
+                        });
+
+                        Route::group(['prefix' => 'career-applications','as'=>'career_applications.'],function(){                        
+                        Route::get('/','CareerWithJobblocController@index')->name('index');
+                        Route::delete('/delete/{id}','CareerWithJobblocController@destroy')->name('delete');  
+                        
                         });
 
 
@@ -419,6 +425,8 @@ Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\websit
     Route::get('submit-job','SubmitJobController@index')->name('submit_job.add'); 
     Route::post('submit-job','SubmitJobController@submitJob')->name('submit_job.store'); 
     Route::get('my-jobs','SubmitJobController@myJobs')->name('my_jobs');
+
+    Route::get('my-jobs/edit/{id}','SubmitJobController@editJob')->name('submit_job.edit');
 
 
     Route::group(['prefix' => 'applicants','as'=>'applicants.'],function(){
