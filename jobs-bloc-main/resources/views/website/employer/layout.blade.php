@@ -1,7 +1,7 @@
 <!--Main Navigation-->
-<header>
+
   <!-- Sidebar -->
-  <nav>
+  
     <div class="position-sticky ">
       <div class="list-group list-group-flush mx-3 mt-4">
 
@@ -78,7 +78,7 @@
         </a>
       </div>
     </div>
-  </nav>
+  
   <!-- Sidebar -->
 
   <!-- Navbar -->
@@ -102,7 +102,7 @@
  
   </nav> -->
   <!-- Navbar -->
-</header>
+
 <!--Main Navigation-->
 
 <!--Main layout-->

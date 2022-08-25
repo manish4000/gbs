@@ -155,4 +155,16 @@ class UserController extends Controller
 
 
 
+    public function delete($id){
+
+        if(User::where('id',$id)->delete()){
+            
+            return response()->json(['status' => 200,'message' => "user Deleted SuccessFully" ]);    
+    
+           }else{
+            return response()->json(['status' => 500,'message' => "Somthing Went wrong ..." ]);    
+           }  
+    }
+
+
 }

@@ -21,6 +21,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Logo Image</label>
                                     <input type="file" class="form-control p-3" name="logo_image" id="logo_image"  >
+                                    <span class="text-danger error-text  logo_image_error "></span>
                                 </div>
                                 <div class="col-md-6">
                                   <img id="logo_image-preview-image-before-upload" src="<?php echo  isset($employer_details->logo_image) ? APP_PATH.EMPLOYER_LOGO_IMAGE_URL.$employer_details->logo_image : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg' ?> "   alt="preview image" style="max-height: 100px;" />
@@ -28,6 +29,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Cover Photo</label>
                                     <input type="file" class="form-control p-3"  name="cover_image" id="cover_image">
+                                    <span class="text-danger error-text  cover_image_error "></span>
                                 </div>
                                 <div class="col-md-6 ">
                                   <img id="cover_image-preview-image-before-upload" src="<?php echo  isset($employer_details->cover_image) ? APP_PATH.EMPLOYER_COVER_IMAGE_URL.$employer_details->cover_image : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg' ?>"
@@ -37,10 +39,12 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Company</label>
                                     <input type="text" class="form-control p-3" name="company" value="{{($user_details->company)?? '' }}" >
+                                    <span class="text-danger error-text  company_error "></span>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Founded Date</label>
                                     <input type="date" class="form-control p-3"  name="founded_date"value="{{($employer_details->founded_date)?? '' }}" >
+                                    <span class="text-danger error-text  founded_date_error "></span>
                                 </div>
 
                                 <div class="col-md-6">
@@ -92,9 +96,20 @@
                                     <label class="form-label">Locations</label>                       
                                     <select name="location_id"  value="{{($employer_details->location_id)?? '' }}" class="form-control p-3">
                                       <option value="">Select  Location </option>
+
+                                      @if(isset($employer_details->location_id))
+                                        @foreach($locations as $location)
+                                          <option value="{{$location->id}}" <?php echo  (($employer_details->location_id != null) && ($location->id == $employer_details->location_id ))?'selected' : '' ?> > {{ $location->title}}</option>
+                                        @endforeach
+
+                                      @else
                                       @foreach($locations as $location)
-                                        <option value="{{$location->id}}" <?php echo  (($employer_details->location_id != null) && ($location->id == $employer_details->location_id ))?'selected' : '' ?> > {{ $location->title}}</option>
+                                      <option value="{{$location->id}}" > {{ $location->title}}</option>
                                       @endforeach
+                                      @endif
+
+                                      
+
                                     </select>
                                 </div>
                                 

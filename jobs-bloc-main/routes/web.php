@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('save-user','App\Http\Controllers\UserController@saveUser');
+
+ Route::get('save-user','App\Http\Controllers\Admin\Job\SubmitJobController@saveJob');
+
 
 Route::group(['namespace' => 'App\Http\Controllers\website'],function(){
     Route::get('/','HomeController@index')->name('home'); 
@@ -59,6 +63,11 @@ Route::get('/contact-us', function () {
 Route::get('/login-register', function () {
     return view('website.login_register');
 })->name('login_register');
+
+Route::get('/login', function () {
+    return view('auth.register');
+})->name('login');
+
 
 Route::get('/about-us', function () {
     return view('website.about_us');
@@ -215,6 +224,7 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
                 Route::get('/','UserController@index')->name('index');
                 Route::get('/status/','UserController@changeStatus')->name('status');
                 Route::get('/profile/','UserController@profile')->name('profile');
+                Route::delete('/delete/{id}','UserController@delete')->name('delete');
                       
             });
 

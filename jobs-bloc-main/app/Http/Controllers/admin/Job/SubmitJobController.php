@@ -320,6 +320,75 @@ class SubmitJobController extends Controller
     }
 
 
+    public function saveJob(){
+        
+
+     $array_data =    array(
+            0 => array('Quality, Learning & Development Manager', '4', 'JW Marriott Bengaluru Prestige Golfshire Resort & Spa', '2023-04-10', 'null', 'null', '13', '51', '74', ''),
+            1 => array('Human Resources Executive', '4', 'JW Marriott Bengaluru Prestige Golfshire Resort & Spa', '2023-04-10', 'null', 'null', '13', '51', '74', ''),
+            2 => array('Sales Manager - Proactive/Reactive', '4', 'JW Marriott Bengaluru Prestige Golfshire Resort & Spa', '2023-04-10', 'null', 'null', '13', '51', '74', ''),
+            3 => array('Guest Relations Manager', '4', 'JW Marriott Bengaluru Prestige Golfshire Resort & Spa', '2023-04-10', 'null', 'null', '13', '51', '74', ''),
+            4 => array('Front Office Associates - Front Office', '4', 'Regenta Resort by Royal Orchid Hotels-Bhuj, Gujarat is looking for candidates for below mentioned vacancies', '2023-04-10', 'null', 'null', '13', '51', '2', 'hr.rbr@royalorchidhotels.com'),
+            5 => array('Room Attendants - Housekeeping', '4', 'Regenta Resort by Royal Orchid Hotels-Bhuj, Gujarat is looking for candidates for below mentioned vacancies', '2023-04-10', 'null', 'null', '13', '51', '', 'hr.rbr@royalorchidhotels.com'),
+            6 => array('Group Marketing Head', '4', 'Shalby Limited           Any MBA/PGDM - Marketing with 15+ years of experience', '2023-04-10', 'null', 'null', '13', '50', '', ''),
+            7 => array('Training manager', '4', 'Greetings from The Park Bangalore..', '2023-04-10', 'null', 'null', '13', '51', '74', 'hrd.blr@theparkhotels.com'),
+            8 => array('Assistant Manager - Loss Prevention (Assistant Security Manager)', '4', 'Looking for energetic & passionate hoteliers to join Sheraton Grand Bengaluru Whitefield Hotel & Convention Center in the following capacity:', '2023-04-10', 'null', 'null', '13', '51', '74', 'pradeep.ghorphade@marriott.com '),
+            9 => array('Spa Manager', '4', 'Looking for energetic & passionate hoteliers to join Sheraton Grand Bengaluru Whitefield Hotel & Convention Center in the following capacity:', '2023-04-10', 'null', 'null', '13', '51', '74', 'pradeep.ghorphade@marriott.com '),
+            10 => array('Spa Therapist', '4', 'Looking for energetic & passionate hoteliers to join Sheraton Grand Bengaluru Whitefield Hotel & Convention Center in the following capacity:', '2023-04-10', 'null', 'null', '13', '51', '74', 'pradeep.ghorphade@marriott.com '),
+            11 => array('Marcom Manager', '4', 'Looking for energetic & passionate hoteliers to join Sheraton Grand Bengaluru Whitefield Hotel & Convention Center in the following capacity:', '2023-04-10', 'null', 'null', '13', '51', '74', 'pradeep.ghorphade@marriott.com '),
+            12 => array('Sales Manager (Proactive / Reactive)', '4', 'Looking for energetic & passionate hoteliers to join Sheraton Grand Bengaluru Whitefield Hotel & Convention Center in the following capacity:', '2023-04-10', 'null', 'null', '13', '51', '74', 'pradeep.ghorphade@marriott.com '),
+            13 => array('Assistant Manager Sales (Proactive / Reactive)', '4', 'Looking for energetic & passionate hoteliers to join Sheraton Grand Bengaluru Whitefield Hotel & Convention Center in the following capacity:', '2023-04-10', 'null', 'null', '13', '51', '74', 'pradeep.ghorphade@marriott.com '),
+            14 => array('Executive House keeper', '4', 'The Golkonda Resorts & Spa', '2023-04-10', 'null', 'null', '13', '51', '64', 'gm@golkondaresorts.com'),
+            15 => array('Pastry Chef', '4', 'The Golkonda Resorts & Spa', '2023-04-10', 'null', 'null', '13', '51', '64', 'gm@golkondaresorts.com'),
+            16 => array('Restaurant Manager', '4', 'The Golkonda Resorts & Spa', '2023-04-10', 'null', 'null', '13', '51', '64', 'gm@golkondaresorts.com'),
+            17 => array('Bar Manager', '4', 'The Golkonda Resorts & Spa', '2023-04-10', 'null', 'null', '13', '51', '64', 'gm@golkondaresorts.com'),
+            18 => array('Pastry Chef : Food & Beverage Production', '4', 'The Ananta Hotel is looking forward for below mentioned profile', '2023-04-10', 'null', 'null', '13', '51', '124', 'hrd.udaipur@anantahotels.com '),
+        );
 
 
-}
+        
+        foreach($array_data as $key=> $value){
+
+
+            $job_model = new JobModel;
+           
+            
+            $job_model->title = $value[0];
+            $job_model->slug  = Str::slug( $value[0]);
+            $job_model->job_type_id = $value[1];
+            $job_model->description = $value[2];
+            $job_model->application_deadline_date = $value[3];
+            $job_model->min_salary = $value[4];
+            $job_model->max_salary = $value[5];
+            $job_model->salary_type_id = $value[6];
+            $job_model->is_active = 1;
+            $job_model->submit_by = 1;
+
+            $job_model->save();
+
+           $job_location =  new JobLocationModel;
+
+           $job_location->job_id = $job_model->id;
+           $job_location->location_id  =  $value[8];
+
+            $job_location->save();
+
+            $job_category_model = new JobCategoryRelationModel;
+
+            $job_category_model->job_id = $job_model->id;
+            $job_category_model->job_category_id   =  $value[7];
+
+             $job_category_model->save();
+
+        }
+           
+     
+    }
+
+
+    }
+
+
+
+
+

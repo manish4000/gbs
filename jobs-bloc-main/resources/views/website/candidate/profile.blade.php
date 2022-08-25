@@ -85,9 +85,9 @@
                                 <div class="col-md-6">
                                     <label for="inputPassword4" class="form-label">Salary Type</label>
                                     <select class="form-select p-3" aria-label="Default select example" name="salary_type_id" value="{{$candidate_details->salary_type_id ?? ''}}">
-                                        <option></option>
+                                        <option value="">Select</option>
                                      @foreach($salary_types as $type)   
-                                     <option value="{{$type->id}}">{{$type->title}}</option>
+                                     <option value="{{$type->id}}" <?php if(isset($candidate_details->salary_type_id) && $candidate_details->salary_type_id == $type->id ){echo "selected";} ?>   >{{$type->title}}</option>
                                      @endforeach
                                     </select>
                                     <span class="text-danger error-text  salary_type_id_error "></span> 
@@ -101,13 +101,13 @@
 
                                 <div class="col-md-12">
 
-                                <?php  if(isset($candidate_details->candidate_job_categories)) { $selected =  explode(',',$candidate_details->candidate_job_categories) ;} ?>
-
+                                <?php  $selected = (isset($candidate_details->candidate_job_categories)) ? explode(',',$candidate_details->candidate_job_categories) : null ; ?>
+                                    
                                     <label for="inputPassword4" class="form-label">Candidate Categories</label>
                                     <select id="category-select" multiple class="form-control p-3" name="candidate_job_categories[]" placeholder="Native Select" data-search="true" data-silent-initial-value-set="true">
-                                    
+                               
                                     @foreach($job_categories as $category)   
-                                     <option value="{{$category->id}}" <?php if(isset($selected)){ (in_array($category->id ,$selected) ? 'selected' : '' );} ?> >{{$category->title}}</option>
+                                     <option value="{{$category->id}}" <?php if(isset($selected)){ echo (in_array($category->id ,$selected) ? 'selected' : '' );} ?> >{{$category->title}}</option>
                                      @endforeach
                                     
                                     </select>
@@ -115,10 +115,11 @@
                                 
                                 <div class="col-md-12">
                                     <label for="inputPassword4" class="form-label">Select Skills </label>
+
                                     <select class="form-select p-3" id="skill-select" aria-label="Default select example" name="candidate_skill_id[]" value="{{$candidate_details->salary_type_id ?? ''}}" multiple>
                                         <option></option>
                                      @foreach($skills as $skill)   
-                                     <option value="{{$skill->id}}">{{$skill->title}}</option>
+                                     <option value="{{$skill->id}}" <?php if(isset($candidate_skills)){ echo (in_array($skill->id ,$candidate_skills) ? 'selected' : '' );} ?> >{{$skill->title}}</option>
                                      @endforeach
                                     </select>
                                     <span class="text-danger error-text  salary_type_id_error "></span> 

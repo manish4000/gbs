@@ -45,14 +45,14 @@
                                         <div class="col-6"> 
                                              <h6 class="mt-2">{{$job->title}}</h6> 
                                              <div class="text=start">
-                                                 <p><small> <i class="fa fa-map-marker" aria-hidden="true"></i> Maharastra </small> </p>
+                                                 <p><small> <i class="fa fa-map-marker" aria-hidden="true"></i> </small> </p>
                                                  <p> <small> <i class="fa fa-calendar" aria-hidden="true"></i> Created : <span> {{ date('d-M-y', strtotime($job->created_at)) }}</span>  </small> <small>    <i class="fa fa-calendar" aria-hidden="true"></i> Expiry : <span>  {{$job->application_deadline_date}}</span> </small>  </p>
                                              </div>
                                         </div>
                                         <div class="col-2 ">({{($job->applicants)??0}}) Applicants</div>
                                         <div class="col-2 ">Preview</div>
-                                        <div class="col-2 ">  <a href="{{route('employer.submit_job.edit',$job->slug)}}" class="bg-info p-1 rounded text-decoration-none text-dark">  <span><i class="fa fa-edit" aria-hidden="true"></i></span> </a>&ensp;
-                                            <a href="#" class="bg-light p-1 rounded text-decoration-none text-danger">  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span> </a></div>
+                                        <div class="col-2 ">  <a href="{{route('employer.submit_job.edit',$job->slug)}}" class="bg-info p-1 rounded text-decoration-none text-dark disabled" disabled>  <span><i class="fa fa-edit" aria-hidden="true"></i></span> </a>&ensp;
+                                            <a href="#" class="bg-light p-1 rounded text-decoration-none text-danger disabled">  <span><i class="fa fa-trash-o" aria-hidden="true"></i></span> </a></div>
                                     </div>
                                     
                                     @endforeach    
@@ -70,7 +70,7 @@
 
             </div>
 
-//
+
 
         </div>
 

@@ -23,6 +23,12 @@ class ProfileController extends Controller
 
         $user_details = Auth::user();
         $candidate_details  = CandidateDetailsModel::where('user_id',$user_details->id)->first();
+
+        $c_skills =    candidateSkillModel::where('user_id',$user_details->id)->get()->toArray();
+
+    
+         $candidate_skills =   array_column($c_skills,'skill_id'); 
+
         $locations = LocationModel::where('is_active',1)->get();
         $salary_types =  SalaryTypeModel::where('is_active',1)->get();
         $social_networks = socialNetworks::where('is_active',1)->get();
@@ -30,7 +36,7 @@ class ProfileController extends Controller
         $skills = SkillModel::where('is_active',1)->get();
         $user_social_networks = UserSocialNetwork::where('user_id',$user_details->id)->get();
 
-        return view('website.candidate.profile',compact('salary_types','skills','user_details','candidate_details','locations','job_categories','social_networks','user_social_networks'));
+        return view('website.candidate.profile',compact('salary_types','candidate_skills','skills','user_details','candidate_details','locations','job_categories','social_networks','user_social_networks'));
     }
 
     public function updateProfile(Request $request){

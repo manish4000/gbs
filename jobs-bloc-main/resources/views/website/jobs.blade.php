@@ -196,7 +196,7 @@
                                                         @if ($jobs->feature_image)
                                                         <img src="{{APP_PATH.JOB_FEATURE_IMAGE_URL}}{{$jobs->feature_image}}" alt="{{$jobs->title}}"  class="ps-2" height="80px" width="80px">
                                                         @else   
-                                                        <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" alt="" height="80px" width="80px"  class="">
+                                                        <img src="{{APP_PATH.NO_IMAGE}}" alt="" height="80px" width="80px"  class="">
                                                         @endif
                                                     </a>
                                                     </div>

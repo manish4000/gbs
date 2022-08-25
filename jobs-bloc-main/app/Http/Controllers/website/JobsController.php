@@ -119,10 +119,9 @@ class JobsController extends Controller
 
 
         if(Auth::user()->role != 'candidate'){
-            return response()->json([
-                "status" => 500,
-                "message" => "Please Log in As an Candidate"
-            ]);
+        
+            
+            return redirect()->back()->with('job_apply_status','Please Log in As an Candidate');
         }
 
         // $validator = Validator::make($request->all(), [  

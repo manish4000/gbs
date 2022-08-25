@@ -331,7 +331,7 @@
           $.ajax({
 
             type:"DELETE",
-            url: "{{APP_PATH}}"+"admin/job/applications/delete/"+delete_testimonial_id,
+            url: "{{APP_PATH}}"+"admin/users/delete/"+delete_testimonial_id,
           
 
             data:{'_token': '{{ csrf_token() }}' },
@@ -342,6 +342,13 @@
                                         'Good job!',
                                          response.message,
                                         'success'
+                             );           
+                }
+                if(response.status == 500 ){
+                  Swal.fire(
+                                        'Good job!',
+                                         response.message,
+                                        'error'
                              );           
                 }
               window.location = "";

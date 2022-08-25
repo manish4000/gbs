@@ -40,7 +40,7 @@
                                                
 
                                                 @else   
-                                                <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" alt="" class="img-thumbnail">
+                                                <img src="{{APP_PATH.NO_IMAGE}}" alt="" class="img-thumbnail">
                                                 @endif
                                             </div>
                                             <div class="text-center mt-2">

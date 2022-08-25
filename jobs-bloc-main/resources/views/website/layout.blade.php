@@ -101,7 +101,7 @@
 
     
 
-      <a class="navbar-brand d-block" href="#">
+      <a class="navbar-brand d-block" href="/">
         <img src="images/logo.png" height="50" />
        </a>
 
