@@ -23,8 +23,19 @@
                                 <div class="col-md-12">
                                     <label for="inputPassword4" class="form-label">Portfolio Photos</label>
                                     <input type="file" class="form-control p-3" name="portfolio_photos[]" id="portfolio_photos" multiple>
-                                    <span class="text-danger error-text  portfolio_photos_error "></span>
+                                    <span class="text-danger error-info  ">The Portfolio Photos is lessthen 524KB </span>
                                 </div>
+                                @if(isset($resume_details->portfolio_photos))
+                                <?php $photos = explode(',',$resume_details->portfolio_photos);  ?>
+
+                                <div class="row">
+                                  @foreach($photos as $photo)
+                                  <div class="col-lg-2 col-3">
+                                    <a href="{{APP_PATH.CANDIDATE_PORTFOLIO_IMAGE_URL}}{{$photo}}" target="_blank"> <img src="{{APP_PATH.CANDIDATE_PORTFOLIO_IMAGE_URL}}{{$photo}}" alt="" height="100" width="100"></a> 
+                                  </div>
+                                  @endforeach
+                                </div>
+                                @endif
                                 {{-- <div class="row">
                                    <div class="images-preview-div"> </div>
                                 </div> --}}
@@ -35,7 +46,7 @@
                                     <label for="inputPassword4" class="form-label">CV Attachment</label>
                                     <input type="file" name="cv"  class="form-control p-3" id="" value=" @isset($resume_details->cv){{$resume_details->cv}} @endisset">
                                     <span class="text-danger error-text  cv_error "></span>
-                                    <p class="text-warning"> @isset($resume_details->cv) {{ $resume_details->cv}} @endisset </p>
+                                    <p class="text-warning"> @isset($resume_details->cv) <a target="_blank" class="text-decoration-none text-reset" href="{{APP_PATH.CANDIDATE_CV_URL}}{{ $resume_details->cv}}">{{ $resume_details->cv}} </a>  @endisset </p>
                                 </div>
 
 
@@ -60,16 +71,22 @@
                                                                       <tr>
                                                                           <td>
                                                                               <div class="col-12 mb-2">
+                                                                                <div class="input-group "> <span class="input-group-text" id="basic-addon3">Title</span>
                                                                                 <input type="text" class="form-control p-2" id="" name="ed_title[]" placeholder="title" value="{{$education->ed_title}}">
-                                                                              </div>
+                                                                                </div>
+                                                                               </div>
                                                                               <div class="col-12 mb-2">
+                                                                                <div class="input-group "> <span class="input-group-text" id="basic-addon3">Academy</span>
                                                                                 <input type="text" class="form-control p-2" id="" name="ed_academy[]" placeholder="academy" value="{{$education->ed_academy}}">
                                                                               </div>
-                                                                              <div class="col-12 mb-2">
-                                                                                <input type="text" class="form-control p-2" id="" minlength="4" maxlength="4" name="ed_year[]" placeholder="year" value="{{$education->ed_year}}">
                                                                               </div>
                                                                               <div class="col-12 mb-2">
-                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ed_description[]" >{{$education->ed_description}}</textarea>
+                                                                                <div class="input-group "> <span class="input-group-text" id="basic-addon3">Year</span>
+                                                                                <input type="text" class="form-control p-2" id="" minlength="4" maxlength="4" name="ed_year[]" placeholder="year" value="{{$education->ed_year}}">
+                                                                              </div>
+                                                                              </div>
+                                                                              <div class="col-12 mb-2">
+                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description" name="ed_description[]" >{{$education->ed_description}}</textarea>
                                                                               </div>
                                                                           </td>
 
@@ -82,7 +99,7 @@
 
                                                   </table>
 
-                                                    <div> <a href="#" class="btn btn-info addEducation">add antoher Education</a> </div>
+                                                    <div> <a href="#" class="btn btn-info addEducation">Add Education</a> </div>
                                            </div>
                                           <!--  -->
                                       </div>
@@ -120,16 +137,28 @@
                                                                       <tr>
                                                                           <td>
                                                                               <div class="col-12 mb-2">
+                                                                                <div class="input-group ">
+                                                                                  <span class="input-group-text" id="basic-addon3">Start Date</span>
                                                                                 <input type="text" class="form-control p-2" id="" name="ex_title[]" placeholder="title" value="{{$experience->ex_title}}">
                                                                               </div>
-                                                                              <div class="col-12 mb-2">
-                                                                                <input type="date" class="form-control p-2" id="" name="ex_start_date[]" placeholder="start_date" value="{{$experience->ex_start_date}}">
                                                                               </div>
                                                                               <div class="col-12 mb-2">
+                                                                                <div class="input-group ">
+                                                                                  <span class="input-group-text" id="basic-addon3">Start Date</span>
+                                                                                 <input type="date" class="form-control p-2" id="" name="ex_start_date[]" placeholder="start_date" value="{{$experience->ex_start_date}}">
+                                                                                </div>
+                                                                              </div>
+                                                                              <div class="col-12 mb-2">
+                                                                                <div class="input-group ">
+                                                                                  <span class="input-group-text" id="basic-addon3">End Date</span>
                                                                                 <input type="date" class="form-control p-2" id="" name="ex_end_date[]" placeholder="end_date" value="{{$experience->ex_end_date}}">
                                                                               </div>
+                                                                              </div>
                                                                               <div class="col-12 mb-2">
+                                                                                <div class="input-group ">
+                                                                                  <span class="input-group-text" id="basic-addon3">Company</span>
                                                                                 <input type="text" class="form-control p-2" id="" name="ex_company[]" placeholder="company" value="{{$experience->ex_company}}">
+                                                                              </div>
                                                                               </div>
                                                                               <div class="col-12 mb-2">   
                                                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ex_description[]">{{$experience->ex_description}}</textarea>
@@ -148,7 +177,7 @@
                                                    </table>
 
                                                   <div>
-                                                        <a href="#" class="btn btn-info addExperience">add antoher Experience</a>
+                                                        <a href="#" class="btn btn-info addExperience">Add Experience</a>
                                                   </div>
 
                                           </div>
@@ -180,10 +209,15 @@
                                                                               <tr>
                                                                                   <td>
                                                                                       <div class="col-12 mb-2">
+                                                                                        <div class="input-group ">
+                                                                                          <span class="input-group-text" id="basic-addon3">Title</span>
                                                                                         <input type="text" class="form-control p-2" id="" name="aw_title[]" placeholder="title" value="{{$award->aw_title}}">
                                                                                       </div>
-                                                                                      <div class="col-12 mb-2">
+                                                                                      </div>
+                                                                                      <div class="col-12 mb-2"> <div class="input-group ">
+                                                                                        <span class="input-group-text" id="basic-addon3">Year</span>
                                                                                         <input type="year" class="form-control p-2" id="" minlength="4" maxlength="4" name="aw_year[]" value="{{$award->aw_year}}" placeholder="year">
+                                                                                      </div>
                                                                                       </div>
                                                                                       <div class="col-12 mb-2">
                                                                                         
@@ -251,17 +285,17 @@
         function addEducation(){
                 var tr =  '<tr>'+
                                                                 '<td>'+
-                                                                    '<div class="col-12 mb-2">'+
-                                                                      '<input type="text" class="form-control p-2" id="" name="ed_title[]" placeholder="title">'+
+                                                                    '<div class="col-12 mb-2">'+'<div class="input-group mb-3">'+'<span class="input-group-text" id="basic-addon3">Title</span>'+
+                                                                      '<input type="text" class="form-control p-2" id="" name="ed_title[]" placeholder="title">'+'</div>'+
+                                                                    '</div>'+
+                                                                    '<div class="col-12 mb-2">'+'<div class="input-group mb-3">'+'<span class="input-group-text" id="basic-addon3">Academy</span>'+
+                                                                      '<input type="text" class="form-control p-2" id="" name="ed_academy[]" placeholder="academy">'+'</div>'+
+                                                                    '</div>'+
+                                                                    '<div class="col-12 mb-2">'+'<div class="input-group mb-3">'+'<span class="input-group-text" id="basic-addon3">Year</span>'+
+                                                                      '<input type="text" class="form-control p-2" id="" minlength="4" maxlength="4" name="ed_year[]" placeholder="year">'+'</div>'+
                                                                     '</div>'+
                                                                     '<div class="col-12 mb-2">'+
-                                                                      '<input type="text" class="form-control p-2" id="" name="ed_academy[]" placeholder="academy">'+
-                                                                    '</div>'+
-                                                                    '<div class="col-12 mb-2">'+
-                                                                      '<input type="text" class="form-control p-2" id="" minlength="4" maxlength="4" name="ed_year[]" placeholder="year">'+
-                                                                    '</div>'+
-                                                                    '<div class="col-12 mb-2">'+
-                                                                                '<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="ed_description[]" ></textarea>'+
+                                                                                '<textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Description" rows="3" name="ed_description[]" ></textarea>'+
                                                                     '</div>'+
                                                                 '</td>'+
 
@@ -329,15 +363,15 @@
 
             var tr = '<tr>'+
                                                                 '<td>'+
-                                                                    '<div class="col-12 mb-2">'+
-                                                                      '<input type="text" class="form-control p-2" id="" name="aw_title[]" placeholder="title">'+
+                                                                    '<div class="col-12 mb-2">'+'<div class="input-group mb-3">'+'<span class="input-group-text" id="basic-addon3">Title</span>'+
+                                                                      '<input type="text" class="form-control p-2" id="" name="aw_title[]" placeholder="title">'+'</div>'+
                                                                     '</div>'+
-                                                                    '<div class="col-12 mb-2">'+
-                                                                      '<input type="year" class="form-control p-2" id="" minlength="4" maxlength="4" name="aw_year[]" placeholder="year">'+
+                                                                    '<div class="col-12 mb-2">'+'<div class="input-group mb-3">'+'<span class="input-group-text" id="basic-addon3">Year</span>'+
+                                                                      '<input type="year" class="form-control p-2" id="" minlength="4" maxlength="4" name="aw_year[]" placeholder="year">'+'</div>'+
                                                                     '</div>'+
                                                                     '<div class="col-12 mb-2">'+
                                                                       
-                                                                      '<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="aw_description[]">'+'</textarea>'+
+                                                                      '<textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Description" rows="3" name="aw_description[]">'+'</textarea>'+
                                                                     '</div>'+
                                                                 '</td>'+
 

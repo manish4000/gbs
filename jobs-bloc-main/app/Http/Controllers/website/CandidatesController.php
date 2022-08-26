@@ -39,7 +39,7 @@ class CandidatesController extends Controller
         }
 
 
-        $candidates = $candidates_data->paginate(6);
+        $candidates = $candidates_data->where('users.is_active',1)->paginate(6);
 
         $job_categories = JobCategoryModel::where('is_active',1)->orderBy('title')->get();
         $locations = LocationModel::where('is_active',1)->orderBy('title')->get();
@@ -50,17 +50,40 @@ class CandidatesController extends Controller
 
     public function candidateDetails(Request $request){
 
-       
 
-        $resume =   User::select('users.*','candidate_details.*','candidate_resume.portfolio_photos','candidate_resume.cv','locations.title as location','job_categories.title as job_category')
-                                                ->leftJoin('candidate_details','candidate_details.user_id','=','users.id')
-                                                ->leftJoin('locations','locations.id','=','candidate_details.location_id')
-                                                ->leftJoin('job_categories','job_categories.id' ,'=' ,'users.job_category_id')
-                                                ->leftJoin('candidate_education','candidate_education.user_id','=','users.id')
-                                                ->leftJoin('candidate_resume','candidate_resume.user_id','=','users.id')
-                                                ->where('users.id',$request->id)->first(); 
+        
+        // $resume =   User::select('users.id as id','candidate_details.*','candidate_resume.portfolio_photos','candidate_resume.cv','locations.title as location','job_categories.title as job_category')
+        //                                         ->leftJoin('candidate_details','candidate_details.user_id','=','users.id')
+        //                                         ->leftJoin('locations','locations.id','=','candidate_details.location_id')
+        //                                         ->leftJoin('job_categories','job_categories.id' ,'=' ,'users.job_category_id')
+        //                                         ->leftJoin('candidate_education','candidate_education.user_id','=','users.id')
+        //                                         ->leftJoin('candidate_resume','candidate_resume.user_id','=','users.id')
+        //                                         ->where('users.id',$request->id)->first()->toArray(); 
 
-                                            
+                                                
+        $resume =   User::select('users.*','candidate_details.featured_image'
+                                ,'candidate_details.cover_image',
+                                'candidate_details.dob','candidate_details.job_title',
+                                'candidate_details.salary','candidate_details.salary_type_id',
+                                'candidate_details.introduction_video_url','candidate_details.candidate_job_categories',
+                                'candidate_details.description','candidate_details.location_id',
+                                'candidate_details.friendly_address',
+                                'candidate_details.candidate_tags',
+                                'candidate_resume.portfolio_photos','candidate_resume.cv',
+                                'locations.title as location',
+                                'job_categories.title as job_category',
+                                
+                                
+                                )
+                            ->leftJoin('candidate_details','candidate_details.user_id','=','users.id')
+                            ->leftJoin('locations','locations.id','=','candidate_details.location_id')
+                            ->leftJoin('candidate_resume','candidate_resume.user_id','=','users.id')
+                            ->leftJoin('job_categories','job_categories.id' ,'=' ,'users.job_category_id')
+                          
+                            ->where('users.id',$request->id)->first(); 
+  
+
+                                                
 
         $resume_education = candidateEducationModel::where('user_id',$request->id)->get();                                        
         $resume_experience = candidateExperienceModel::where('user_id',$request->id)->get();                                        

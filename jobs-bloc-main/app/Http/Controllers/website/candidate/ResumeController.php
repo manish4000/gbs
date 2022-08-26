@@ -35,7 +35,7 @@ class ResumeController extends Controller
             // return response($request->all());
           $validator = Validator::make($request->all(), [              
             'portfolio_photos.*' => 'nullable|image|mimes:png,jpg,jpeg|max:524' ,
-            'cv' => 'nullable|mimes:pdf,docx,doc' ,    
+            'cv' => 'nullable|mimes:pdf,docx,doc'    
         ]);
 
         if($validator->fails()){

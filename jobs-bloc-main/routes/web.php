@@ -419,6 +419,7 @@ Route::get('/logout', function(){
 //these route for candidates
 Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\website\candidate','as'=>'candidate.'],function(){
     
+    Route::get('dashboard','DashboardController@index')->name('dashboard');
     Route::get('profile','ProfileController@index')->name('profile.index'); 
     Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
 

@@ -12,89 +12,81 @@
             <div class="col-9  py-4 px-3">
 
                     <h5>Applications statistics</h5>           
+                    <div class="row g-0 py-2 ">
 
-                     <div class="container my-5 py-5">
-
-                                    <!--Section: Block Content-->
-                                    <section>
-
-                                    <!--Grid row-->
-                                    <div class="row">
-
-                                        <!--Grid column-->
-                                        <div class="col-lg-3 col-6 mb-4">
-
-                                        <div class="media blue lighten-2  z-depth-1 rounded">
-                                            <i class="far fa-money-bill-alt fa-3x blue z-depth-1 p-4 rounded-left "></i>
-                                            <div class="media-body">
-                                            <p class="text-uppercase mt-2 mb-1 ml-3"><small>sales</small></p>
-                                            <p class="font-weight-bold mb-1 ml-3">23 000$</p>
-
-
-                                            </div>
-                                        </div>
-
-
-                                        </div>
-                                        <!--Grid column-->
-
-                                        <!--Grid column-->
-                                        <div class="col-lg-3 col-6 mb-4">
-
-                                        <div class="media deep-purple lighten-2  z-depth-1 rounded">
-                                            <i class="fas fa-chart-bar fa-3x deep-purple z-depth-1 p-4 rounded-left "></i>
-                                            <div class="media-body">
-                                            <p class="text-uppercase mt-2 mb-1 ml-3"><small>Traffic</small></p>
-                                            <p class="font-weight-bold mb-1 ml-3">323 540</p>
-                                        
-
-                                            </div>
-                                        </div>
-
-
-                                        </div>
-                                        <!--Grid column-->
-
-                                        <!--Grid column-->
-                                        <div class="col-lg-3 col-6 mb-4">
-
-                                        <div class="media pink lighten-2  z-depth-1 rounded">
-                                            <i class="fas fa-download fa-3x pink z-depth-1 p-4 rounded-left "></i>
-                                            <div class="media-body">
-                                            <p class="text-uppercase mt-2 mb-1 ml-3"><small>downloads</small></p>
-                                            <p class="font-weight-bold mb-1 ml-3">13 540</p>
-                                        
-
-                                            </div>
-                                        </div>
-
-
-                                        </div>
-                                        <!--Grid column-->
-
-                                        <!--Grid column-->
-                                        <div class="col-lg-3 col-6 mb-4">
-
-                                        <div class="media pink lighten-2  z-depth-1 rounded">
-                                            <i class="fas fa-download fa-3x pink z-depth-1 p-4 rounded-left "></i>
-                                            <div class="media-body">
-                                            <p class="text-uppercase mt-2 mb-1 ml-3"><small>downloads</small></p>
-                                            <p class="font-weight-bold mb-1 ml-3">13 540</p>
-                                            </div>
-                                        </div>
-
-
-                                        </div>
-                                        <!--Grid column-->
-
+                       
+                            
+                        <div class="col-3">
+                            <div class="card bg-light m-3 border-warning">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <div class="media d-flex justify-content-between">
+                                      <div class="align-self-center">
+                                        <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
+                                      </div>
+                                      <div class="media-body text-end">
+                                        <h4>0</h4>
+                                        <p>Applied Jobs</p>
+                                      </div>
                                     </div>
-                                    <!--Grid row-->
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card bg-light m-3 border-warning">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <div class="media d-flex justify-content-between">
+                                      <div class="align-self-center">
+                                        <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
+                                      </div>
+                                      <div class="media-body text-end">
+                                        <h4>0</h4>
+                                        <p>Shortlisted</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        {{-- <div class="col-3">
+                            <div class="card bg-light m-3 border-warning">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <div class="media d-flex justify-content-between">
+                                      <div class="align-self-center">
+                                        <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
+                                      </div>
+                                      <div class="media-body text-end">
+                                        <h4>156</h4>
+                                        <p>New Comments</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card bg-light m-3 border-warning">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <div class="media d-flex justify-content-between">
+                                      <div class="align-self-center">
+                                        <i class="fa fa-paper-plane-o fa-2x" aria-hidden="true"></i>
+                                      </div>
+                                      <div class="media-body text-end">
+                                        <h4>156</h4>
+                                        <p>New Comments</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div> --}}
 
-                                    </section>
-                                    <!--Section: Blocks Content-->
-
-
-            </div>
+                    
+                     </div>
 
                     <div >
                         <h5 class="mt-4">Jobs Applied Recently</h5>

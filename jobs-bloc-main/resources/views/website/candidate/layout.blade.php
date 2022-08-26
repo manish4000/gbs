@@ -14,8 +14,8 @@
         </a>
 
         <a
-           href="#"
-           class="list-group-item list-group-item-action  py-2 ripple"
+           href="{{route('candidate.dashboard')}}"
+           class="list-group-item list-group-item-action  py-2 ripple  <?php echo  (Request::segment(2) == "dashboard") ? "active" : '' ;?>" 
            aria-current="true"
            >
           <i class="fas fa-tachometer-alt fa-fw me-3 my-3"></i
@@ -24,19 +24,19 @@
         
         <a
            href="{{route('candidate.profile.index')}}"
-           class="list-group-item list-group-item-action  py-2  active"
+           class="list-group-item list-group-item-action  py-2  <?php echo  (Request::segment(2) == "profile") ? "active" : '' ;?>"
            >
           <i class="fas fa-user fa-fw me-3 my-3"></i
             ><span>Profile</span>
         </a>
         <a
            href="{{route('candidate.resume.index')}}"
-           class="list-group-item list-group-item-action  py-2 ripple"
+           class="list-group-item list-group-item-action  py-2 ripple <?php echo  (Request::segment(2) == "resume") ? "active" : '' ;?>"
            ><i class="fas fa-file fa-fw me-3 my-3"></i><span>My Resume</span></a
           >
         <a
            href="{{route('candidate.applied_jobs')}}"
-           class="list-group-item list-group-item-action  py-2 ripple disabled"
+           class="list-group-item list-group-item-action  py-2 ripple disabled <?php echo  (Request::segment(2) == "applied-jobs") ? "active" : '' ;?>"
            ><i class="fas fa-star-o fa-fw me-3 my-3"></i
           ><span>Applied Jobs</span> </a
           >

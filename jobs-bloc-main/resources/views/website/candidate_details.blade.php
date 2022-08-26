@@ -20,8 +20,29 @@
                                                 <div>
                                                     <p class="fw-bold fs-4">{{$resume->name}} </p>
                                                     <p><small>Marketing jobs</small></p>
-                                                    <p> <span> <i class="fa-solid text-warning fa-phone"></i> <small class="text-muted"> {{$resume->phone}}</small> </span> &ensp; <span> <i class="fa-solid text-warning fa-envelope"></i> <small class="text-muted"> {{$resume->email}}</small> </span> </p>
-                                                    <p class=""> <i class="fa-solid  text-warning fa-location-dot"></i> <small> {{$resume->friendly_address}}  </small> </p>
+                                                    <p> <span> <i class="fa-solid text-warning fa-phone"></i> <small class="text-muted">
+                                                      
+                                                      @if(isset($resume->phone))
+                                                      <a href="tel:{{$resume->phone}}" class="text-decoration-none text-reset">{{$resume->phone}} </a> 
+                                                      @else
+                                                      not available
+                                                      @endif
+                                                    </small> </span> &ensp; <span> <i class="fa-solid text-warning fa-envelope"></i> <small class="text-muted">
+                                                      
+  
+                                                        <a href="mailto:{{$resume->email}}"  class="text-decoration-none text-reset"> {{ $resume->email }}</a>
+                                                  
+                                                      
+                                                      </small> </span> </p>
+                                                    <p class=""> <i class="fa-solid  text-warning fa-location-dot"></i> <small class="text-reset"> 
+                                                      
+                                                      @if(isset($resume->friendly_address))
+                                                      {{$resume->friendly_address}} 
+                                                      @else
+                                                      not available
+                                                      @endif
+
+                                                      </small> </p>
 
                                                 </div>
                                             </div>
