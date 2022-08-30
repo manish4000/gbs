@@ -7,7 +7,7 @@ use App\Models\EmployerDetailsModel;
 use App\Models\EmployerTeamModel;
 use App\Models\Job\JobCategoryModel;
 use App\Models\LocationModel;
-use App\Models\socialNetworks;
+use App\Models\SocialNetworks;
 use App\Models\User;
 use App\Models\UserSocialNetwork;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class ProfileController extends Controller
         $employer_details  = EmployerDetailsModel::where('id',$user_details->id)->first();
         $locations = LocationModel::where('is_active',1)->get();
     
-        $social_networks = socialNetworks::where('is_active',1)->get();
+        $social_networks = SocialNetworks::where('is_active',1)->get();
         $job_categories = JobCategoryModel::where('is_active',1)->get();
         $employer_team_details = EmployerTeamModel::where('user_id',$user_details->id)->get();
 

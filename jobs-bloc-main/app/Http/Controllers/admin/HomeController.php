@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobModel;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $total_employer =  User::where('role',"employer")->count('id');
+        $total_candidates =  User::where('role',"candidate")->count('id');
+
+        $total_jobs = JobModel::count('id');
+
+        return view('dashboard',compact('total_candidates','total_employer','total_jobs'));
     }
 }

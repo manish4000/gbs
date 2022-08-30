@@ -23,43 +23,42 @@ class JobsController extends Controller
 {
     
     public function index(Request $request){
-
-   
+     
        $job_location_checked =   (($request->job_location != '') || ($request->job_location != null) )? explode(',',$request->job_location) : null;
 
        $job_category_checked =   ($request->job_category != '') ? explode(',',$request->job_category) : null;
 
-                         
+                       
 
-       $job_type_checked  =   ($request->job_type != '') ? $request->job_type  : null;
+       $job_type_checked  =   ($request->job_type == '' ) ? NULL : $request->job_type;
 
 
         $job_data = JobModel::select('job.id','job.title','job.slug','job.feature_image')->where('job.is_active',1);
 
-        if($request->has('title')){
-
+        if($request->title != ''){
+            echo "title";
             $job_data->where('job.title','like','%'.$request->title.'%');
         }
         if($request->has('sub_category')){
-
+            echo "sub cat";
             $job_data->leftJoin('job_categories_relation','job_categories_relation.job_id','job.id')->where('job_categories_relation.job_category_id',$request->sub_category);
         }
 
         if($job_location_checked != null){
+            echo "location";
             $job_data->leftJoin('job_locations','job_locations.job_id','job.id')->whereIn('job_locations.location_id',$job_location_checked);
         }
         if($job_category_checked != null){
-
+            echo "category";
             // $sub_categories = JobCategoryModel::select('id')->whereIn('parent_id',$job_category_checked)->get()->toArray();
 
             // $all_subcategory_id = array_column($sub_categories, 'id');
 
-    
-
             $job_data->leftJoin('job_categories_relation','job_categories_relation.job_id','job.id')->whereIn('job_categories_relation.job_category_id',$job_category_checked);
            
         }
-         if($job_type_checked != null){
+         if($job_type_checked != NULL){
+            echo "jobtype";
               $job_data->where('job.job_type_id',$job_type_checked);
          }
 
@@ -72,6 +71,7 @@ class JobsController extends Controller
         $job_categories = JobCategoryModel::where('is_active',1)->get();
         $locations = LocationModel::where('is_active',1)->get();
 
+       
 
         return view('website.jobs',compact('jobs_data','Job_types','job_categories','locations','job_location_checked','job_category_checked','job_type_checked'));
     }

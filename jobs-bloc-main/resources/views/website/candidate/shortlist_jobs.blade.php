@@ -17,6 +17,21 @@
             <div class="col-12 col-md-9  py-4 ">
 
 
+                @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session('success') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>   
+                @endif
+
+                @if (session()->has('failed'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  {{ session('failed') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>   
+                @endif
+
+
                     <div class="g-0">
                         <h3 class=" fw-bold  my-4">Shortlist Jobs</h3>
             
@@ -37,7 +52,7 @@
 
                  <div class="row g-4">
 
-                    @for($i=1;$i<=10;$i++)
+                    @foreach($shortlisted_jobs as $jobs)
 
                         <div class="col-12  shadow">
                             <div class="product">
@@ -48,9 +63,13 @@
                                         <img src="https://jobsbloc.com/wp-content/themes/careerup/images/placeholder.png" height="125px"> 
                                         </div>
                                         <div class="col-7 my-auto">
-                                                <span class=" text-uppercase text-warning">FULL TIME</span>
-                                         <h5> <a href="#" class="text-decoration-none text-reset"> Front Office Associate</a>  <span> <i class="fa fa-star" style="color:#ffc107;"></i> </span>  </h5>   
-                                                <span class="text-muted">posted 17 hours ago</span>    
+                                                <span class=" text-uppercase text-warning">{{$jobs->job_type}}</span>
+                                         <h5> <a href="#" class="text-decoration-none text-reset"{{$jobs->title}}> </a> 
+                                            
+                                                <span> <i class="fa fa-star" style="color:#ffc107;"></i> </span>  </h5>  
+                                                
+                                                
+                                                <span class="text-muted"> Posted {{$jobs->job_created_at->diffForHumans()}}</span>    
 
                                         </div>
                                         <div class="col-2 my-auto">
@@ -64,7 +83,7 @@
                             </div>
                         </div>
 
-                    @endfor
+                    @endforeach
 
                 </div>
 

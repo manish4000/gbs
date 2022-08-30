@@ -9,7 +9,7 @@ use App\Models\Job\JobCategoryModel;
 use App\Models\LocationModel;
 use App\Models\Job\SalaryTypeModel;
 use App\Models\SkillModel;
-use App\Models\socialNetworks;
+use App\Models\SocialNetworks;
 use App\Models\User;
 use App\Models\UserSocialNetwork;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class ProfileController extends Controller
 
         $locations = LocationModel::where('is_active',1)->get();
         $salary_types =  SalaryTypeModel::where('is_active',1)->get();
-        $social_networks = socialNetworks::where('is_active',1)->get();
+        $social_networks = SocialNetworks::where('is_active',1)->get();
         $job_categories = JobCategoryModel::where('is_active',1)->get();
         $skills = SkillModel::where('is_active',1)->get();
         $user_social_networks = UserSocialNetwork::where('user_id',$user_details->id)->get();

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('layouts.app', ['activePage' => 'social-networks', 'titlePage' => __('Social NetWorks')])
 
 @section('content')
 

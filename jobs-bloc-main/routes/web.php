@@ -26,7 +26,7 @@ Route::group(['namespace' => 'App\Http\Controllers\website'],function(){
     Route::get('/jobs', 'JobsController@index')->name('jobs');
 
     Route::get('/jobs/{id}','JobsController@jobDetails')->name('job_details');
-    Route::get('/jobs/shortlist/{job_id}','JobsController@shortlistJob')->name('shortlist_job');
+ 
 
     Route::get('/job/locations','JobsLocationController@index')->name('job_by_location');
     Route::get('apply-job','JobsController@applyJob')->name('job.apply');
@@ -290,6 +290,17 @@ Route::group(['prefix' => 'admin','middleware'=> ['guest','preventBackHistory','
                               Route::get('/status/{id}','TestimonialController@changeStatus')->name('status');
                   
                              });
+
+                          Route::group(['prefix' => 'social-network','as'=>'social_network.'],function(){
+                  
+                              Route::get('/','SocialNetworkController@index')->name('index');
+                              Route::Post('/store','SocialNetworkController@store')->name('store');
+                              Route::get('/edit/{id}','SocialNetworkController@edit')->name('edit');
+                              Route::post('/update/','SocialNetworkController@update')->name('update');
+                              Route::delete('/delete/{id}','SocialNetworkController@destroy')->name('delete');
+                              Route::get('/status/{id}','SocialNetworkController@changeStatus')->name('status');
+                  
+                             });
                          });
           
           
@@ -417,38 +428,47 @@ Route::get('/logout', function(){
 });
 
 //these route for candidates
-Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\website\candidate','as'=>'candidate.'],function(){
+
+Route::group(['middleware'=> ['auth'] ],function(){
+ 
     
-    Route::get('dashboard','DashboardController@index')->name('dashboard');
-    Route::get('profile','ProfileController@index')->name('profile.index'); 
-    Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
+    Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\website\candidate','as'=>'candidate.'],function(){
+        
+        Route::get('dashboard','DashboardController@index')->name('dashboard');
+        Route::get('profile','ProfileController@index')->name('profile.index'); 
+        Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
+    
+        Route::get('resume','ResumeController@index')->name('resume.index'); 
+        Route::post('resume','ResumeController@updateResume')->name('resume.update'); 
 
-    Route::get('resume','ResumeController@index')->name('resume.index'); 
-    Route::post('resume','ResumeController@updateResume')->name('resume.update'); 
-
-});
-
-Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\website\employer','as'=>'employer.'],function(){
-
-    Route::get('dashboard','DashboardController@index')->name('dashboard');
-    Route::get('profile','ProfileController@index')->name('profile.index'); 
-    Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
-    Route::get('submit-job','SubmitJobController@index')->name('submit_job.add'); 
-    Route::post('submit-job','SubmitJobController@submitJob')->name('submit_job.store'); 
-    Route::get('my-jobs','SubmitJobController@myJobs')->name('my_jobs');
-
-    Route::get('my-jobs/edit/{id}','SubmitJobController@editJob')->name('submit_job.edit');
-
-
-    Route::group(['prefix' => 'applicants','as'=>'applicants.'],function(){
-
-        Route::get('/','ApplicantsController@index')->name('index'); 
-        Route::get('/application-status','ApplicantsController@changeApplicationStatus')->name('application_status');
-        Route::get('/shortlist/{id}','ApplicantsController@changeShortListStatus')->name('application_shortlist');
-        Route::get('remove/{id}','ApplicantsController@removeApplication')->name('remove');
+        Route::get('shortlisted-jobs','ShortlitsJobsController@index')->name('shortlisted_job');
+        Route::get('shortlisted-jobs/delete/id','ShortlitsJobsController@delete')->name('delete_shortlisted_job');
+    
     });
+    
+    Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\website\employer','as'=>'employer.'],function(){
+    
+        Route::get('dashboard','DashboardController@index')->name('dashboard');
+        Route::get('profile','ProfileController@index')->name('profile.index'); 
+        Route::post('profile','ProfileController@updateProfile')->name('profile.update'); 
+        Route::get('submit-job','SubmitJobController@index')->name('submit_job.add'); 
+        Route::post('submit-job','SubmitJobController@submitJob')->name('submit_job.store'); 
+        Route::get('my-jobs','SubmitJobController@myJobs')->name('my_jobs');
+    
+        Route::get('my-jobs/edit/{id}','SubmitJobController@editJob')->name('submit_job.edit');
+    
+    
+        Route::group(['prefix' => 'applicants','as'=>'applicants.'],function(){
+    
+            Route::get('/','ApplicantsController@index')->name('index'); 
+            Route::get('/application-status','ApplicantsController@changeApplicationStatus')->name('application_status');
+            Route::get('/shortlist/{id}','ApplicantsController@changeShortListStatus')->name('application_shortlist');
+            Route::get('remove/{id}','ApplicantsController@removeApplication')->name('remove');
+        });
+    
+    });
+ });
 
-});
 
 
 

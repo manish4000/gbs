@@ -239,8 +239,8 @@
                                                                 '<label for="inputPassword4" class="form-label">Url</label>'+                       
                                                                 '<input type="text" class="form-control p-2" id="" name="url[]">'+
                                                                 '</td>'+
-                                                                '<td class="my-auto">'+
-                                                                    '<a href="#" class="btn btn-danger remove">Delete </a>'+
+                                                                '<td class="my-auto">'+'<label for="inputPassword4" class="form-label">Url</label>'+
+                                                                    '<p>'+'<a href="#" class="btn btn-danger remove">Delete </a>'+ '</p>'+
                                                                 '</td>'+
                                                                 '</tr>';
 

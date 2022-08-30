@@ -264,39 +264,14 @@
 
         var job_type = $('input[name="job_type_id"]:checked').val();
 
-        document.getElementById("job_type").value = job_type ;
+
+        document.getElementById("job_type").value = (job_type == undefined) ? '' : job_type ;
         
         submitForm();
 
     });
 
-    
-    // $(".location_id").click(function(){
-
-    //     var locations = $('.location_id').val(); 
-
-    //     $('.location_id').each(function (key, data) {
-
-    //         if($(this).is(":checked")){
-    //             job_locations.push(data.value);
-    //         }            
-    //     });
-    //     document.getElementById("job_location").value = job_locations ;
-
-        
-    //     submitForm();
-
-    // });
-
-    // $(".job_type_id").click(function(){
-
-    //     var job_type = $('input[name="job_type_id"]:checked').val();
-
-    //     document.getElementById("job_type").value = job_type ;
-
-    //     submitForm();
-    // });
-    
+  
 
 
     function submitForm(){
