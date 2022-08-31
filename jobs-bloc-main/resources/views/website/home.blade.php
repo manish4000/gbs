@@ -5,7 +5,15 @@
 
 @section('content')
 
-
+<style>
+    .alert-card {
+  box-shadow: 0 13px 10px rgb(0 0 0 / 0.2);
+}
+.alert-card:hover{
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.1);
+}
+</style>
 <div class="container-fluid background">
     
     <!-- search section -->
@@ -129,9 +137,28 @@
 
 <!-- alert -->
 
-    <div class="container border border-2 mt-4 border-warning " style="border-radius: 80px 30px 30px 0px; ">
+    <div class="container  " >
 
-            <div class="row my-5 p-3">
+            <div class="row my-5 p-3 g-5">
+                <h2 class="text-center">Create Your Free Alerts to get Instant Notifications </h2>
+
+                <div class="col-12 col-md-6 ">
+                    <div class="card alert-card border border mt-4 border-warning p-3  h-100">
+                        <h4 class="text-center my-4">Candidate Alert</h4>
+                        <div class="px-2">
+                            <p>Post your free jobs and get instant applications into your account plus added notifications advantage of any new candidate added or updated in our database matching your search criteria. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 ">
+                    <div class=" card alert-card border border mt-4  border-warning  p-3  h-100 ">
+                        <h4 class="text-center my-4">Job Alert</h4>
+                        <div class="px-2">
+                            <p>Register for free and get instant notifications matching your search criteria for the job. </p>
+                        </div>
+                    </div>
+                </div>
+{{-- 
                 <div class="col-12 col-md-6 mb-3"> <h2>Create Your Free Alerts to get Instant Notifications </h2></div>
                 <div class="col-12 col-md-6  mb-3">
                     <div class="row">
@@ -142,7 +169,7 @@
                         <button type="submit" class="btn btn-warning  p-2  fw-bold ">Candidate Alerts </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
     </div>

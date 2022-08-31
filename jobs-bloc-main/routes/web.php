@@ -432,7 +432,7 @@ Route::get('/logout', function(){
 Route::group(['middleware'=> ['auth'] ],function(){
  
     
-    Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\website\candidate','as'=>'candidate.'],function(){
+    Route::group(['prefix' => 'candidate','namespace' => 'App\Http\Controllers\website\candidate','middleware'=> ['IsCandidate'],'as'=>'candidate.'],function(){
         
         Route::get('dashboard','DashboardController@index')->name('dashboard');
         Route::get('profile','ProfileController@index')->name('profile.index'); 
@@ -446,7 +446,7 @@ Route::group(['middleware'=> ['auth'] ],function(){
     
     });
     
-    Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\website\employer','as'=>'employer.'],function(){
+    Route::group(['prefix' => 'employer','namespace' => 'App\Http\Controllers\website\employer','middleware'=> ['IsEmployer'],'as'=>'employer.'],function(){
     
         Route::get('dashboard','DashboardController@index')->name('dashboard');
         Route::get('profile','ProfileController@index')->name('profile.index'); 

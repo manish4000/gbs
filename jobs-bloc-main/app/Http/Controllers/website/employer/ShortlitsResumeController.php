@@ -15,4 +15,17 @@ class ShortlitsResumeController extends Controller
 
         return view('website.employer.shortlist_candidates',compact('shortlisted_resume'));
     }
+
+
+    public function delete(Request $request){
+
+        $response =  EmployerShortlistCandidateModel::where('employer_id',Auth::user()->id)->where('candidate_id',$request->id)->delete();
+
+        if($response){
+            return redirect()->back()->with('success','Remove From Shortlist');
+        }else{
+            return redirect()->back()->with('failed','Somthing Went wrong');
+        }
+    }
+
 }
