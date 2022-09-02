@@ -83,7 +83,7 @@ class JobsController extends Controller
                                   
                                 ->where('job.slug',$slug)->first();
 
-
+        $check_already_apply =    JobApplicationModel::where('user_id',Auth::user()->id)->where('job_id',$job_data->id)->exists();  
 
         $job_data->location = JobLocationModel::select('locations.title')->leftJoin('locations','locations.id','=','job_locations.location_id')->where('job_id',$job_data->id)->get();                        
 
