@@ -88,121 +88,282 @@
 .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
   background-color: rgba(255, 211, 51, 0.5);
 }
+/*  */
+nav {
+  padding: 0 15px;
+}
+a {
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+}
+.menu,
+.submenu {
+  list-style-type: none;
+}
+
+.item {
+  padding: 10px;
+}
+.item.button {
+  padding: 9px 5px;
+}
+.item:not(.button) a:hover,
+.item a:hover::after {
+  color: #ccc;
+}
+/* Mobile menu */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu li a {
+  display: block;
+  padding: 15px 5px;
+}
+.menu li.subitem a {
+  padding: 15px;
+}
+.toggle {
+  order: 1;
+  font-size: 20px;
+}
+.item.button {
+  order: 2;
+}
+.item {
+  order: 3;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+.active .item {
+  display: block;
+}
+.button.secondary {
+  /* divider between buttons and menu links */
+  border-bottom: 1px #444 solid;
+}
+/* Submenu up from mobile screens */
+.submenu {
+  display: none;
+}
+.submenu-active .submenu {
+  display: block;
+}
+.has-submenu i {
+  font-size: 12px;
+}
+.has-submenu > a::after {
+  font-family: "Font Awesome 5 Free";
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 900;
+  content: "\f078";
+  color: white;
+  padding-left: 5px;
+}
+.subitem a {
+  padding: 10px 15px;
+}
+.submenu-active {
+  background-color: #111;
+  border-radius: 3px;
+}
+
+/* Tablet menu */
+@media all and (min-width: 700px) {
+  .menu {
+    justify-content: center;
+  }
+  .logo {
+    flex: 1;
+  }
+  .item.button {
+    width: auto;
+    order: 1;
+    display: block;
+  }
+  .toggle {
+    flex: 1;
+    text-align: right;
+    order: 2;
+  }
+  /* Button up from tablet screen */
+  .menu li.button a {
+    padding: 10px 15px;
+    margin: 5px 0;
+  }
+  .button a {
+    background: #0080ff;
+    border: 1px royalblue solid;
+  }
+  .button.secondary {
+    border: 0;
+  }
+  .button.secondary a {
+    background: transparent;
+    border: 1px #0080ff solid;
+  }
+  .button a:hover {
+    text-decoration: none;
+  }
+  .button:not(.secondary) a:hover {
+    background: royalblue;
+    border-color: darkblue;
+  }
+}
+/* Desktop menu */
+@media all and (min-width: 960px) {
+  .menu {
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    background: none;
+  }
+  .logo {
+    order: 0;
+  }
+  .item {
+    order: 1;
+    position: relative;
+    display: block;
+    width: auto;
+  }
+  .button {
+    order: 2;
+  }
+  .submenu-active .submenu {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 68px;
+    background: #111;
+  }
+  .toggle {
+    display: none;
+  }
+  .submenu-active {
+    border-radius: 0;
+  }
+}
+
     </style>
   </head>
   <body>
 
+  <!--  
 <div class="container-fluid p-2  shadow border border-3 border-warning bg-white">
 
   {{-- style="display: flex;justify-content:center;" --}}
 
-<div  class="d-md-flex justify-content-center">
-  <nav class="navbar navbar-expand-lg navbar-dark " id="headerNav">
+  <div class="container bg-info">
 
-    
 
-      <a class="navbar-brand d-block" href="/">
-        <img src="images/logo.png" height="50" />
-       </a>
-
-      <button class="navbar-toggler text-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    Button with data-bs-target
-  </button> -->
+      <nav class="navbar navbar-expand-lg navbar-dark " >
   
-      <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-
-       
-
-        <ul class="navbar-nav px-3 ">
+        
+  
+          <a class="navbar-brand d-block" href="/">
+            <img src="images/logo.png" height="50" />
+          </a>
+  
+          <button class="navbar-toggler text-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+         
+      
+          <div class=" collapse navbar-collapse  " id="navbarNavDropdown">
+  
           
-          <li class="nav-item">
-            <a class="nav-link text-dark  active text-decoration-none text-reset fw-bold" aria-current="page" href="{{route('home')}}"> <small> Home </small> </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-bold " aria-current="page" href="{{route('candidates')}}"> <small> Find Resume </small> </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark  fw-bold" aria-current="page" href="{{route('jobs')}}"> <small>  Job Search </small></a>
-          </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('job_by_category')}}"> <small>Jobs By Category </small> </a>
-          </li> --}}
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('job_by_location')}}">  <small> Jobs By Location</small> </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('contact')}}"> <small> Contact </small> </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('career_with_jabsbloc')}}"> <small>  Career with jobsbloc </small> </a>
-          </li>
-       
   
-          @if(Route::has('login'))
-              @auth 
-                  @if(Auth::user()->role == "candidate")
-                  <li class="nav-item dropdown">
-                    <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
-                       {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
-                    class="img-fluid rounded-circle me-3" width="50"> --}}
-                    <i class="fa-solid fa-user-large"></i>
-                     {{Auth::user()->name}} </a>
-                      <ul class="dropdown-menu">
-                     <li><a class="dropdown-item" href="{{route('candidate.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.resume.index')}}"><i class="fas fa-file fa-fw"></i> My Resume</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.applied_jobs')}}"><i class="fas fa-star-o fa-fw"></i> Applied Jobs</a></li>
-                     <li><a class="dropdown-item" href="#"><i class="fas fa-tag fa-fw fa-fw"></i> Packages</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.shortlist_jobs')}}"><i class="fas fa-chart-bar fa-fw"></i> Shortlist Jobs</a></li>
-                     <li><a class="dropdown-item" href="#"><i class="fas fa-user-secret fa-fw"></i> Following Employers</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.alert_job')}}"><i class="fas fa-bell-o fa-fw"></i> Alerts Jobs</a></li>
-                     <li><a class="dropdown-item" href="#"><i class="fas fa-comments-o fa-fw"></i> Messages</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.change_password')}}"><i class="fas fa-unlock-alt fa-fw"></i> Change Password</a></li>
-                     <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
-                     <li><a class="dropdown-item" href="{{route('candidate.delete_profile')}}"><i class="fas fa-trash fa-fw"></i> Delete Profile</a></li>
-                      
-                      
-                      </ul>
-                  </li>
-                  @elseif(Auth::user()->role == "employer")    
-                  <li class="nav-item dropdown">
-                    <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
-                       {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
-                    class="img-fluid rounded-circle me-3" width="50"> --}}
-                    <i class="fa-solid fa-user-large"></i>
-                     {{Auth::user()->name}} </a>
-
-                      <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{{route('employer.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
-                      <li><a class="dropdown-item" href="{{route('employer.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
-                      <li><a class="dropdown-item" href="{{route('employer.submit_job.add')}}"><i class="fas fa-file fa-fw"></i> Submit Job</a></li>
-                      <li><a class="dropdown-item" href="{{route('employer.my_jobs')}}"><i class="fas fa-file fa-fw"></i> My Jobs</a></li>
-                      <li><a class="dropdown-item" href="{{route('employer.applicants.index')}}"><i class="fas fa-file fa-fw"></i> Applicants</a></li>
-                      <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
-                      </ul>
-                      
-                  </li>
-                  @endif
-              @else
-              <li>
-              <a href="{{route('register')}}" class="btn btn-warning p-3 ms-4  fw-bold"> Login/Register </a>
-             </li>
-  
-              @endif
+            <ul class="navbar-nav ">
               
-          @endif
+              <li class="nav-item">
+                <a class="nav-link text-dark " aria-current="page" href="{{route('home')}}">  Home  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark  " aria-current="page" href="{{route('candidates')}}">  Find Resume  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark " aria-current="page" href="{{route('jobs')}}">   Job Search </a>
+              </li>
+              {{-- <li class="nav-item">
+                <a class="nav-link text-dark fw-bold" aria-current="page" href="{{route('job_by_category')}}"> Jobs By Category  </a>
+              </li> --}}
+              <li class="nav-item">
+                <a class="nav-link text-dark " aria-current="page" href="{{route('job_by_location')}}">   Jobs By Location </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark " aria-current="page" href="{{route('contact')}}">  Contact  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark " aria-current="page" href="{{route('career_with_jabsbloc')}}">   Career with jobsbloc </a>
+              </li>
+          
+      
+               @if(Route::has('login'))
+                  @auth 
+                      @if(Auth::user()->role == "candidate")
+                      <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
+                          {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                        class="img-fluid rounded-circle me-3" width="50"> --}}
+                        <i class="fa-solid fa-user-large"></i>
+                        {{Auth::user()->name}} </a>
+                          <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{route('candidate.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.resume.index')}}"><i class="fas fa-file fa-fw"></i> My Resume</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.applied_jobs')}}"><i class="fas fa-star-o fa-fw"></i> Applied Jobs</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-tag fa-fw fa-fw"></i> Packages</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.shortlist_jobs')}}"><i class="fas fa-chart-bar fa-fw"></i> Shortlist Jobs</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user-secret fa-fw"></i> Following Employers</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.alert_job')}}"><i class="fas fa-bell-o fa-fw"></i> Alerts Jobs</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-comments-o fa-fw"></i> Messages</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.change_password')}}"><i class="fas fa-unlock-alt fa-fw"></i> Change Password</a></li>
+                        <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
+                        <li><a class="dropdown-item" href="{{route('candidate.delete_profile')}}"><i class="fas fa-trash fa-fw"></i> Delete Profile</a></li>
+                          
+                          
+                          </ul>
+                      </li>
+                      @elseif(Auth::user()->role == "employer")    
+                      <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
+                          {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                        class="img-fluid rounded-circle me-3" width="50"> --}}
+                        <i class="fa-solid fa-user-large"></i>
+                        {{Auth::user()->name}} </a>
   
-          
-          
-       
-        </ul>
-      </div>
+                          <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{{route('employer.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
+                          <li><a class="dropdown-item" href="{{route('employer.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
+                          <li><a class="dropdown-item" href="{{route('employer.submit_job.add')}}"><i class="fas fa-file fa-fw"></i> Submit Job</a></li>
+                          <li><a class="dropdown-item" href="{{route('employer.my_jobs')}}"><i class="fas fa-file fa-fw"></i> My Jobs</a></li>
+                          <li><a class="dropdown-item" href="{{route('employer.applicants.index')}}"><i class="fas fa-file fa-fw"></i> Applicants</a></li>
+                          <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
+                          </ul>
+                          
+                      </li>
+                      @endif
+                  @else
+                  <li>
+                  <a href="{{route('register')}}" class="btn btn-warning p-3 ms-4  fw-bold"> Login/Register </a>
+                 </li>
+      
+                  @endif
+                  
+              @endif 
+                
+            </ul>
+          </div>
+        
+        </nav>
    
-    </nav>
-   </div>
+  </div>
+
   </div> 
   
 
@@ -210,43 +371,94 @@
   <a href="{{route('login_register')}}" class="btn btn-warning px-5 py-3  fw-bold"> Login/Register </a>
 </div>
 
-<!-- of canvas -->
+ -->
 
-<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body text-white">
-        <ul class="navbar-nav">
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('home')}}">Home</a>
-                </li>
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('candidates')}}"> Find Resume</a>
-                </li>
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('jobs')}}">Job Search</a>
-                </li>
-                {{-- <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('job_by_category')}}">Jobs By Category</a>
-                </li> --}}
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('job_by_location')}}">Jobs By Location</a>
-                </li>
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('contact')}}">Contact</a>
-                </li>
-                <li class="nav-item py-1">
-                  <a class="nav-link active text-decoration-none text-reset" aria-current="page" href="{{route('career_with_jabsbloc')}}">Career with jobsbloc</a>
-                </li>
-               
-              </ul>
-   
-  </div>
-</div>
-<!--  -->
 
+ <div class="container-fluid p-2  shadow border border-3 border-warning bg-white">
+      <nav class="container">
+        <ul class="menu">
+          <li class="logo"><a href="/"> <img src="images/logo.png" height="40" /> </a></li>
+          <li class="item"><a href="{{route('home')}}">Home</a></li>
+          <li class="item"><a href="{{route('candidates')}}">Find Resume</a></li>
+          {{-- <li class="item has-submenu">
+            <a tabindex="0">Services</a>
+            <ul class="submenu">
+              <li class="subitem"><a href="#">Design</a></li>
+              <li class="subitem"><a href="#">Development</a></li>
+              <li class="subitem"><a href="#">SEO</a></li>
+              <li class="subitem"><a href="#">Copywriting</a></li>
+            </ul>
+          </li>
+          <li class="item has-submenu">
+            <a tabindex="0">Plans</a>
+            <ul class="submenu">
+              <li class="subitem"><a href="#">Freelancer</a></li>
+              <li class="subitem"><a href="#">Startup</a></li>
+              <li class="subitem"><a href="#">Enterprise</a></li>
+            </ul>
+          </li> --}}
+          <li class="item"><a href="{{route('jobs')}}"> Job Search </a></li>
+          <li class="item"><a href="{{route('contact')}}">Contact</a></li>
+          <li class="item"><a href="{{route('about_us')}}">About</a></li>
+          <li class="item"><a href="{{route('career_with_jabsbloc')}}">Career with jobsbloc</a></li>
+         
+          @if(Route::has('login'))
+          @auth 
+              @if(Auth::user()->role == "candidate")
+              <li class="item dropdown">
+                <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
+                  {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                class="img-fluid rounded-circle me-3" width="50"> --}}
+                <i class="fa-solid fa-user-large"></i>
+                {{Auth::user()->name}} </a>
+                  <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{route('candidate.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.resume.index')}}"><i class="fas fa-file fa-fw"></i> My Resume</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.applied_jobs')}}"><i class="fas fa-star-o fa-fw"></i> Applied Jobs</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-tag fa-fw fa-fw"></i> Packages</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.shortlist_jobs')}}"><i class="fas fa-chart-bar fa-fw"></i> Shortlist Jobs</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-user-secret fa-fw"></i> Following Employers</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.alert_job')}}"><i class="fas fa-bell-o fa-fw"></i> Alerts Jobs</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-comments-o fa-fw"></i> Messages</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.change_password')}}"><i class="fas fa-unlock-alt fa-fw"></i> Change Password</a></li>
+                <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
+                <li><a class="dropdown-item" href="{{route('candidate.delete_profile')}}"><i class="fas fa-trash fa-fw"></i> Delete Profile</a></li>
+                  
+                  
+                  </ul>
+              </li>
+              @elseif(Auth::user()->role == "employer")    
+              <li class="item dropdown">
+                <a class="nav-link  dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown">
+                  {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-1.webp" alt="avatar"
+                class="img-fluid rounded-circle me-3" width="50"> --}}
+                <i class="fa-solid fa-user-large"></i>
+                {{Auth::user()->name}} </a>
+
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{route('employer.dashboard')}}"><i class="fas fa-tachometer-alt fa-fw"></i>  Dashboard</a></li>
+                  <li><a class="dropdown-item" href="{{route('employer.profile.index')}}"><i class="fas fa-user fa-fw"></i> Profile</a></li>
+                  <li><a class="dropdown-item" href="{{route('employer.submit_job.add')}}"><i class="fas fa-file fa-fw"></i> Submit Job</a></li>
+                  <li><a class="dropdown-item" href="{{route('employer.my_jobs')}}"><i class="fas fa-file fa-fw"></i> My Jobs</a></li>
+                  <li><a class="dropdown-item" href="{{route('employer.applicants.index')}}"><i class="fas fa-file fa-fw"></i> Applicants</a></li>
+                  <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out fa-fw"></i> Logout</a></li>
+                  </ul>
+                  
+              </li>
+              @endif
+          @else
+          <li>
+           <a href="{{route('register')}}" class="btn btn-warning p-3 ms-4  fw-bold"> Login/Register </a>
+         </li>
+
+          @endif
+          
+      @endif 
+          <li class="toggle"><a href="#"><i class="fas fa-bars"></i></a></li>
+        </ul>
+      </nav>
+  </div>
 <!--  -->
     @yield('content')
 
@@ -383,6 +595,57 @@ if (window.innerWidth > 992) {
 
 
 </script>   
-  
+
+<script>
+  const toggle = document.querySelector(".toggle");
+const menu = document.querySelector(".menu");
+const items = document.querySelectorAll(".item");
+
+/* Toggle mobile menu */
+function toggleMenu() {
+  if (menu.classList.contains("active")) {
+    menu.classList.remove("active");
+    toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
+  } else {
+    menu.classList.add("active");
+    toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
+  }
+}
+
+/* Activate Submenu */
+function toggleItem() {
+  if (this.classList.contains("submenu-active")) {
+    this.classList.remove("submenu-active");
+  } else if (menu.querySelector(".submenu-active")) {
+    menu.querySelector(".submenu-active").classList.remove("submenu-active");
+    this.classList.add("submenu-active");
+  } else {
+    this.classList.add("submenu-active");
+  }
+}
+
+/* Close Submenu From Anywhere */
+function closeSubmenu(e) {
+  if (menu.querySelector(".submenu-active")) {
+    let isClickInside = menu
+      .querySelector(".submenu-active")
+      .contains(e.target);
+
+    if (!isClickInside && menu.querySelector(".submenu-active")) {
+      menu.querySelector(".submenu-active").classList.remove("submenu-active");
+    }
+  }
+}
+/* Event Listeners */
+toggle.addEventListener("click", toggleMenu, false);
+for (let item of items) {
+  if (item.querySelector(".submenu")) {
+    item.addEventListener("click", toggleItem, false);
+  }
+  item.addEventListener("keypress", toggleItem, false);
+}
+document.addEventListener("click", closeSubmenu, false);
+
+</script>
   </body>
 </html>
